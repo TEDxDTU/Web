@@ -1,0 +1,150 @@
+import React from 'react';
+import Link from 'next/link';
+
+export default function NavBar() {
+  return (<nav
+    className='
+      bg-black
+      w-full
+      h-28
+      sticky
+      top-0
+      text-white
+      grid
+      lg:grid-cols-[repeat(13,minmax(0,1fr))]
+      lg:grid-flow-row
+      place-items-center
+    '
+  >
+    <Link
+      href="/"
+    >
+      <img
+        className='
+        col-span-3
+        h-3/4
+      '
+        src="/Images/Logo-White-Text.svg"
+        alt="TEDxDTU Logo" />
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        col-start-6
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        Home
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        Theme
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        Events
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        Speakers
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        Partners
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <div
+        className='
+        border-b-2
+        border-white
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        '
+      >
+        About
+      </div>
+    </Link>
+
+    <Link
+      href="/"
+    >
+      <button
+        className='
+        bg-red-600
+        col-span-2
+        w-3/4
+        h-16
+        text-lg
+        '
+      >
+        Register
+      </button>
+    </Link>
+  </nav>);
+};

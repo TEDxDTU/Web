@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import Head from "next/head";
 import ThemeBar from "../Home/ThemeBox";
+import CardSection from "../Home/CardSection";
 
 export default function Page({ pageTitle, children }) {
   return (
@@ -18,8 +19,11 @@ export default function Page({ pageTitle, children }) {
       <NavBar />
       <div className="bg-black text-white min-h-[max(calc(100vh-16rem),36rem)] my-auto">
         {children}
+        <ThemeBar />
+        <CardSection />
       </div>
-      <ThemeBar />
+      
+      
       {/* <Footer /> */}
     </>
   );

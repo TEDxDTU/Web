@@ -46,18 +46,18 @@ const ThemeBar = () => {
   if (!isLargeViewPort)
     return (
       <div className="flex justify-center bg-black">
-        <div className=" bg-red-600 min-w-[10%] max-w-sm md:max-w-lg min-h-[70vh] md:h-[90vh] grid grid-cols-4  grid-rows-4 rounded-2xl text-white">
-          <div className="bg-red-500 col-span-4 text-center place-self-center self-center">
-            <h1 className="font-bold text-5xl ">Theme Title</h1>
+        <div className=" bg-red-600 min-w-[10%] max-w-sm max-h-32 md:max-w-md min-h-[70vh] md:h-[80vh] grid grid-cols-4  grid-rows-8 rounded-2xl text-white">
+          <div className="bg-red-600 col-span-4 text-center place-self-center self-center">
+            <h1 className="font-semibold text-3xl">Theme Title</h1>
           </div>
-          <div className="bg-red-400 col-span-3 row-span-5 rounded-lg m-4"></div>
-          <div className="col-span-1  self-start mt-14 place-self-center ">
+          <div className="bg-red-400 col-span-3 row-span-4 rounded-lg m-4"></div>
+          <div className="col-span-1  self-start mt-20 place-self-center ">
             Info about the event
           </div>
-          <div className="col-span-1  self-start mt-14 place-self-center ">
+          <div className="col-span-1  self-start mt-20 place-self-center ">
             Info about the event
           </div>
-          <div className="col-span-1  self-start mt-14 place-self-center ">
+          <div className="col-span-1  self-start mt-20 place-self-center ">
             Info about the event
           </div>
         </div>

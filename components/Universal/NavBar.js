@@ -51,8 +51,7 @@ export default function NavBar() {
       <div
         className='
         col-start-6
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
@@ -68,8 +67,7 @@ export default function NavBar() {
     >
       <div
         className='
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
@@ -85,8 +83,7 @@ export default function NavBar() {
     >
       <div
         className='
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
@@ -102,8 +99,7 @@ export default function NavBar() {
     >
       <div
         className='
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
@@ -119,8 +115,7 @@ export default function NavBar() {
     >
       <div
         className='
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
@@ -136,8 +131,7 @@ export default function NavBar() {
     >
       <div
         className='
-        border-b-2
-        border-white
+        hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600

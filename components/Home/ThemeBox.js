@@ -25,19 +25,19 @@ const ThemeBar = () => {
               <img src="" alt="" />
             </span>
           </div>
-          <div className="bg-red-600  col-span-3  mt-10">
+          <div className="bg-red-600 col-span-3  mt-10">
             <span className="text-2xl xl:text-3xl 2xl:text-4xl text-white font-semibold">
               Theme Title
             </span>
           </div>
 
-          <div className="bg-red-600  self-center text-white w-28 row-span-2 text-xl xl:text-xl 2xl:text-2xl">
+          <div className="bg-red-600 self-center text-white w-28 row-span-2 text-xl xl:text-xl 2xl:text-2xl">
             <span>Welcome to the show</span>
           </div>
-          <div className="bg-red-600  self-center row-span-2 text-white w-28 text-xl xl:text-xl 2xl:text-2xl">
+          <div className="bg-red-600 self-center row-span-2 text-white w-28 text-xl xl:text-xl 2xl:text-2xl">
             Renowned Chief Guest
           </div>
-          <div className="bg-red-600  self-center row-span-2 text-white w-28 text-xl xl:text-xl 2xl:text-2xl">
+          <div className="bg-red-600 self-center row-span-2 text-white w-28 text-xl xl:text-xl 2xl:text-2xl">
             Hurry We are live now
           </div>
         </article>
@@ -51,13 +51,13 @@ const ThemeBar = () => {
             <h1 className="font-semibold text-3xl">Theme Title</h1>
           </div>
           <div className="bg-red-400 col-span-3 row-span-4 rounded-lg m-4"></div>
-          <div className="col-span-1  self-start mt-20 place-self-center ">
+          <div className="col-span-1 self-start mt-20 place-self-center ">
             Info about the event
           </div>
-          <div className="col-span-1  self-start mt-20 place-self-center ">
+          <div className="col-span-1 self-start mt-20 place-self-center ">
             Info about the event
           </div>
-          <div className="col-span-1  self-start mt-20 place-self-center ">
+          <div className="col-span-1 self-start mt-20 place-self-center ">
             Info about the event
           </div>
         </div>

@@ -19,11 +19,9 @@ export default function Page({ pageTitle, children }) {
       <NavBar />
       <div className="bg-black text-white min-h-[max(calc(100vh-16rem),36rem)] my-auto">
         {children}
-        <ThemeBar />
-        <CardSection />
       </div>
-      
-      
+
+
       {/* <Footer /> */}
     </>
   );

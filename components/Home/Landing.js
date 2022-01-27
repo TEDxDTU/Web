@@ -1,9 +1,13 @@
 import React from 'react';
-import NavBar from '../Universal/NavBar';
 import Page from '../Universal/Page';
+import CardSection from './CardSection';
+import ThemeBar from './ThemeBox';
 
 export default function Landing() {
-  return (<Page>
-    <div>Landing Page</div>
+  return (<Page
+    pageTitle={"Home"}
+  >
+    <ThemeBar />
+    <CardSection />
   </Page>);
 };

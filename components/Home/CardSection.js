@@ -1,7 +1,7 @@
-import Card from "../Card";
+import Card from "./Card";
 
 export default function CardSection() {
-  return(
+  return (
     <div className="grid grid-cols-1 md:grid-cols-2 md:m-9 gap-x-6 gap-y-8 justify-items-center justify-evenly">
       <Card className="" source="Images\speakers.png" title="SPEAKERS" />
       <Card source="Images\events.png" title="EVENTS" />

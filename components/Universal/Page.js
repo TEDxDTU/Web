@@ -21,7 +21,6 @@ export default function Page({ pageTitle, children }) {
         {children}
       </div>
 
-
       {/* <Footer /> */}
     </>
   );

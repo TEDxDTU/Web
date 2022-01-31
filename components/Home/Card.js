@@ -1,10 +1,10 @@
 export default function Card(props) {
   return (
-    <div className="rounded-md w-96 m-4">
+    <div className="rounded-md w-full max-w-[24rem] m-4">
       <div>
         <img src={props.source} alt={props.title} className="w-80 h-80" />
       </div>
-      
+
       <div className="text-white">
         <h2 className="text-3xl m-2 p-2 border-b-2 border-red-600">{props.title}</h2>
         <p className="p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus repudiandae consequatur magni cupiditate earum veniam laborum similique libero nam, eum quidem iusto quo mollitia debitis ab vel fuga exercitationem? Magni quam veniam a? Facilis ex et adipisci voluptas sit rerum?</p>
@@ -15,7 +15,7 @@ export default function Card(props) {
           <a href="/" className="text-white">Read more</a>
         </div>
       </div>
-      
+
     </div>
   );
 }

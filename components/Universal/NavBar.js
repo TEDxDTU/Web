@@ -20,7 +20,7 @@ export default function NavBar() {
 
   if (isLargeViewPort) return (<nav
     className='
-      bg-black
+    bg-black
       w-full
       h-28
       sticky

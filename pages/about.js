@@ -1,13 +1,7 @@
-import Speaker from "../components/Home/Speaker";
-import NavBar from "../components/Universal/NavBar";
+import React from 'react';
+import About from '../components/About/About';
 
-const about = () => {
-  return (
-    <div>
-      <NavBar />
-      <Speaker />
-    </div>
-  );
+export default function about() {
+  return <About />;
 };
 
-export default about;

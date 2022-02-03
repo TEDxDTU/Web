@@ -1,8 +1,14 @@
+import AboutContent from "./AboutContent";
+import Collage from "./Collage";
+
 const Speaker = () => {
   return (
     <>
-      <div>
-        <h1 className="text-6xl text-center">Top Component</h1>
+      <div className="border-t-4 border-red-700 bg-black">
+        <main className="grid lg:grid-cols-2 xl:grid-cols-11 2xl:gap-12  xl:px-2 2xl:px-24 mx-14 py-8">
+          <AboutContent />
+          <Collage />
+        </main>
       </div>
     </>
   );

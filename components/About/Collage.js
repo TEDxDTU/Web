@@ -8,6 +8,7 @@ export default function Collage() {
         <div className="   h-[7.688rem] w-[7.5rem]">
           <img className="w-full" src="AboutUs-Assets\R1C1 Daggubati-Rana.png" />
         </div>
+
         <div className="  mt-2 ml-6 h-[8.688rem] w-[12.125rem]">
           <img
             className="w-full h-full"
@@ -17,6 +18,7 @@ export default function Collage() {
         <div className="  ml-6 -mt-8 h-[5.688rem] w-[4.938rem]">
           <img className="w-full h-full" src="AboutUs-Assets\R1C3.png" />
         </div>
+
         <div className="  -mt-16 h-[10.75rem] w-[8.688rem]">
           <img
             className="w-full h-full"

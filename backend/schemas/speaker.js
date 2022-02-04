@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const speakerSchema = mongoose.Schema({
+  topic: {
+    type: String,
+    required: true,
+  },
   achievements: [
     {
       type: String,

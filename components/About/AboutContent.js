@@ -17,7 +17,7 @@ const AboutContent = () => {
         </div>
 
         <div className="text-white text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex">
-          What is<span className="text-logo_red"> TED</span>
+          <span>What is <span className="text-logo_red">TED</span></span>
         </div>
 
         <div className="bg-box text-xl lg:text-base xl:text-xl text-white py-5 px-10 rounded-xl m-10 mb-20">

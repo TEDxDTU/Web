@@ -1,13 +1,13 @@
 const AboutContent = () => {
   const content =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio reprehenderit totam iste vel dignissimos, laudantium eumeligendi temporibus ea in quidem explicabo placeat aperiam eosdoloribus a ad unde consequatur nam. Assumenda porro ullam consequuntur debitis natus nemo, tenetur accusamus quibusdam praesentium. Rerum distinctio debitis nisi nemo esse consequuntur provident vel quis modi placeat aliquam, assumenda, omnis obcaecati voluptas officiis ducimus quam accusamus iste";
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio reprehenderit totam iste vel dignissimos, laudantium eumeligendi temporibus ea in quidem explicabo placeat aperiam eosdoloribus a ad unde consequatur nam. Assumenda porro ullam consequuntur debitis natus nemo, tenetur accusamus quibusdam praesentium. Rerum distinctio debitis nisi nemo esse consequuntur provident vel quis modi placeat aliquam, assumenda, omnis obcaecati voluptas officiis ducimus quam accusamus istes";
   return (
     <article className="bg-black lg:col-span-1 xl:col-span-6 2xl:col-span-7 max-h-fit mb-20">
       <span className="flex flex-col mt-5 2xl:mt-10 ">
-        <div className="text-white text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex gap-8">
+        <div className="text-white text-5xl sm:6xl md:text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex gap-8">
           About
           <img
-            className=" mt-1"
+            className=" mt-1 overflow-hidden"
             src="/LandingPage-Assets/Logo-White-Text.svg"
           />
         </div>

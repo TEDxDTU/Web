@@ -1,13 +1,17 @@
-import React from 'react';
-import NavBar from '../Universal/NavBar';
-import Page from '../Universal/Page';
-import PrimaryTheme from './PrimaryTheme';
+import React from "react";
+import EventsFooter from "../Events/EventsFooter";
+import Page from "../Universal/Page";
+import CardSection from "./CardSection";
+import PrimaryTheme from "./PrimaryTheme";
+import ThemeBar from "./ThemeBox";
 
 export default function Landing() {
-  return (<Page>
-    <div>
-      <PrimaryTheme/>
-      {/* <div>jgfdhfsdhf</div> */}
-    </div>
-  </Page>);
-};
+  return (
+    <Page pageTitle={"Home"}>
+      <PrimaryTheme />
+      <ThemeBar />
+      <CardSection />
+      <EventsFooter/>
+    </Page>
+  );
+}

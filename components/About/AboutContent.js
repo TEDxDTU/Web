@@ -1,12 +1,15 @@
 const AboutContent = () => {
   const content =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio reprehenderit totam iste vel dignissimos, laudantium eumeligendi temporibus ea in quidem explicabo placeat aperiam eosdoloribus a ad unde consequatur nam. Assumenda porro ullam consequuntur debitis natus nemo, tenetur accusamus quibusdam praesentium. Rerum distinctio debitis nisi nemo esse consequuntur provident vel quis modi placeat aliquam, assumenda, omnis obcaecati voluptas officiis ducimus quam accusamus iste";
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio reprehenderit totam iste vel dignissimos, laudantium eumeligendi temporibus ea in quidem explicabo placeat aperiam eosdoloribus a ad unde consequatur nam. Assumenda porro ullam consequuntur debitis natus nemo, tenetur accusamus quibusdam praesentium. Rerum distinctio debitis nisi nemo esse consequuntur provident vel quis modi placeat aliquam, assumenda, omnis obcaecati voluptas officiis ducimus quam accusamus istes";
   return (
     <article className="bg-black lg:col-span-1 xl:col-span-6 2xl:col-span-7 max-h-fit mb-20">
       <span className="flex flex-col mt-5 2xl:mt-10 ">
-        <div className="text-white text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex gap-8">
+        <div className="text-white text-5xl sm:6xl md:text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex gap-8">
           About
-          <img className=" mt-1" src="/Images/Logo-White-Text.svg" />
+          <img
+            className=" mt-1 overflow-hidden"
+            src="/LandingPage-Assets/Logo-White-Text.svg"
+          />
         </div>
 
         <div className="bg-box text-xl lg:text-base xl:text-xl text-white py-5 px-10 rounded-xl m-10 2xl:mb-20">
@@ -14,7 +17,7 @@ const AboutContent = () => {
         </div>
 
         <div className="text-white text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex">
-          What is<span className="text-logo_red"> TED</span>
+          <span>What is <span className="text-logo_red">TED</span></span>
         </div>
 
         <div className="bg-box text-xl lg:text-base xl:text-xl text-white py-5 px-10 rounded-xl m-10 mb-20">
@@ -22,7 +25,7 @@ const AboutContent = () => {
         </div>
 
         <footer className="flex sm:justify-center 2xl:justify-start 2xl:flex-none ">
-          <div className="bg-box_red min-h-[9rem] max-w-[16rem] md:w-[20rem] -mt-14 rounded-3xl mx-10 grid grid-cols-2 justify-items-center place-content-center text-xl text-white">
+          <div className="bg-box_red min-h-[9rem] max-w-[16rem] md:w-[20rem] -mt-6 rounded-3xl mx-10 grid grid-cols-2 justify-items-center place-content-center text-xl text-white">
             <div>
               Ted talk <br />
               with <br />

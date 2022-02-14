@@ -44,7 +44,7 @@ export default function NavBar() {
         h-3/4
         cursor-pointer
       "
-            src="/Images/Logo-White-Text.svg"
+            src="/LandingPage-Assets/Logo-White-Text.svg"
             alt="TEDxDTU Logo"
           />
         </Link>
@@ -174,7 +174,7 @@ export default function NavBar() {
         mx-8
         cursor-pointer
       "
-            src="/Images/NavBar-White.png"
+            src="/LandingPage-Assets/NavBar-White.png"
             alt="NavBar"
             onClick={() => setIsNavOpen(!isNavOpen)}
           />
@@ -184,7 +184,7 @@ export default function NavBar() {
           w-40
           cursor-pointer
         "
-              src="/Images/Logo-White-Text.svg"
+              src="/LandingPage-Assets/Logo-White-Text.svg"
               alt="TEDxDTU Logo"
             />
           </Link>

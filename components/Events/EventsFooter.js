@@ -11,16 +11,16 @@ const EventsFooter = () => {
                 </div>
             </div>
             <div className="flex">
-                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/Images/speaker2.jpeg')] ClippingImage1">
+                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/LandingPage-Assets/speaker2.jpeg')] ClippingImage1">
                     <div className="ml-6 font-bold text-3xl">2018</div>
                 </div>
-                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/Images/speaker2.jpeg')] ClippingImage1">
+                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/LandingPage-Assets/speaker2.jpeg')] ClippingImage1">
                 <div className="ml-6 font-bold text-3xl">2017</div>
                 </div>
-                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/Images/speaker2.jpeg')] ClippingImage1">
+                <div className="h-44 w-64 flex items-end mt-0.5 -mr-16 ml-0.5 bg-cover bg-[url('/LandingPage-Assets/speaker2.jpeg')] ClippingImage1">
                 <div className="ml-6 font-bold text-3xl">2016</div>
                 </div>
-                <div className="h-44 w-72  flex items-end mt-0.5 ml-0.5 bg-cover bg-[url('/Images/speaker2.jpeg')] ClippingImage2">
+                <div className="h-44 w-72  flex items-end mt-0.5 ml-0.5 bg-cover bg-[url('/LandingPage-Assets/speaker2.jpeg')] ClippingImage2">
                 <div className="ml-6 font-bold text-3xl">2015</div>
                 </div>
             </div>

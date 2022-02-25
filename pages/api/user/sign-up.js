@@ -4,29 +4,30 @@ const User = require("../../../backend/schemas/user");
 const mongooseConnect = require("../../../backend/mongooseConnect");
 
 export default async function handler(req, res) {
-
-  if (admin.apps.length === 0) admin.initializeApp({
-    credential: admin.credential.cert(creds)
-  });
+  if (admin.apps.length === 0)
+    admin.initializeApp({
+      credential: admin.credential.cert(creds),
+    });
 
   try {
     if (req.method === "POST") {
       const { name, email, password, university, imageURL } = req.body;
-
+      console.log(name, email, password, university, imageURL);
       const auth = admin.auth();
       let existingUser;
 
       try {
         existingUser = await auth.getUserByEmail(email);
-      } catch (err) { };
+      } catch (err) {}
 
       if (existingUser) {
-        res.json({
-          msg: "User with given email already exists"
+        console.log("User exists");
+        res.status(400).json({
+          msg: "User with given email already exists",
+          code: "user_exists",
         });
         return;
       }
-
 
       const newDBUser = User({
         name,
@@ -52,17 +53,13 @@ export default async function handler(req, res) {
         await newDBUser.save();
 
         return res.json(newDBUser);
-
       } catch (err) {
         res.status(500).json({
-          msg: err.toString()
+          msg: err.toString(),
         });
-      };
-
-    };
-
+      }
+    }
   } catch (err) {
     console.log(err);
   }
-
-};  
+}

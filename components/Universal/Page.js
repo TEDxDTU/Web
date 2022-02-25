@@ -11,7 +11,7 @@ export default function Page({ pageTitle, children }) {
         <title>TEDxDTU: {pageTitle}</title>
         <link
           rel="icon"
-          href="/Images/Tab-Logo-Black.svg"
+          href="/LandingPage/Tab-Logo-Black.svg"
           type="image/x-icon"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

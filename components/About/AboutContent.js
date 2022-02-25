@@ -4,11 +4,11 @@ const AboutContent = () => {
   return (
     <article className="bg-black lg:col-span-1 xl:col-span-6 2xl:col-span-7 max-h-fit mb-20">
       <span className="flex flex-col mt-5 2xl:mt-10 ">
-        <div className="text-white text-6xl 2xl:text-8xl ml-20 2xl:ml-28 flex gap-8">
+        <div className="text-white text-6xl 2xl:text-8xl mx-auto flex flex-wrap w-full justify-center gap-8">
           About
           <img
             className=" mt-1"
-            src="/LandingPage-Assets/Logo-White-Text.svg"
+            src="/LandingPage/Logo-White-Text.svg"
           />
         </div>
 

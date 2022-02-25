@@ -1,8 +1,8 @@
 import React from "react";
 
-function PrimaryTheme() {
+const PrimaryTheme=()=>{
   return (<div className="bg-[url('/Images/Theme1.png')] h-[28rem] xl:h-[32rem] w-full mb-16 flex items-end justify-end">
-    <div className=" bg-[rgba(255,255,255,0.1)] flex backdrop-blur-2xl p-4 pb-6">
+    <div className="bg-[rgba(255,255,255,0.1)] flex backdrop-blur-2xl p-4 pb-6">
       <div className="mr-10">
         <div className="flex">
           <div className="text-2xl w-fit text-white">Ted talk with Sarthak</div>

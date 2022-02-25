@@ -1,7 +1,7 @@
 const mongooseConnect = require("../../backend/mongooseConnect");
 const Event = require("../../backend/schemas/event");
 
-export default async function handler(req, res) {
+export default async function eventHandler(req, res) {
   console.log(req.query);
   var {
     query: { eventType, sortBy, sortOrder, page, limit },

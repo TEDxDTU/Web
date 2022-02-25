@@ -1,4 +1,5 @@
 import React from "react";
+import EventsFooter from "../Events/EventsFooter";
 import Page from "../Universal/Page";
 import CardSection from "./CardSection";
 import PrimaryTheme from "./PrimaryTheme";
@@ -10,6 +11,7 @@ export default function Landing() {
       <PrimaryTheme />
       <ThemeBar />
       <CardSection />
+      <EventsFooter/>
     </Page>
   );
 }

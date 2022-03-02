@@ -32,11 +32,11 @@ function Carousel({ carouselRef, carouselTitle }) {
     <div
       ref={carouselRef}
       className='
-    w-full
-    bg-gradient-to-r from-[rgb(50,50,50)] via-black to-[rgb(50,50,50)]
-    overflow-x-auto
-    flex
-    flex-row
+        w-full
+        bg-gradient-to-r from-[rgb(50,50,50)] via-black to-[rgb(50,50,50)]
+        overflow-x-hidden
+        flex
+        flex-row
     '
     >
       <Card />
@@ -56,8 +56,42 @@ function Carousel({ carouselRef, carouselTitle }) {
 };
 
 function Controller({ carouselRef }) {
-  return (<div>
-
+  return (<div
+    className='
+      w-full
+      bg-gradient-to-r from-[rgb(50,50,50)] via-black to-[rgb(50,50,50)]
+      flex
+      justify-center
+      pb-8
+  '
+  >
+    <img
+      src="/AboutUs/Carousel-Button-Left.svg"
+      className='
+        h-12
+        inline
+        cursor-pointer
+        mx-8
+      '
+      alt="Carousel Left Button"
+      onClick={() => carouselRef.current.scrollTo({
+        left: carouselRef.current.scrollLeft - 256,
+        behavior: 'smooth'
+      })} />
+    <img
+      src="/AboutUs/Carousel-Button-Right.svg"
+      className='
+        h-12
+        inline
+        cursor-pointer
+        mx-8
+      '
+      alt="Carousel Right Button"
+      onClick={() => carouselRef.current.scrollTo({
+        left: carouselRef.current.scrollLeft + 256,
+        behavior: 'smooth'
+      })}
+    />
   </div>);
 };
 

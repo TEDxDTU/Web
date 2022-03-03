@@ -12,8 +12,8 @@ export default async function handler(req, res) {
   try {
     if (req.method === "POST") {
       const { name, email, password, university, imageURL } = req.body;
-      console.log(name, email, password, university, imageURL);
       const auth = admin.auth();
+
       let existingUser;
 
       try {
@@ -21,7 +21,6 @@ export default async function handler(req, res) {
       } catch (err) {}
 
       if (existingUser) {
-        console.log("User exists");
         res.status(400).json({
           msg: "User with given email already exists",
           code: "user_exists",
@@ -60,6 +59,8 @@ export default async function handler(req, res) {
       }
     }
   } catch (err) {
-    console.log(err);
+    res.sendStatus(500).json({
+      msg: err.toString(),
+    });
   }
 }

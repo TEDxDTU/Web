@@ -91,9 +91,6 @@ const eventSchema = mongoose.Schema({
 eventSchema.pre("save", async function (next) {
   const event = this;
   if (event.eventType == "past") {
-    console.log("past");
-
-    console.log("past gallery image");
     if (!event.galleryImageUrls) {
       throw new Error("galleryImageUrls is required for past events");
     }
@@ -101,7 +98,6 @@ eventSchema.pre("save", async function (next) {
     if (validator.isAfter(event.dateTime, new Date().toISOString())) {
       throw new Error("dateTime for past event must be in the past");
     }
-    console.log("past done");
   } else if (event.eventType == "upcoming") {
     if (validator.isBefore(event.dateTime, new Date().toISOString())) {
       throw new Error("dateTime for upcoming event must be in the future");

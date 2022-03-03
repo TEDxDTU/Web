@@ -13,7 +13,6 @@ export default async function handler(req, res) {
   try {
     if (req.method === "POST") {
       const { authToken } = req.body;
-      // console.log(admin.auth);
       const auth = admin.auth();
 
       auth
@@ -21,17 +20,19 @@ export default async function handler(req, res) {
         .then(async (decodedToken) => {
           const firebaseID = decodedToken.uid;
           const user = await User.findOne({ firebaseID });
-          console.log(user.toString());
           return res.send(user);
         })
         .catch((error) => {
-          console.log(error.toString());
           return res.status(500).json({
             msg: error.toString(),
           });
         });
+    } else {
+      res.status(401).json("Method not allowed");
     }
   } catch (err) {
-    console.log(err.toString());
+    return res.status(500).json({
+      msg: error.toString(),
+    });
   }
 }

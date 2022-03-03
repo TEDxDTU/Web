@@ -14,10 +14,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const { authToken, email, password, name, imageURL, university } =
         req.body;
-      // console.log(admin.auth);
-      console.log(university);
       const auth = admin.auth();
-      console.log("here1");
       const decodedToken = await auth.verifyIdToken(authToken);
 
       const firebaseID = decodedToken.uid;
@@ -26,8 +23,6 @@ export default async function handler(req, res) {
         password,
         displayName: name,
       });
-      // console.log(JSON.stringify(updatedFBUser));
-      console.log("here2");
 
       const newUser = await User.findOneAndUpdate(
         { firebaseID },
@@ -41,7 +36,6 @@ export default async function handler(req, res) {
           new: true,
         }
       );
-      console.log(newUser);
 
       return res.json(newUser);
     } else {
@@ -50,7 +44,6 @@ export default async function handler(req, res) {
       });
     }
   } catch (err) {
-    console.log(err.toString());
     return res.status(500).json({
       msg: err.toString(),
     });

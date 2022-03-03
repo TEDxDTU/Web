@@ -1,12 +1,14 @@
 const mongooseConnect = require("../../../backend/mongooseConnect");
 const Trivia = require("../../../backend/schemas/trivia");
 
-export default async function triviaFetchHandler(req, res) {
-  console.log("trivia fetch handler");
+export default async function getSingleTrivia(req, res) {
+  console.log("getSingleTrivia");
   console.log(req.query);
   console.log(req.params);
+  const { id } = req.query;
+  console.log(id);
   try {
-    const trivias = await Trivia.find({}, ["imageUrl", "title", "_id"], {
+    const trivias = await Trivia.findById(id, null, {
       sort: {
         _createdAt: 1,
       },

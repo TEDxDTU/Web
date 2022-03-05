@@ -5,10 +5,11 @@ const User = require("../../../backend/schemas/user");
 const mongooseConnect = require("../../../backend/mongooseConnect");
 
 export default async function handler(req, res) {
-  if (admin.apps.length === 0)
+  if (admin.apps.length === 0) {
     admin.initializeApp({
       credential: admin.credential.cert(creds),
     });
+  }
 
   try {
     if (req.method === "POST") {
@@ -28,7 +29,7 @@ export default async function handler(req, res) {
           });
         });
     } else {
-      res.status(401).json("Method not allowed");
+      res.status(405).json("Method not allowed");
     }
   } catch (err) {
     return res.status(500).json({

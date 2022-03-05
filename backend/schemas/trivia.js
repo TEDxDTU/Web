@@ -69,11 +69,25 @@ const triviaSchema = mongoose.Schema(
         required: true,
       },
     ],
+    questionCount: {
+      type: Number,
+      // required: true,
+    },
+    totalTime: {
+      type: Number,
+      // required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+triviaSchema.pre("save", async function (next) {
+  this.questionCount = this.questions.length;
+  this.totalTime = this.questions.reduce((acc, cur) => acc + cur.seconds, 0);
+  next();
+});
 
 const Trivia = mongoose.models.Trivia || mongoose.model("Trivia", triviaSchema);
 module.exports = Trivia;

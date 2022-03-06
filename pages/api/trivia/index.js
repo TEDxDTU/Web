@@ -3,10 +3,10 @@ const Trivia = require("../../../backend/schemas/trivia");
 const { withAuth } = require("../../../backend/middleware/auth");
 // console.log(withAuth);
 async function triviaFetchHandler(req, res) {
-  console.log("trivia fetch handler");
-  console.log(req.query);
-  console.log(req.params);
-  console.log(req.uid);
+  // console.log("trivia fetch handler");
+  // console.log(req.query);
+  // console.log(req.params);
+  // console.log(req.uid);
   try {
     const trivias = await Trivia.find(
       {},

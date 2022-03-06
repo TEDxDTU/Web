@@ -1,7 +1,8 @@
 const mongooseConnect = require("../../../backend/mongooseConnect");
 const Trivia = require("../../../backend/schemas/trivia");
+const { withAuth } = require("../../../backend/middleware/auth");
 
-export default async function getSingleTrivia(req, res) {
+async function getSingleTrivia(req, res) {
   console.log("getSingleTrivia");
   console.log(req.query);
   console.log(req.params);
@@ -19,3 +20,5 @@ export default async function getSingleTrivia(req, res) {
     return res.status(500).json({ error: e.toString() });
   }
 }
+
+export default withAuth(getSingleTrivia);

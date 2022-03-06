@@ -31,7 +31,7 @@ export function withAuth(handler) {
       console.log(`verifyIdToken error: ${error}`);
       return res
         .status(401)
-        .json({ message: `Error while verifying token. Error: ${error}` });
+        .json({ msg: `Error while verifying token. Error: ${error}` });
     }
 
     return handler(request, res);

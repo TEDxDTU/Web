@@ -96,8 +96,6 @@ router.post("/update", async (req, res) => {
 
 router.post("/data-from-token", async (req, res) => {
   try {
-    console.log(req.query);
-    console.log(req.params);
     const { authToken } = req.body;
     const auth = admin.auth();
     const decodedToken = await auth.verifyIdToken(authToken);

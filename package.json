@@ -1,0 +1,42 @@
+{
+    "name": "ted-web",
+    "private": true,
+    "scripts": {
+        "server-dev": "nodemon server.js",
+        "client-dev": "node server.js",
+        "build": "next build",
+        "start": "NODE_ENV=production node server.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "firebase-admin": "^10.0.1",
+        "joi": "^17.6.0",
+        "mongoose": "^6.2.0",
+        "next": "^12.0.7",
+        "nodemailer": "^6.7.2",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "validator": "^13.7.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.2",
+        "eslint": "8.6.0",
+        "eslint-config-next": "12.0.7",
+        "nodemon": "^2.0.15",
+        "postcss": "^8.4.5",
+        "tailwindcss": "^3.0.12"
+    },
+    "version": "1.0.0",
+    "main": "next.config.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TEDxDTU/WebApp.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TEDxDTU/WebApp/issues"
+    },
+    "homepage": "https://github.com/TEDxDTU/WebApp#readme"
+}

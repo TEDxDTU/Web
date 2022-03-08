@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 const admin = require("firebase-admin");
 
-router.post("sign-up", async (req, res) => {
+router.post("/sign-up", async (req, res) => {
   try {
     const { name, email, password, university, imageURL } = req.body;
     const auth = admin.auth();

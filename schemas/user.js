@@ -1,6 +1,22 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const userTriviaSchema = mongoose.Schema(
+  {
+    triviaId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Trivia",
+      required: true,
+    },
+    points: {
+      type: Number,
+    },
+  },
+  {
+    timestamps: true,
+    _id: false,
+  }
+);
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -29,11 +45,8 @@ const userSchema = mongoose.Schema({
         throw new Error(`${value} is not a valid URL`);
     },
   },
+  trivias: [userTriviaSchema],
 
-  // _id: {
-  //   type: mongoose.Types.ObjectId,
-
-  // }
   firebaseID: {
     type: String,
   },

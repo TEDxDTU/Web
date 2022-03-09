@@ -59,12 +59,12 @@ router.post("/:id/points", withAuth, async (req, res) => {
     //else create new document
 
     const trivia = user.trivias.find((trivia) => {
-      console.log(
-        trivia.triviaId,
-        "==",
-        mongoose.Types.ObjectId(id),
-        trivia.triviaId.equals(mongoose.Types.ObjectId(id))
-      );
+      //   console.log(
+      //     trivia.triviaId,
+      //     "==",
+      //     mongoose.Types.ObjectId(id),
+      //     trivia.triviaId.equals(mongoose.Types.ObjectId(id))
+      //   );
       return trivia.triviaId.equals(mongoose.Types.ObjectId(id));
     });
     let msg = "";

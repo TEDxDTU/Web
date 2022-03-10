@@ -11,50 +11,49 @@ const port = 3000 || process.env.PORT;
 const APIRouter = require("./routes/api/apis");
 
 const nextApp = nextServer({
-  dev: true,
-  customServer: true,
-  port: port,
+    dev: true,
+    customServer: true,
+    port: port,
 });
 
 nextApp
-  .prepare()
-  .then(async () => {
-    const app = express();
-    // console.log(process.env.DB_URL);
-    //   cl
-    console.log(process.env.DB_URL);
+    .prepare()
+    .then(async () => {
+        const app = express();
 
-    // Serving static files from "public" directory
-    app.use(express.static("public"));
+        console.log(process.env.DB_URL);
 
-    // Body Parser
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+        // Serving static files from "public" directory
+        app.use(express.static("public"));
 
-    // Helmet (Server Protection)
-    app.use(helmet());
-    // Cross Origin Resource Sharing
-    app.use(cors());
+        // Body Parser
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true }));
 
-    await mongoose.connect(process.env.DB_URL);
+        // Helmet (Server Protection)
+        app.use(helmet());
+        // Cross Origin Resource Sharing
+        app.use(cors());
 
-    admin.initializeApp({
-      credential: admin.credential.cert(creds),
+        await mongoose.connect(process.env.DB_URL);
+
+        admin.initializeApp({
+            credential: admin.credential.cert(creds),
+        });
+
+        const server = app.listen(port, () => {
+            console.log("Port is listening on: " + port);
+        });
+
+        // API Router
+        app.use("/api", APIRouter);
+
+        // Routes
+        app.all("*", async (req, res) => {
+            nextApp.render(req, res, req.path);
+        });
+    })
+    .catch((err) => {
+        console.log(err.message);
+        process.exit(1);
     });
-
-    const server = app.listen(port, () => {
-      console.log("Port is listening on: " + port);
-    });
-
-    // API Router
-    app.use("/api", APIRouter);
-
-    // Routes
-    app.all("*", async (req, res) => {
-      nextApp.render(req, res, req.path);
-    });
-  })
-  .catch((err) => {
-    console.log(err.message);
-    process.exit(1);
-  });

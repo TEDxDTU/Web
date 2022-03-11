@@ -5,12 +5,12 @@ export async function getStaticProps(ctx) {
 
     return {
         props: {
-
+            teamsList: []
         }
     };
 };
 
-export default function about() {
-    return <About />;
+export default function about({ teamsList }) {
+    return <About teamsList={teamsList} />;
 };
 

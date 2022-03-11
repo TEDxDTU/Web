@@ -1,111 +1,71 @@
 import React, { useRef } from 'react';
 
-function Card() {
-  return (<div
-    className='
-    flex-shrink-0
-    w-48
-    h-60
-    bg-[rgba(56,56,56,0.95)]
-    m-8
-    rounded-2xl
-    '
-  >
-
-  </div>);
-};
-
-function Carousel({ carouselRef, carouselTitle }) {
-
-  return (<>
-    <header
-      className='
-        text-left
-        text-4xl
-        font-semibold
-        text-white
-        m-8
-      '
+function Card({ imageURL, name }) {
+    return (<div
+        className='flex-shrink-0 w-48 h-60 bg-[rgba(100,100,100,0.3)] m-8 rounded-2xl'
     >
-      {carouselTitle}
-    </header>
-    <div
-      ref={carouselRef}
-      className='
-        w-full
-        bg-gradient-to-r from-[rgb(50,50,50)] via-black to-[rgb(50,50,50)]
-        overflow-x-hidden
-        flex
-        flex-row
-    '
-    >
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-    </div>
-  </>);
+
+    </div>);
 };
 
-function Controller({ carouselRef }) {
-  return (<div
-    className='
-      w-full
-      bg-gradient-to-r from-[rgb(50,50,50)] via-black to-[rgb(50,50,50)]
-      flex
-      justify-center
-      pb-8
-  '
-  >
-    <img
-      src="/AboutUs/Carousel-Button-Left.svg"
-      className='
-        h-12
-        inline
-        cursor-pointer
-        mx-8
-      '
-      alt="Carousel Left Button"
-      onClick={() => carouselRef.current.scrollTo({
-        left: carouselRef.current.scrollLeft - 256,
-        behavior: 'smooth'
-      })} />
-    <img
-      src="/AboutUs/Carousel-Button-Right.svg"
-      className='
-        h-12
-        inline
-        cursor-pointer
-        mx-8
-      '
-      alt="Carousel Right Button"
-      onClick={() => carouselRef.current.scrollTo({
-        left: carouselRef.current.scrollLeft + 256,
-        behavior: 'smooth'
-      })}
-    />
-  </div>);
+function Carousel({ teamTitle, teamMembers }) {
+
+    const carouselRef = useRef(null);
+
+    return (<>
+        <header
+            className='text-left text-4xl font-semiboldtext-white m-8'
+        >
+            {teamTitle}
+        </header>
+        <div className='grid grid-cols-12 items-center'>
+            <img
+                className='w-2/5 sm:min-w-[3rem] sm:col-span-1 col-span-2 m-auto cursor-pointer'
+                src='/AboutUs/Arrow-left.svg'
+                onClick={() => carouselRef.current.scrollTo({
+                    left: carouselRef.current.scrollLeft - 256,
+                    behavior: 'smooth'
+                })}
+            />
+            <div
+                ref={carouselRef}
+                className='overflow-x-hidden flex flex-row bg-black col-start-3 col-span-8 sm:col-span-10'
+            >
+                {/* {teamMembers.map((member) => <Card
+                    name={member.name}
+                    imageURL={member.imageURL}
+                />)} */}
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+            </div>
+            <img
+                className='w-2/5 sm:min-w-[3rem] sm:col-span-1 col-span-2 m-auto cursor-pointer'
+                src='/AboutUs/Arrow-Right.svg'
+                onClick={() => carouselRef.current.scrollTo({
+                    left: carouselRef.current.scrollLeft + 256,
+                    behavior: 'smooth'
+                })}
+            />
+        </div>
+    </>);
 };
 
-export default function CarouselWrapper() {
 
-  const carouselRef = useRef(null);
+export default function CarouselWrapper({ teamsList }) {
 
-  return (<>
-    <Carousel
-      carouselRef={carouselRef}
-      carouselTitle={"Tech Team"}
-    />
-    <Controller
-      carouselRef={carouselRef}
-    />
-  </>);
-}
+    return (<>
+        {/* {teamsList.map((team) => <Carousel
+            teamTitle={team.title}
+            teamMembers={team.teamMembers}
+        />)} */}
+        <Carousel
+            teamTitle={"Tech Team"}
+            teamMembers={[]}
+        />
+    </>);
+};

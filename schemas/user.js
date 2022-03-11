@@ -46,7 +46,12 @@ const userSchema = mongoose.Schema({
     },
   },
   trivias: [userTriviaSchema],
-
+  triviasAttempted: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Trivia",
+    },
+  ],
   firebaseID: {
     type: String,
   },

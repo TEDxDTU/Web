@@ -31,10 +31,10 @@ nextApp
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    // Helmet (Server Protection)
-    app.use(helmet());
-    // Cross Origin Resource Sharing
-    app.use(cors());
+    // // Helmet (Server Protection)
+    // app.use(helmet());
+    // // Cross Origin Resource Sharing
+    // app.use(cors());
 
     await mongoose.connect(process.env.DB_URL);
 

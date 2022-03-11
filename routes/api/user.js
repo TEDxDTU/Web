@@ -112,7 +112,7 @@ router.post("/data-from-token", async (req, res) => {
   }
 });
 
-router.post("/mark-trivia-started", withAuth, async (req, res) => {
+router.post("/started", withAuth, async (req, res) => {
   try {
     const { triviaId } = req.body;
     const firebaseID = req.uid;

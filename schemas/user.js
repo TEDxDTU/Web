@@ -17,6 +17,14 @@ const userTriviaSchema = mongoose.Schema(
     _id: false,
   }
 );
+userTriviaSchema.methods.toJSON = function () {
+  const userTrivia = this;
+  userTriviaObj = userTrivia.toObject();
+  delete userTriviaObj.triviaId;
+  delete userTriviaObj.createdAt;
+  delete userTriviaObj.updatedAt;
+  return userTriviaObj;
+};
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -56,6 +64,19 @@ const userSchema = mongoose.Schema({
     type: String,
   },
 });
+
+userSchema.methods.containsTrivia = function (id) {
+  const user = this;
+  return user.triviasAttempted.some((triviaId) => triviaId.toString() === id);
+};
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.trivias;
+  delete userObject.triviasAttempted;
+  return userObject;
+};
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 module.exports = User;

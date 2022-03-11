@@ -2,6 +2,8 @@
 
 const User = require("../../schemas/user");
 const express = require("express");
+const withAuth = require("../../middleware/auth");
+
 const router = express.Router();
 const admin = require("firebase-admin");
 
@@ -60,13 +62,13 @@ router.post("/sign-up", async (req, res) => {
   }
 });
 
-router.post("/update", async (req, res) => {
+router.post("/update", withAuth, async (req, res) => {
   try {
-    const { authToken, email, password, name, imageURL, university } = req.body;
+    const { email, password, name, imageURL, university } = req.body;
     const auth = admin.auth();
-    const decodedToken = await auth.verifyIdToken(authToken);
+    // const decodedToken = await auth.verifyIdToken(authToken);
 
-    const firebaseID = decodedToken.uid;
+    const firebaseID = req.uid;
     const updatedFBUser = await auth.updateUser(firebaseID, {
       email,
       password,
@@ -102,6 +104,25 @@ router.post("/data-from-token", async (req, res) => {
     const firebaseID = decodedToken.uid;
     const user = await User.findOne({ firebaseID });
     return res.json(user);
+  } catch (err) {
+    console.log(err.toString());
+    return res.status(500).json({
+      msg: err.toString(),
+    });
+  }
+});
+
+router.post("/mark-trivia-started", withAuth, async (req, res) => {
+  try {
+    const { triviaId } = req.body;
+    const firebaseID = req.uid;
+    const user = await User.findOne({ firebaseID });
+    if (!user.triviasAttempted) {
+      user.triviasAttempted = [];
+    }
+    user.triviasAttempted.push(triviaId);
+    await user.save();
+    return res.json("Marked trivia started");
   } catch (err) {
     console.log(err.toString());
     return res.status(500).json({

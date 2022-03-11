@@ -6,7 +6,18 @@ const withAuth = require("../../middleware/auth");
 
 const router = express.Router();
 const admin = require("firebase-admin");
-
+/**
+ * Sign up post request
+ * @param {string} email - the email of the user
+ * @param {string} password - the password of the user
+ * @param {string} name - the name of the user
+ * @param {string} university - the university of the user
+ * @param {string} imageURL - the URL to the user's profile picture, with current architecture should be on Firebase Cloud Storage
+ *
+ * If user with same email already exists, returns 409 with error code user_exists
+ * Otherwise, creates a new user in both MongoDB and FirebaseAuth and returns the details
+ * TODO: ADD EMAIL VERIFICATION VIA OTP OR FIREBASE
+ */
 router.post("/sign-up", async (req, res) => {
   try {
     const { name, email, password, university, imageURL } = req.body;
@@ -19,7 +30,7 @@ router.post("/sign-up", async (req, res) => {
     } catch (err) {}
 
     if (existingUser) {
-      res.status(400).json({
+      res.status(409).json({
         msg: "User with given email already exists",
         code: "user_exists",
       });
@@ -62,6 +73,26 @@ router.post("/sign-up", async (req, res) => {
   }
 });
 
+/**
+ * Post request to update a given user data, should probably be a PATCH request
+ * @param {string} name - the updated name
+ * @param {string} university - the updated university
+ * @param {string} imageURL - the updated URL to the user's profile picture, with current architecture should be on Firebase Cloud Storage
+ * @param {string} password - the updated password
+ * @param {string} email - the updated email
+ *
+ * All params should be passed in the request body. This is an authenticated request,
+ * a valid authToken must be passed in headers.
+ *
+ * It is the responsibility of the frontend to verify the old password before sending
+ * a password change request. Recommended to use a password change email from Firebase
+ * instead. On email change a logout should be triggered from frontend because all
+ * existing auth and refresh tokens will become invalid.
+ *
+ * Updates the user's data in both MongoDB and FirebaseAuth
+ * Returns the updated user data.
+ */
+
 router.post("/update", withAuth, async (req, res) => {
   try {
     const { email, password, name, imageURL, university } = req.body;
@@ -96,6 +127,15 @@ router.post("/update", withAuth, async (req, res) => {
   }
 });
 
+/**
+ * Post request to get the user's data if authToken exists (should be a get request?)
+ * @param {string} authToken - the auth token of the user, should be passed in body.
+ *
+ * Does not really need to be an authenticated request, because if the authToken is
+ * invalid we will throw and return an error.
+ *
+ * Get's the user's uid from the authToken and returns the user's data.
+ */
 router.post("/data-from-token", async (req, res) => {
   try {
     const { authToken } = req.body;
@@ -111,7 +151,16 @@ router.post("/data-from-token", async (req, res) => {
     });
   }
 });
-
+/**
+ * Post request to mark a trivia as started for a particular user
+ * @param {string} triviaId - the id of the trivia to be marked as started
+ * Should be passed in requests body.
+ *
+ * This is an authenticated request,a valid authToken must be given in the header.
+ *
+ * Marks the trivia as started for the user. Returns a success response with a
+ * simple success message if successful.
+ */
 router.post("/started", withAuth, async (req, res) => {
   try {
     const { triviaId } = req.body;

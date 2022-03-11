@@ -6,7 +6,9 @@ const Trivia = require("../../schemas/trivia");
 const withAuth = require("../../middleware/auth");
 const User = require("../../schemas/user");
 const mongoose = require("mongoose");
-
+/**
+ * Get request that returns a list of all trivias
+ */
 router.get("/", async (req, res) => {
   try {
     const trivias = await Trivia.find(
@@ -24,6 +26,18 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: err.toString() });
   }
 });
+
+/**
+ * Get request that returns a single trivia, with the specified id
+ * @param {string} id - the id of the trivia to return
+ * This is an authenticated request, the user must be logged in to make it
+ * It also returns the user's details w.r.t to this trivia, namely:
+ * hasAttempted: has the user attempted this trivia before
+ * userTrivia : the user's score for this trivia, might include more details in future.
+ * if hasAttempted is false, userTrivia is not passed.
+ * hasAttempted can be true even if userTrivia is not passed, this means the user
+ * started to attempt the trivia but did not complete it
+ */
 
 router.get("/:id", withAuth, async (req, res) => {
   //   console.log(req.query);
@@ -64,6 +78,18 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+/**
+ * A post request to set the user's points for a trivia
+ * @param {string} id - the id of the trivia to set the user's points for
+ * @param {number} points - the points to set the user's points to
+ * id must be passed as a request parameter
+ * points must be passed in the body of the request
+ * This is an authenticated request, the user must be logged in to make it
+ * If points for this user and this trivia already exist, they are updated.
+ * If points for this user and this trivia do not exist, they are created.
+ * Accordingly a "Points added" or "Points updated" message is relayed from
+ * the server.
+ */
 router.post("/:id/points", withAuth, async (req, res) => {
   const firebaseID = req.uid;
   const id = req.params.id;

@@ -34,12 +34,12 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.ClippingImage1{
+/* .ClippingImage1{
   clip-path:polygon(25% 0, 100% 0%, 75% 100%, 0% 100%);
 }
 .ClippingImage2{
   clip-path:polygon(22% 0, 100% 0%, 100% 100%, 0% 100%);
-}
+} */
 .Outlinestroke{
   -webkit-text-stroke: 1px white;
   -webkit-text-fill-color: transparent;

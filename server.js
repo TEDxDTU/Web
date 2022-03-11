@@ -5,13 +5,13 @@ const admin = require("firebase-admin");
 const creds = require("./tedx-dtu-firebase-adminsdk-creds.json");
 const helmet = require("helmet");
 const cors = require("cors");
-// require("dotenv").config();
 const port = 3000 || process.env.PORT;
 
 const APIRouter = require("./routes/api/apis");
 
 const nextApp = nextServer({
     dev: true,
+    // dev: false, For Production Only
     customServer: true,
     port: port,
 });
@@ -21,8 +21,6 @@ nextApp
     .then(async () => {
         const app = express();
 
-        console.log(process.env.DB_URL);
-
         // Serving static files from "public" directory
         app.use(express.static("public"));
 
@@ -30,8 +28,8 @@ nextApp
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
 
-        // Helmet (Server Protection)
-        app.use(helmet());
+        // Helmet (Server Protection) Use in Production only
+        // app.use(helmet());
         // Cross Origin Resource Sharing
         app.use(cors());
 

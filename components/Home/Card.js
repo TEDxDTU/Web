@@ -6,8 +6,8 @@ export default function Card(props) {
             </div>
 
             <div className="text-white">
-                <h2 className="text-3xl m-2 p-2 border-b-2 border-red-600">{props.title}</h2>
-                <p className="p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus repudiandae consequatur magni cupiditate earum veniam laborum similique libero nam, eum quidem iusto quo mollitia debitis ab vel fuga exercitationem? Magni quam veniam a? Facilis ex et adipisci voluptas sit rerum?</p>
+                <h2 className="text-3xl border-b-2 py-4 border-red-600 text-justify" >{props.title}</h2>
+                <p className="py-2 text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus repudiandae consequatur magni cupiditate earum veniam laborum similique libero nam, eum quidem iusto quo mollitia debitis ab vel fuga exercitationem? Magni quam veniam a? Facilis ex et adipisci voluptas sit rerum?</p>
             </div>
 
             <div className="flex flex-row-reverse">

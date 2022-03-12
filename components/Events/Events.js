@@ -2,22 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Page from '../Universal/Page';
 import EventSection from './EventSection';
 
-const Events=()=> {
-    const url = '/api/events?eventType=past&&sortOrder=desc';
-    const [data,setData]=useState(null);
-    useEffect(()=>{
-      fetch(url)
-      .then ((response)=>response.json())
-      .then((data)=>setData(data)); 
-    },[]);  
+const Events = ({ allEvents }) => {
+  const { liveEvent, pastEvents, upcomingEvents } = allEvents;
 
-return <Page
+  return <Page
     pageTitle={"Events"}
   >
-    {data?.map((item,key)=>
-      <EventSection id={key} 
-      {...item}/>
-    )}
+    <EventSection eventList={upcomingEvents} eventType={"upcoming"} />
+    <EventSection eventList={[liveEvent]} eventType={"live"} />
+    <EventSection eventList={pastEvents} eventType={"past"} />
   </Page>;
 };
 export default Events;

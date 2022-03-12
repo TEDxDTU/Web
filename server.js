@@ -8,50 +8,51 @@ const cors = require("cors");
 const port = 3000 || process.env.PORT;
 
 const APIRouter = require("./routes/api/apis");
+const Event = require("./schemas/event");
 
 const nextApp = nextServer({
-    dev: true,
-    // dev: false, For Production Only
-    customServer: true,
-    port: port,
+  dev: true,
+  // dev: false, For Production Only
+  customServer: true,
+  port: port,
 });
 
 nextApp
-    .prepare()
-    .then(async () => {
-        const app = express();
+  .prepare()
+  .then(async () => {
+    const app = express();
 
-        // Serving static files from "public" directory
-        app.use(express.static("public"));
+    // Serving static files from "public" directory
+    app.use(express.static("public"));
 
-        // Body Parser
-        app.use(express.json());
-        app.use(express.urlencoded({ extended: true }));
+    // Body Parser
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
-        // Helmet (Server Protection) Use in Production only
-        // app.use(helmet());
-        // Cross Origin Resource Sharing
-        app.use(cors());
+    // Helmet (Server Protection) Use in Production only
+    // app.use(helmet());
+    // Cross Origin Resource Sharing
+    app.use(cors());
 
-        await mongoose.connect(process.env.DB_URL);
+    await mongoose.connect(process.env.DB_URL);
 
-        admin.initializeApp({
-            credential: admin.credential.cert(creds),
-        });
-
-        const server = app.listen(port, () => {
-            console.log("Port is listening on: " + port);
-        });
-
-        // API Router
-        app.use("/api", APIRouter);
-
-        // Routes
-        app.all("*", async (req, res) => {
-            nextApp.render(req, res, req.path);
-        });
-    })
-    .catch((err) => {
-        console.log(err.message);
-        process.exit(1);
+    admin.initializeApp({
+      credential: admin.credential.cert(creds),
     });
+
+    const server = app.listen(port, () => {
+      console.log("Port is listening on: " + port);
+    });
+
+    // API Router
+    app.use("/api", APIRouter);
+
+    // Routes
+    app.all("*", async (req, res) => {
+      nextApp.render(req, res, req.path);
+    });
+  })
+  .catch((err) => {
+    console.log(err.message);
+    process.exit(1);
+  });

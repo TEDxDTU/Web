@@ -1,17 +1,16 @@
 import React from "react";
-import EventsFooter from "../Events/EventsFooter";
 import Page from "../Universal/Page";
 import CardSection from "./CardSection";
 import LiveBanner from "./LiveBanner";
 
-export default function Landing({ latestEvent }) {
+export default function Landing({ liveEvent }) {
 
     return (
         <Page pageTitle={"Home"}>
             <LiveBanner
-                imageUrl={latestEvent.imageUrl}
-                title={latestEvent.title}
-                details={latestEvent.details}
+                imageUrl={liveEvent.imageUrl}
+                title={liveEvent.title}
+                details={liveEvent.details}
             />
             <CardSection />
         </Page>

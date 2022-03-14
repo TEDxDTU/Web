@@ -8,8 +8,6 @@ export async function getStaticProps(ctx) {
 
   const [liveEvent, pastEvents, upcomingEvents] = await Promise.all([getLiveEvent(), getPastEvents(), getUpcomingEvents()]);
 
-
-
   return {
     props: {
       liveEvent, pastEvents, upcomingEvents
@@ -20,4 +18,3 @@ export async function getStaticProps(ctx) {
 export default function events({ liveEvent, pastEvents, upcomingEvents }) {
   return <Events allEvents={{ liveEvent, pastEvents, upcomingEvents }} />;
 };
-

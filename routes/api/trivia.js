@@ -93,9 +93,20 @@ router.get("/:id", withAuth, async (req, res) => {
 router.post("/:id/points", withAuth, async (req, res) => {
   const firebaseID = req.uid;
   const id = req.params.id;
-  const { points } = req.body;
+  const { points, timeTaken } = req.body;
   try {
     const user = await User.findOne({ firebaseID });
+    const currTrivia = await Trivia.findOne({}, ["_id"], {
+      sort: {
+        _createdAt: -1,
+      },
+    });
+    if (currTrivia._id.equals(mongoose.Types.ObjectId(id))) {
+      // ADD Score to leaderboard
+      console.log("current trivia");
+    } else {
+      console.log("Older trivia");
+    }
     console.log(user);
     if (!user.trivias) {
       user.trivias = [];
@@ -116,11 +127,13 @@ router.post("/:id/points", withAuth, async (req, res) => {
     console.log(trivia);
     if (trivia) {
       trivia.points = points;
+      trivia.timeTaken = timeTaken;
       msg = "Points updated!";
     } else {
       user.trivias.push({
         triviaId: id,
-        points: points,
+        points,
+        timeTaken,
       });
       msg = "Points added!";
     }

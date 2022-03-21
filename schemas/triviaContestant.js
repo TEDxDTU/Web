@@ -27,9 +27,9 @@ const triviaContestantSchema = mongoose.Schema(
   }
 );
 
-const triviaContestant = mongoose.model(
+const TriviaContestant = mongoose.model(
   "TriviaContestant",
   triviaContestantSchema,
   "leaderboard"
 );
-module.exports = triviaContestant;
+module.exports = TriviaContestant;

@@ -6,6 +6,9 @@ const Trivia = require("../../schemas/trivia");
 const withAuth = require("../../middleware/auth");
 const User = require("../../schemas/user");
 const mongoose = require("mongoose");
+const TriviaContestant = require("../../schemas/triviaContestant");
+const admin = require("firebase-admin");
+
 /**
  * Get request that returns a list of all trivias
  */
@@ -20,10 +23,36 @@ router.get("/", async (req, res) => {
         },
       }
     );
-    return res.status(200).json(trivias);
+    const authorization = req.headers.authorization;
+    if (!authorization) {
+      return res.status(200).json({ trivias });
+    }
+    const token = authorization;
+    let decodedIdToken;
+    try {
+      decodedIdToken = await admin.auth().verifyIdToken(token);
+      if (!decodedIdToken || !decodedIdToken.uid) {
+        return res.status(200).json({ trivias, error: "Not authenticated." });
+      }
+
+      req.uid = decodedIdToken.uid;
+      const user = await User.findOne({ firebaseID: req.uid }, [
+        "triviasAttempted",
+      ]);
+      console.log(user.trivias);
+      return res.status(200).json({
+        trivias,
+        userData: {
+          triviasAttempted: user.triviasAttempted,
+        },
+      });
+    } catch (error) {
+      console.log(`verifyIdToken error: ${error}`);
+      return res.status(200).json(trivias);
+    }
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ msg: err.toString() });
+    return res.status(200).json({ trivias, error: err.toString() });
   }
 });
 

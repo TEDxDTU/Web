@@ -20,7 +20,9 @@
 .use-philosopher {
     font-family: "Philosopher", sans-serif;
 }
-
+.use-popins{
+  font-family: "Poppins", sans-serif;
+}
 .hover-underline-animation {
   display: inline-block;
   position: relative;

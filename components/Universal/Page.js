@@ -14,7 +14,7 @@ export default function Page({ pageTitle, children }) {
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
-            <NavBar />
+            <NavBar {...pageTitle} />
             <div className="bg-black text-white min-h-[max(calc(100vh-16rem),36rem)] my-auto">
                 {children}
             </div>

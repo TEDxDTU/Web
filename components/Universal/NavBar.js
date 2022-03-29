@@ -178,7 +178,7 @@ export default function NavBar() {
                         alt="NavBar"
                         onClick={() => setIsNavOpen(!isNavOpen)}
                     />
-                    <Link href="/register">
+                    <Link href="/">
                         <img
                             className="
           w-40
@@ -188,6 +188,7 @@ export default function NavBar() {
                             alt="TEDxDTU Logo"
                         />
                     </Link>
+                    <Link href="/register">
                     <button
                         className="
       bg-red-600
@@ -199,6 +200,7 @@ export default function NavBar() {
                     >
                         Register
                     </button>
+                    </Link>
                 </header>
                 {isNavOpen && (
                     <nav

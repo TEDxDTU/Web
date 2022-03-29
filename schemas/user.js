@@ -15,6 +15,9 @@ const userTriviaSchema = mongoose.Schema(
     points: {
       type: Number,
     },
+    timeTaken: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

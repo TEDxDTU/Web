@@ -3,7 +3,6 @@ import getLiveEvent from "../utils/getLiveEvent";
 
 export async function getStaticProps() {
 
-
   const liveEvent = await getLiveEvent();
 
   return {

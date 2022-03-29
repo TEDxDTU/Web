@@ -5,21 +5,24 @@ const admin = require("firebase-admin");
 const creds = require("./tedx-dtu-firebase-adminsdk-creds.json");
 const helmet = require("helmet");
 const cors = require("cors");
+// const serverless = require("serverless-http");
 const port = 3000 || process.env.PORT;
 
 const APIRouter = require("./routes/api/apis");
-const Event = require("./schemas/event");
 
 const nextApp = nextServer({
-  dev: true,
-  // dev: false, For Production Only
+  dev: true, // For Development Only
+  // dev: false, //For Production Only
   customServer: true,
   port: port,
 });
 
-nextApp
-  .prepare()
-  .then(async () => {
+(async () => {
+  try {
+
+    await nextApp.prepare();
+    console.log("Next.js Engine is prepared");
+
     const app = express();
 
     // Serving static files from "public" directory
@@ -34,7 +37,13 @@ nextApp
     // Cross Origin Resource Sharing
     app.use(cors());
 
-    await mongoose.connect(process.env.DB_URL);
+    try {
+      await mongoose.connect(process.env.DB_URL);
+
+    } catch (err) {
+      console.log(err.message);
+      process.exit(1);
+    };
 
     admin.initializeApp({
       credential: admin.credential.cert(creds),
@@ -49,10 +58,14 @@ nextApp
 
     // Routes
     app.all("*", async (req, res) => {
-      nextApp.render(req, res, req.path);
+      nextApp.getRequestHandler()(req, res, req.path);
     });
-  })
-  .catch((err) => {
+
+    // module.exports.handler = serverless(app)
+
+  } catch (err) {
     console.log(err.message);
     process.exit(1);
-  });
+  };
+
+})();

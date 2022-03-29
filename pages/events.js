@@ -4,7 +4,7 @@ import getLiveEvent from '../utils/getLiveEvent';
 import getPastEvents from "../utils/getPastEvents";
 import getUpcomingEvents from "../utils/getUpcomingEvents";
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
 
   const [liveEvent, pastEvents, upcomingEvents] = await Promise.all([getLiveEvent(), getPastEvents(), getUpcomingEvents()]);
 

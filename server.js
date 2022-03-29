@@ -5,7 +5,6 @@ const admin = require("firebase-admin");
 const creds = require("./tedx-dtu-firebase-adminsdk-creds.json");
 const helmet = require("helmet");
 const cors = require("cors");
-// const serverless = require("serverless-http");
 const port = 3000 || process.env.PORT;
 
 const APIRouter = require("./routes/api/apis");
@@ -60,8 +59,6 @@ const nextApp = nextServer({
     app.all("*", async (req, res) => {
       nextApp.getRequestHandler()(req, res, req.path);
     });
-
-    // module.exports.handler = serverless(app)
 
   } catch (err) {
     console.log(err.message);

@@ -1,28 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Roboto:wght@300;400;500;700;900&display=swap');
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .text-stroke-thin {
-    -webkit-text-stroke: red 1px;
-    -webkit-font-smoothing: antialiased;
-    font-smooth: always;
+  -webkit-text-stroke: red 1px;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
 }
 
-.use-philosopher {
-    font-family: "Philosopher", sans-serif;
-}
-.use-popins{
-  font-family: "Poppins", sans-serif;
-}
 .hover-underline-animation {
   display: inline-block;
   position: relative;
@@ -30,7 +24,6 @@
 }
 
 .hover-underline-animation:after {
-  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
@@ -47,7 +40,7 @@
   transform-origin: bottom left;
 }
 
-.Outlinestroke{
+.Outlinestroke {
   -webkit-text-stroke: 1px white;
   -webkit-text-fill-color: transparent;
 }

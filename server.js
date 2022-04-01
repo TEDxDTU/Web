@@ -25,7 +25,7 @@ const nextApp = nextServer({
     const app = express();
 
     // Serving static files from "public" directory
-    app.use(express.static("public"));
+    // app.use(express.static("public"));
 
     // Body Parser
     app.use(express.json());

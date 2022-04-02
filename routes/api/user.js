@@ -27,7 +27,7 @@ router.post("/sign-up", async (req, res) => {
 
     try {
       existingUser = await auth.getUserByEmail(email);
-    } catch (err) {}
+    } catch (err) { }
 
     if (existingUser) {
       res.status(409).json({
@@ -149,7 +149,7 @@ router.post("/data-from-token", async (req, res) => {
     return res.status(500).json({
       msg: err.toString(),
     });
-  }
+  };
 });
 /**
  * Post request to mark a trivia as started for a particular user

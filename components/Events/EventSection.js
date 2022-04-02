@@ -5,16 +5,16 @@ const EventSection = ({ eventList, eventType }) => {
   let eventsByYear = new Object();
   eventList.forEach((event) => {
     const year = new Date(event.dateTime).getUTCFullYear();
-    if (eventsByYear[year]) eventsByYear[year].push(event);
-    else eventsByYear[year] = [event];
+    if (eventsByYear[ year ]) eventsByYear[ year ].push(event);
+    else eventsByYear[ year ] = [ event ];
   });
 
-  eventsByYear = Object.entries(eventsByYear);
+  eventsByYear = Object.entries(eventsByYear).reverse();
 
   return (<div className="py-8">
     <h1 className="capitalize w-full text-5xl font-bold text-red-600">{eventType} events</h1>
     <main>
-      {eventsByYear.map(([year, eventList], idx) => {
+      {eventsByYear.map(([ year, eventList ], idx) => {
         return (<div
           key={idx.toString()}
           className="mx-auto my-8"

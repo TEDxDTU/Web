@@ -6,7 +6,7 @@ import getUpcomingEvents from "../utils/getUpcomingEvents";
 
 export async function getServerSideProps(ctx) {
 
-  const [liveEvent, pastEvents, upcomingEvents] = await Promise.all([getLiveEvent(), getPastEvents(), getUpcomingEvents()]);
+  const [ liveEvent, pastEvents, upcomingEvents ] = await Promise.all([ getLiveEvent(), getPastEvents(), getUpcomingEvents() ]);
 
   return {
     props: {

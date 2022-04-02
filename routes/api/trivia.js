@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   try {
     const trivias = await Trivia.find(
       {},
-      ["imageUrl", "title", "questionCount", "totalTime", "_id"],
+      [ "imageUrl", "title", "questionCount", "totalTime", "_id" ],
       {
         sort: {
           _createdAt: 1,
@@ -80,11 +80,11 @@ router.get("/leaderboard", async (req, res) => {
   let leaderboard = [];
 
   for (let i = 0; i < contestants.length; i++) {
-    const user = await User.findOne({ firebaseID: contestants[i].userId });
+    const user = await User.findOne({ firebaseID: contestants[ i ].userId });
     leaderboard.push({
       name: user.name,
-      points: contestants[i].points,
-      timeTaken: contestants[i].timeTaken,
+      points: contestants[ i ].points,
+      timeTaken: contestants[ i ].timeTaken,
       imageURL: user.imageURL,
       university: user.university,
       firebaseID: user.firebaseID,
@@ -169,7 +169,7 @@ router.post("/:id/points", withAuth, async (req, res) => {
   const { points, timeTaken } = req.body;
   try {
     const user = await User.findOne({ firebaseID });
-    const currTrivia = await Trivia.findOne({}, ["_id"], {
+    const currTrivia = await Trivia.findOne({}, [ "_id" ], {
       sort: {
         _createdAt: -1,
       },

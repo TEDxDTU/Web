@@ -3,14 +3,14 @@ import React, { useState } from "react";
 export function Password({ registerStatus }) {
   const [ passwordView, setpasswordView ] = useState(false);
   return (<div className="flex items-center">
-    <input className={registerStatus ? "px-5 w-72 rounded py-3 my-2.5" : "px-5 w-72 rounded py-2.5 my-2"} type={passwordView ? "text" : "password"} name="password" placeholder="Password" required />
+    <input className={`px-5 w-80 rounded py-3 ${(registerStatus ? "my-2.5" : "my-2")}`} type={passwordView ? "text" : "password"} name="password" placeholder="Password" required />
     <img className="h-7 w-7 -ml-10 cursor-pointer" src={"/Register/" + (passwordView ? "password.svg" : "ShowPassword.svg")} onClick={() => setpasswordView(!passwordView)} />
   </div>);
 }
 
 export function Email({ registerStatus }) {
-  return (<div>
-    <input className={registerStatus ? "pl-5 py-3 my-3 w-72 rounded" : "pl-5 py-2.5 my-2 w-72 rounded"} type="email" name="email" placeholder="Email address" required />
+  return (<div className="flex">
+    <input className={`px-5 w-80 rounded py-3 ${registerStatus ? "my-3" : "my-2"}`} type="email" name="email" placeholder="Email address" required />
   </div>);
 }
 
@@ -25,7 +25,7 @@ export function Heading({ registerStatus, setregisterStatus }) {
 
 export function SubmitButton({ registerStatus }) {
   return (<div className="flex justify-center w-72 text-white mt-2">
-    <button className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm">
+    <button className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8">
       {registerStatus ? "Login" : "Register"}
     </button>
   </div>);

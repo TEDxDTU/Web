@@ -3,7 +3,7 @@ import { Password, Email, Heading, SubmitButton } from "./SharedComp";
 
 export default function Login({ setregisterStatus, registerStatus }) {
 
-  return (<div className="py-16 grid place-content-center">
+  return (<div className="px-12 py-20 md:px-24 sm:py-24">
     <Heading registerStatus={registerStatus} setregisterStatus={setregisterStatus} />
     <div className="text-black">
       <Email registerStatus={registerStatus} />

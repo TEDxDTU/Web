@@ -11,6 +11,6 @@ const recentUpdatesAPI = require("./recentUpdates");
 router.use("/events", eventsAPI);
 router.use("/trivia", triviaAPI);
 router.use("/user", userAPI);
-router.use("/recentUpdates", recentUpdatesAPI);
+router.use("/recent-updates", recentUpdatesAPI);
 
 module.exports = router;

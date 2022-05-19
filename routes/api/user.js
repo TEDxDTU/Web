@@ -140,9 +140,11 @@ router.post("/update", withAuth, async (req, res) => {
 router.post("/data-from-token", async (req, res) => {
   try {
     const { authToken } = req.body;
+    
     const auth = admin.auth();
     const decodedToken = await auth.verifyIdToken(authToken);
     const firebaseID = decodedToken.uid;
+
     const user = await User.findOne({ firebaseID });
     return res.json(user);
   } catch (err) {

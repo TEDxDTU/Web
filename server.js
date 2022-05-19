@@ -10,7 +10,7 @@ const port = 3000 || process.env.PORT;
 const APIRouter = require("./routes/api/apis");
 
 const nextApp = nextServer({
-  dev: true, // For Development Only
+  dev: true, // For Development Onl y
   // dev: false, //For Production Only
   customServer: true,
   port: port,

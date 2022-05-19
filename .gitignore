@@ -3,6 +3,8 @@
 .env.local
 .env
 tedx-dtu-firebase-adminsdk-creds.json
+firebase.config.js
+firebaseAPI.js
 
 # dependencies
 /node_modules

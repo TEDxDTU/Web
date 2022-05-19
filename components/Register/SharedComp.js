@@ -1,5 +1,25 @@
 import React, { useState } from "react";
 
+const addEmail=async()=>
+{
+  const obj={
+    email:"gari01@gmail.com",
+    name:"hgg",
+    password:"jgjjhjdshg",
+    university:"hhgjg",
+    imageURL:"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+  }
+  const response= await fetch("http://localhost:3000/api/user/sign-up",{
+    method:'POST',
+    body:JSON.stringify(obj),
+    headers:{
+      'Content-Type':'application/json',
+    }
+  })
+  const data=await response.json();
+  console.log(data);
+
+}
 export function Password({ registerStatus }) {
   const [ passwordView, setpasswordView ] = useState(false);
   return (<div className="flex items-center">
@@ -25,7 +45,7 @@ export function Heading({ registerStatus, setregisterStatus }) {
 
 export function SubmitButton({ registerStatus }) {
   return (<div className="flex justify-center w-72 text-white mt-2">
-    <button className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8">
+    <button className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8" onClick={()=>addEmail()}>
       {registerStatus ? "Login" : "Register"}
     </button>
   </div>);

@@ -45,8 +45,8 @@ router.post("/sign-up", async (req, res) => {
     });
 
     try {
-
-      // await newDBUser.save();
+      newDBUser.firebaseID=undefined;
+      await newDBUser.save();
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,

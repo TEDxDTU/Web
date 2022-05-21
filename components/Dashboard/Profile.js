@@ -1,8 +1,8 @@
 import React from "react";
-import OptionsButton from "./OptionsButton";
+import { OptionsButton } from "./SharedComp";
 
 export default function Profile() {
-    return (<div>
+    return (<div className="fixed">
         <div className="flex justify-around">
             <img src="/LandingPage/speakers.png" className="h-24 w-24 rounded-full text-center" />
         </div>

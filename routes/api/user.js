@@ -30,11 +30,10 @@ router.post("/sign-up", async (req, res) => {
     } catch (err) { }
 
     if (existingUser) {
-      res.status(409).json({
+      return res.status(409).json({
         msg: "User with given email already exists",
         code: "user_exists",
       });
-      return;
     }
 
     const newDBUser = User({

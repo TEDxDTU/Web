@@ -27,7 +27,7 @@ export default function Register({ registerStatus, setregisterStatus }) {
       <Email registerStatus={registerStatus} handleChange={handleChange}/>
       <div className="flex"><input onChange={(e) => handleChange(e)} className="w-80 px-5 py-3 my-2 rounded" name="university" type="text" placeholder="University" required /></div>
       <Password registerStatus={registerStatus} handleChange={handleChange}/>
-      <SubmitButton registerStatus={registerStatus} form={form}/>
+      <SubmitButton registerStatus={registerStatus} form={form} />
     </div>
   </div>);
 }

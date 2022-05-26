@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
-import firebaseConfigAPI from "../../firebaseAPI"
+import firebaseConfigAPI from "../../firebaseAPI";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-export async function LoginhandleAction(form,router)  {
+export async function LoginhandleAction(form, router) {
 
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
   const { email, password } = form;
 
   const authToken = await signInWithEmailAndPassword(authentication, email, password);
   const url = `http://localhost:3000/api/user/data-from-token`;
+
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify({ authToken: authToken.user.accessToken }),
@@ -20,10 +21,15 @@ export async function LoginhandleAction(form,router)  {
   });
 
   const data = await response.json();
-  router.push('/');
-  console.log(data);
+  const { status } = response;
+  if (status == 200) {
+    localStorage.setItem("profile", JSON.stringify({ ...data}));
+    router.push('/');
+  }
+  return;
 }
-const RegisterhandleAction = async (form,router) => {
+
+const RegisterhandleAction = async (form, router) => {
 
   const { email, firstname, lastname, password, university } = form;
 
@@ -36,6 +42,7 @@ const RegisterhandleAction = async (form,router) => {
   }
 
   const url = `http://localhost:3000/api/user/sign-up`;
+
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(UserObj),
@@ -44,9 +51,12 @@ const RegisterhandleAction = async (form,router) => {
     }
   })
   const data = await response.json();
-  router.push('/');
-  console.log(data);
-
+  const { status } = response;
+  if (status == 200) {
+    localStorage.setItem("profile", JSON.stringify({ ...data}));
+    router.push('/dashboard');
+  }
+  return;
 }
 export function Password({ registerStatus, handleChange }) {
   const [passwordView, setpasswordView] = useState(false);
@@ -71,13 +81,13 @@ export function Heading({ registerStatus, setregisterStatus }) {
   </div>);
 }
 
-export function SubmitButton({ registerStatus, form }) {
-  
-  const router=useRouter();
+export function SubmitButton({ registerStatus, form}) {
+
+  const router = useRouter();
 
   return (<div className="flex justify-center w-72 text-white mt-2">
     <button className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8"
-      onClick={() => { registerStatus ? LoginhandleAction(form,router) : RegisterhandleAction(form,router) }}
+      onClick={() => { registerStatus ? LoginhandleAction(form, router) : RegisterhandleAction(form, router) }}
     >
       {registerStatus ? "Login" : "Register"}
     </button>

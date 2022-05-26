@@ -17,7 +17,7 @@ export default function Login({ setregisterStatus, registerStatus }) {
     <div className="text-black">
       <Email registerStatus={registerStatus} handleChange={handleChange} />
       <Password registerStatus={registerStatus} handleChange={handleChange} />
-      <SubmitButton registerStatus={registerStatus} form={form}/>
+      <SubmitButton registerStatus={registerStatus} form={form} />
     </div>
   </div>);
 }

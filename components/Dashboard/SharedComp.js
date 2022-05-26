@@ -1,25 +1,64 @@
-import React from "react";
-// hover:bg-[#2C2C2C] hover:rounded-lg px-2 cursor-pointer transition duration-150
-export function OptionsButton({ src, name }) {
-    return (<div className="">
-        <div className="flex mb-3 shrink mx-10 mr-24 hover:bg-[#2C2C2C] hover:rounded-lg cursor-pointer transition duration-150">
+import React, { useState } from "react";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import firebaseConfigAPI from "../../firebaseAPI";
+import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
+import { v4 } from "uuid";
+
+export function OptionsButton({ src, name, setOption, option }) {
+
+    return (<div onClick={() => setOption(name)}>
+        <div className={`flex mb-3 shrink mx-10 mr-20 pr-4 hover:bg-[#2C2C2C] rounded-lg cursor-pointer transition duration-150 ${option === name ? 'bg-[#2C2C2C]' : ''}`}>
             <div className="bg-[#2C2C2C] w-fit p-2 rounded-lg mr-6"><img src={src} className="h-5 w-5" /></div>
             <div className="align-middle pt-1 text-lg font-semibold ">{name}</div>
         </div>
     </div>)
 }
 
-export function InputField({ tag, name, placeholder, editState }) {
+export function handleChange(e, setForm, form) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+}
 
-    return (<div className="grid grid-cols-3 gap-4 mt-8">
+export function InputField({ tag, name, placeholder, editState, value, setForm, form }) {
+
+    return (<div className="grid grid-cols-3 gap-4 mt-6">
         <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
-        <div><input name={name} className="rounded h-10 w-96 pl-4" disabled={!editState} placeholder={placeholder} /></div>
+        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-96 pl-4 ${editState && 'text-black'} ${name != "email" && 'capitalize'}`} value={value} disabled={!editState} placeholder={placeholder} /></div>
     </div>)
 }
 
-export function SaveAndCancelButton({ tag, setEditState }) {
+export function InputImage({ tag, name, editState, setImage }) {
 
-    return (<button className="bg-red-600 w-20 h-10 text-lg mt-6 ml-4" onClick={() => setEditState(false)}>
+    return (<div className={`grid grid-cols-3 gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>
+        <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
+        <div>
+            <input name={name} type="file" disabled={!editState} onChange={(e) => setImage(e.target.files[0])}
+                className={`file:border-0 file:rounded file:p-1 file:px-2 mt-1 ${editState ? 'file:bg-red-600 file:text-white cursor-pointer' : ''}`}
+            />
+        </div>
+    </div>)
+}
+
+export function SaveAndCancelButton({ tag, setEditState, BackToOldState, UpdateTheState, imageUpload }) {
+
+    const storage = getStorage(initializeApp(firebaseConfigAPI));
+
+    const uploadFile = () => {
+        if (imageUpload == null) {
+            UpdateTheState();
+            return;
+        }
+        const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) =>UpdateTheState(url))
+        });
+    };
+
+    return (<button className="bg-red-600 w-20 h-10 text-lg ml-4" onClick={() => {
+        setEditState(false)
+        { tag === "Cancel" && BackToOldState() }
+        { tag === "Save" && uploadFile() }
+    }}>
         {tag}
     </button>)
 }

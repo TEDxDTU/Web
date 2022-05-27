@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { FormContext } from "../../contextFiles/formContext";
 import { OptionsButton } from "./SharedComp";
 
 export default function Profile({ setOption, option }) {
 
-    const [form, setForm] = useState([]);
+    const [form, setForm] = useContext(FormContext);
 
     useEffect(function () {
         setForm(JSON.parse(window.localStorage.getItem("profile")));

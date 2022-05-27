@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import firebaseConfigAPI from "../../firebaseAPI";
+import { FormContext } from "../../contextFiles/formContext";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { v4 } from "uuid";
 
@@ -19,7 +20,9 @@ export function handleChange(e, setForm, form) {
     setForm({ ...form, [e.target.name]: e.target.value });
 }
 
-export function InputField({ tag, name, placeholder, editState, value, setForm, form }) {
+export function InputField({ tag, name, placeholder, editState, value }) {
+
+    const [form, setForm] = useContext(FormContext);
 
     return (<div className="grid grid-cols-3 gap-4 mt-6">
         <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
@@ -27,37 +30,38 @@ export function InputField({ tag, name, placeholder, editState, value, setForm, 
     </div>)
 }
 
-export function InputImage({ tag, name, editState, setImage }) {
+export function InputImage({ tag, name, editState }) {
+
+    const storage = getStorage(initializeApp(firebaseConfigAPI));
+    const [form, setForm] = useContext(FormContext);
+    const uploadFile = (imageUpload) => {
+        if (imageUpload == null) {
+            return;
+        }
+        const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                setForm({ ...form, imageURL: url })
+            })
+        });
+    };
 
     return (<div className={`grid grid-cols-3 gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>
         <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
         <div>
-            <input name={name} type="file" disabled={!editState} onChange={(e) => setImage(e.target.files[0])}
+            <input name={name} type="file" disabled={!editState} onChange={(e) => uploadFile(e.target.files[0])}
                 className={`file:border-0 file:rounded file:p-1 file:px-2 mt-1 ${editState ? 'file:bg-red-600 file:text-white cursor-pointer' : ''}`}
             />
         </div>
     </div>)
 }
 
-export function SaveAndCancelButton({ tag, setEditState, BackToOldState, UpdateTheState, imageUpload }) {
-
-    const storage = getStorage(initializeApp(firebaseConfigAPI));
-
-    const uploadFile = () => {
-        if (imageUpload == null) {
-            UpdateTheState();
-            return;
-        }
-        const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) =>UpdateTheState(url))
-        });
-    };
+export function SaveAndCancelButton({ tag, setEditState, BackToOldState, UpdateTheState }) {
 
     return (<button className="bg-red-600 w-20 h-10 text-lg ml-4" onClick={() => {
         setEditState(false)
         { tag === "Cancel" && BackToOldState() }
-        { tag === "Save" && uploadFile() }
+        { tag === "Save" && UpdateTheState() }
     }}>
         {tag}
     </button>)

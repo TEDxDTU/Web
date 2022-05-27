@@ -30,11 +30,10 @@ router.post("/sign-up", async (req, res) => {
     } catch (err) { }
 
     if (existingUser) {
-      res.status(409).json({
+      return res.status(409).json({
         msg: "User with given email already exists",
         code: "user_exists",
       });
-      return;
     }
 
     const newDBUser = User({
@@ -45,8 +44,8 @@ router.post("/sign-up", async (req, res) => {
     });
 
     try {
+      newDBUser.firebaseID=undefined;
       await newDBUser.save();
-
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,
@@ -57,7 +56,6 @@ router.post("/sign-up", async (req, res) => {
       });
 
       newDBUser.firebaseID = newFirebaseUser.uid;
-
       await newDBUser.save();
 
       return res.json(newDBUser);
@@ -67,8 +65,10 @@ router.post("/sign-up", async (req, res) => {
       });
     }
   } catch (err) {
+
     res.sendStatus(500).json({
       msg: err.toString(),
+
     });
   }
 });
@@ -139,9 +139,11 @@ router.post("/update", withAuth, async (req, res) => {
 router.post("/data-from-token", async (req, res) => {
   try {
     const { authToken } = req.body;
+    
     const auth = admin.auth();
     const decodedToken = await auth.verifyIdToken(authToken);
     const firebaseID = decodedToken.uid;
+
     const user = await User.findOne({ firebaseID });
     return res.json(user);
   } catch (err) {

@@ -2,6 +2,7 @@ import React from "react";
 import Page from "../Universal/Page";
 import CardSection from "./CardSection";
 import LiveBanner from "./LiveBanner";
+// import EventInfo from "../SingleEvent/EventInfo";
 
 export default function Landing({ liveEvent }) {
 

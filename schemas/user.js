@@ -91,7 +91,7 @@ const userSchema = mongoose.Schema({
   ],
   /** The user's UID in firebase. This is used to identify a user in Mongo as well*/
   firebaseID: {
-    type: String,
+    type: String
   },
 });
 

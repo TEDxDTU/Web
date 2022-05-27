@@ -24,7 +24,7 @@ export default function CardSection() {
         <div className="relative leading-none"><Card source="LandingPage\speakers.png" title="Speakers" link="speakers" /></div>
       </div>
 
-      <div className="relative h-[700px] group">
+      <div className="relative lg:h-[700px] group">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
         <div className="relative leading-none"><Card source="LandingPage\events.png" title="Events" link="events" /></div>
       </div>
@@ -34,7 +34,7 @@ export default function CardSection() {
         <div className="relative rounded-lg leading-none"><Card source="LandingPage\about-us.png" title="About Us" link="about" /></div>
       </div>
 
-      <div className="relative h-[700px] group">
+      <div className="relative lg:h-[700px] group">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
         <div className="relative rounded-lg leading-none"><Card source="LandingPage\partners.png" title="Partners" link="partners" /></div>
       </div>

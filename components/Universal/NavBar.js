@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { FormContext } from "../../contextFiles/formContext";
 import Link from "next/link";
 
 export default function NavBar() {
-  const [ isLargeViewPort, setIsLargeViewPort ] = useState(null);
-  const [ isNavOpen, setIsNavOpen ] = useState(false);
+  const [isLargeViewPort, setIsLargeViewPort] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [form, setForm] = useContext(FormContext);
 
+  useEffect(function () {
+  }, []);
   useEffect(
     () =>
       (async () => {
@@ -19,7 +23,7 @@ export default function NavBar() {
       })(),
     []
   );
-
+  console.log(form);
   if (isLargeViewPort)
     return (
       <nav
@@ -123,7 +127,21 @@ export default function NavBar() {
           </div>
         </Link>
 
-        <Link href="/register">
+        {form && <Link href="/dashboard">
+          <div
+            className="
+        hover-underline-animation
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        "
+          >
+            Dashboard
+          </div>
+        </Link>}
+
+        <Link href={form ? "/" : "/register"}>
           <button
             className="
         bg-red-600
@@ -132,8 +150,12 @@ export default function NavBar() {
         h-16
         text-lg
         "
+            onClick={() => {
+              window.localStorage.clear();
+              setForm(null);
+            }}
           >
-            Register
+            {form ? "Log Out" : "Register"}
           </button>
         </Link>
       </nav>
@@ -176,7 +198,8 @@ export default function NavBar() {
             alt="TEDxDTU Logo"
           />
         </Link>
-        <Link href="/register">
+
+        <Link href={form ? "/" : "/register"}>
           <button
             className="
       bg-red-600
@@ -185,8 +208,13 @@ export default function NavBar() {
       w-24
       md:w-32
       "
+            onClick={() => {
+              window.localStorage.clear();
+              setForm(null);
+            }}
           >
-            Register
+            {form ? "Log Out" : "Register"}
+
           </button>
         </Link>
       </header>
@@ -250,6 +278,20 @@ export default function NavBar() {
               Events
             </button>
           </Link>
+
+          {form && <Link href="/dashboard">
+            <button
+              className="
+            bg-red-600
+            rounded
+            w-3/4
+            py-4
+            my-4
+          "
+            >
+              Dashboard
+            </button>
+          </Link>}
 
           <Link href="/partners">
             <button

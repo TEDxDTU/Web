@@ -1,15 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { FormContext } from "../../contextFiles/formContext";
 import { OptionsButton } from "./SharedComp";
 
 export default function Profile({ setOption, option }) {
 
     const [form, setForm] = useContext(FormContext);
-
-    useEffect(function () {
-        setForm(JSON.parse(window.localStorage.getItem("profile")));
-    }, []);
-
 
     return (<div className="fixed">
         <div className="flex justify-around">

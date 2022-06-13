@@ -11,8 +11,14 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.text-stroke-thin {
+.text-stroke-thin-red {
   -webkit-text-stroke: red 1px;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+}
+
+.text-stroke-thin-white {
+  -webkit-text-stroke: white 1px;
   -webkit-font-smoothing: antialiased;
   font-smooth: always;
 }

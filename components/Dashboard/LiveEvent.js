@@ -1,23 +1,26 @@
 import React from "react";
 
-export default function LiveEvent() {
+export default function LiveEvent({ liveEvent, pastEvents }) {
 
     return (<div className="grid grid-cols-5 gap-4">
         <div className="col-span-2 mr-20 mt-10 relative">
             <div className="absolute z-0 flex justify-around w-full">
-                <img src="/Dashboard/BackImage1.svg" className="w-32 border-2 border-gray-600" />
+                <img src={pastEvents[0].imageUrl} className="w-32 h-16 border-2 border-gray-600" />
             </div>
             <div className="mt-14 absolute z-10 flex justify-around w-full">
-                <img src="/Dashboard/BackImage2.svg" className="w-44 border-2 border-gray-600" />
+                <img src={pastEvents[1].imageUrl} className="w-44 h-20 border-2 border-gray-600" />
             </div>
-            <div className="mt-32 absolute z-20 bg-red-600 p-1 pb-8 shadow-red-500 flex justify-around w-full shadow-lg shadow-red-500">
-                <img src="/Dashboard/liveEvent.svg " className="w-52" />
+            <div className="mt-32 absolute z-20 bg-red-600 p-1 pb-1 shadow-red-500 w-full shadow-lg shadow-red-500">
+                <img src={liveEvent.imageUrl} className="w-52 pb-1 h-32" />
+                <div className="flex justify-end">
+                    <div className="rounded-2xl cursor-pointer bg-white text-black p-1 mr-2 font-semibold">Book Now</div>
+                </div>
             </div>
             <div className="mt-64 absolute z-10 flex justify-around w-full">
-                <img src="/Dashboard/BackImage3.svg" className="w-44 border-2 border-gray-600" />
+                <img src={pastEvents[2].imageUrl} className="w-44 h-20 border-2 border-gray-600" />
             </div>
             <div className="mt-80 absolute z-0 flex justify-around w-full">
-                <img src="/Dashboard/BackImage4.svg" className="w-32 border-2 border-gray-600" />
+                <img src={pastEvents[3].imageUrl} className="w-32 border-2 h-16 border-gray-600" />
             </div>
         </div>
         <div className="col-span-3">

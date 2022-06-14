@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Page from "../Universal/Page";
 import EditProfile from "./EditProfile";
 import LiveEvent from "./LiveEvent";
+import MyTicketPage from "./myTicketPage";
 import Profile from "./Profile";
 
 export default function Landing({ allEvents }) {
@@ -11,7 +12,7 @@ export default function Landing({ allEvents }) {
     const [isLargeViewPort, setIsLargeViewPort] = useState(null);
 
     useEffect(function () {
-    }, []);  
+    }, []);
     useEffect(
         () =>
             (async () => {
@@ -25,7 +26,7 @@ export default function Landing({ allEvents }) {
             })(),
         []
     );
-    
+
     return (<Page pageTitle={'Dashboard'}>
         {isLargeViewPort && <div className="grid grid-cols-3 gap-4 px-12 py-4 h-screen">
             <div className="col-span-1 md:mr-8 lg:mr-24 mt-8">
@@ -34,6 +35,7 @@ export default function Landing({ allEvents }) {
             <div className="col-span-2 ">
                 {option === 'Profile' && <EditProfile />}
                 {option === 'Live Event' && <LiveEvent isLargeViewPort={isLargeViewPort} liveEvent={liveEvent} pastEvents={pastEvents} />}
+                {option === 'Tickets' && <MyTicketPage />}
             </div>
         </div>}
         {!isLargeViewPort && <div className="py-4 h-screen">
@@ -43,6 +45,7 @@ export default function Landing({ allEvents }) {
             <div className="bg-black px-12 ">
                 {option === 'Profile' && <div className=""><EditProfile /></div>}
                 {option === 'Live Event' && <LiveEvent isLargeViewPort={isLargeViewPort} liveEvent={liveEvent} pastEvents={pastEvents} />}
+                {option === 'Tickets' && <MyTicketPage />}
             </div>
         </div>}
     </Page>)

@@ -11,6 +11,25 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
+.customScrollbar{
+  scrollbar-width: thin;
+  scrollbar-color: #000 #fff;
+}
+
+.customScrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.customScrollbar::-webkit-scrollbar-track { 
+  background: #fff;
+  border-radius: 10px;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb { 
+  border-radius: 10px;
+  background:#888;
+}
+
 .text-stroke-thin-red {
   -webkit-text-stroke: red 1px;
   -webkit-font-smoothing: antialiased;
@@ -49,4 +68,21 @@
 .Outlinestroke {
   -webkit-text-stroke: 1px white;
   -webkit-text-fill-color: transparent;
+}
+
+.border-scoop-right {
+  height: 120px;
+  width: 220px;
+  background: -webkit-radial-gradient(0% 0%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(100% 0%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(0% 100%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(100% 100%, circle, transparent 6%, #D2D2D2 6%) no-repeat;
+  background: radial-gradient(circle at 0% 0%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 100% 0%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 0% 100%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 100% 100%, transparent 6%, #D2D2D2 6%) no-repeat;
+  background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%;
+  background-size: 75% 75%;
+}
+.border-scoop-left {
+  height: 120px;
+  width: 100px;
+  background: -webkit-radial-gradient(0% 100%, circle, transparent 9%, #555555 6%) no-repeat, -webkit-radial-gradient(100% 100%, circle, transparent 6%, #555555 6%) no-repeat, -webkit-radial-gradient(0% 0%, circle, transparent 9%, #555555 6%) no-repeat, -webkit-radial-gradient(0% 0%, circle, transparent 6%, #555555 6%) no-repeat;
+  background: radial-gradient(circle at 0% 100%, transparent 9%, #555555 6%) no-repeat, radial-gradient(circle at 100% 100%, transparent 6%, #555555 6%) no-repeat, radial-gradient(circle at 0% 0%, transparent 9%, #555555 6%) no-repeat, radial-gradient(circle at 0% 0%, transparent 6%, #555555 6%) no-repeat;
+  background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%;
+  background-size: 75% 75%;
 }

@@ -27,7 +27,7 @@ router.post("/sign-up", async (req, res) => {
 
     try {
       existingUser = await auth.getUserByEmail(email);
-    } catch (err) { }
+    } catch (err) {}
 
     if (existingUser) {
       return res.status(409).json({
@@ -44,8 +44,9 @@ router.post("/sign-up", async (req, res) => {
     });
 
     try {
-      newDBUser.firebaseID=undefined;
+      newDBUser.firebaseID = undefined;
       await newDBUser.save();
+      b;
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,
@@ -65,10 +66,8 @@ router.post("/sign-up", async (req, res) => {
       });
     }
   } catch (err) {
-
     res.sendStatus(500).json({
       msg: err.toString(),
-
     });
   }
 });
@@ -139,7 +138,7 @@ router.post("/update", withAuth, async (req, res) => {
 router.post("/data-from-token", async (req, res) => {
   try {
     const { authToken } = req.body;
-    
+
     const auth = admin.auth();
     const decodedToken = await auth.verifyIdToken(authToken);
     const firebaseID = decodedToken.uid;
@@ -151,7 +150,7 @@ router.post("/data-from-token", async (req, res) => {
     return res.status(500).json({
       msg: err.toString(),
     });
-  };
+  }
 });
 /**
  * Post request to mark a trivia as started for a particular user

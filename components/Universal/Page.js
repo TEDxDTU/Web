@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import NavBar from "./NavBar";
+import { FormContext } from "../../contextFiles/formContext";
 import Head from "next/head";
 
 export default function Page({ pageTitle, children }) {
+
+  const [form, setForm] = useContext(FormContext);
+
+  useEffect(function () {
+    setForm(JSON.parse(window.localStorage.getItem("profile")));
+  }, []);
+
   return (
     <>
       <Head>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import firebaseConfigAPI from "../../firebaseAPI";
@@ -9,9 +9,9 @@ import { v4 } from "uuid";
 export function OptionsButton({ src, name, setOption, option }) {
 
     return (<div onClick={() => setOption(name)}>
-        <div className={`flex mb-3 shrink mx-10 mr-20 pr-4 hover:bg-[#2C2C2C] rounded-lg cursor-pointer transition duration-150 ${option === name ? 'bg-[#2C2C2C]' : ''}`}>
-            <div className="bg-[#2C2C2C] w-fit p-2 rounded-lg mr-6"><img src={src} className="h-5 w-5" /></div>
-            <div className="align-middle pt-1 text-lg font-semibold ">{name}</div>
+        <div className={`lg:w-40 flex mb-4 shrink w-44 md:w-36 lg:mx-10 hover:bg-[#2C2C2C] rounded-lg cursor-pointer transition duration-150 ${option === name ? 'bg-[#2C2C2C]' : ''}`}>
+            <div className="bg-[#2C2C2C] w-fit p-2 rounded-lg mr-2 lg:mr-4"><img src={src} className="h-5 w-5" /></div>
+            <div className="align-middle pt-1 text-lg font-semibold ml-2">{name}</div>
         </div>
     </div>)
 }
@@ -24,9 +24,9 @@ export function InputField({ tag, name, placeholder, editState, value }) {
 
     const [form, setForm] = useContext(FormContext);
 
-    return (<div className="grid grid-cols-3 gap-4 mt-6">
-        <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
-        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-96 pl-4 ${editState && 'text-black'} ${name != "email" && 'capitalize'}`} value={value} disabled={!editState} placeholder={placeholder} /></div>
+    return (<div className="grid grid-cols-3 gap-3 lg:gap-4 mt-6">
+        <div className="text-xl font-semibold pl-2 md:pl-6 lg:pl-12 mt-1">{tag}</div>
+        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-48 w-full md:w-64 lg:w-96 pl-4 pr-2 ${editState && 'text-black'} ${name != "email" && 'capitalize'}`} defaultValue={value} disabled={!editState} placeholder={placeholder} /></div>
     </div>)
 }
 
@@ -47,7 +47,7 @@ export function InputImage({ tag, name, editState }) {
     };
 
     return (<div className={`grid grid-cols-3 gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>
-        <div className="text-xl font-semibold px-10 pl-16 mt-1">{tag}</div>
+        <div className="text-xl font-semibold pl-2 md:pl-6 lg:pl-12 mt-1">{tag}</div>
         <div>
             <input name={name} type="file" disabled={!editState} onChange={(e) => uploadFile(e.target.files[0])}
                 className={`file:border-0 file:rounded file:p-1 file:px-2 mt-1 ${editState ? 'file:bg-red-600 file:text-white cursor-pointer' : ''}`}

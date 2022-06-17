@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import Card from "./Card";
+import { FormContext } from "../../contextFiles/formContext";
 import Link from "next/link";
 
 export default function CardSection() {
+
+  const [form, setForm] = useContext(FormContext);
+  
   return (<div>
     <div className="ml-[2rem] w-[20rem] md:ml-[5rem] mt-4 lg:w-[36rem] lg:ml-[7.5rem] lg:mt-5">
       <div>TEDxDTU welcomes you</div>
@@ -10,13 +15,13 @@ export default function CardSection() {
       <div className="md:w-80 lg:w-96 mt-5 ">We are very overwhelmed by your presence.
         And we aim at providing you the best experience
         & knowledge from world leaders.</div>
-      <div className="md:w-80 mt-2 w-96">
+      {!form&&<div className="md:w-80 mt-2 w-96">
         <Link href="/register">
           <button className="bg-red-600 w-28 h-12 text-lg mt-2">
             Register
           </button>
         </Link>
-      </div>
+      </div>}
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 md:mx-auto py-8 mt-5 gap-x-6 gap-y-14 justify-items-center justify-evenly">
       <div className="relative group">

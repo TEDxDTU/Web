@@ -13,6 +13,7 @@ export async function getStaticProps() {
 };
 
 export default function Home({ liveEvent }) {
+
   return <Landing
     liveEvent={liveEvent}
   />;

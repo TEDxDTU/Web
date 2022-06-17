@@ -5,12 +5,12 @@ export default function Login({ setregisterStatus, registerStatus }) {
   const formFormat = {
     email: "",
     password: "",
-  }
-  
+  };
+
   const [form, setForm] = useState(formFormat);
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
 
   return (<div className="px-12 py-20 md:px-24 sm:py-24">
     <Heading registerStatus={registerStatus} setregisterStatus={setregisterStatus} />
@@ -20,4 +20,4 @@ export default function Login({ setregisterStatus, registerStatus }) {
       <SubmitButton registerStatus={registerStatus} form={form} />
     </div>
   </div>);
-}
+};

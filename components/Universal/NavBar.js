@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function NavBar() {
-  const [ isLargeViewPort, setIsLargeViewPort ] = useState(null);
-  const [ isNavOpen, setIsNavOpen ] = useState(false);
+  const [isLargeViewPort, setIsLargeViewPort] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(
     () =>

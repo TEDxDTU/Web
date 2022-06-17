@@ -2,7 +2,7 @@
 
 const User = require("../../schemas/user");
 const express = require("express");
-const withAuth = require("../../middleware/auth");
+const withAuth = require("../../middleware/auth").withAuth;
 
 const router = express.Router();
 const admin = require("firebase-admin");
@@ -44,7 +44,7 @@ router.post("/sign-up", async (req, res) => {
     });
 
     try {
-      newDBUser.firebaseID=undefined;
+      newDBUser.firebaseID = undefined;
       await newDBUser.save();
       const newFirebaseUser = await auth.createUser({
         email: email,
@@ -139,7 +139,7 @@ router.post("/update", withAuth, async (req, res) => {
 router.post("/data-from-token", async (req, res) => {
   try {
     const { authToken } = req.body;
-    
+
     const auth = admin.auth();
     const decodedToken = await auth.verifyIdToken(authToken);
     const firebaseID = decodedToken.uid;

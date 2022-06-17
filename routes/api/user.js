@@ -95,16 +95,18 @@ router.post("/sign-up", async (req, res) => {
 router.post("/update", withAuth, async (req, res) => {
   try {
     const { email, password, name, imageURL, university } = req.body;
+
     const auth = admin.auth();
     // const decodedToken = await auth.verifyIdToken(authToken);
 
     const firebaseID = req.uid;
+    
     const updatedFBUser = await auth.updateUser(firebaseID, {
       email,
       password,
       displayName: name,
     });
-
+    
     const newUser = await User.findOneAndUpdate(
       { firebaseID },
       {
@@ -117,7 +119,7 @@ router.post("/update", withAuth, async (req, res) => {
         new: true,
       }
     );
-
+    
     return res.json(newUser);
   } catch (err) {
     return res.status(500).json({

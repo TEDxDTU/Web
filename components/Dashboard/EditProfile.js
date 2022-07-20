@@ -12,6 +12,29 @@ export default function EditProfile() {
         setForm(JSON.parse(window.localStorage.getItem("profile")));
     }
 
+    function UpdateTheState() {
+        localStorage.setItem("profile", JSON.stringify(form));
+
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const url = `http://localhost:3000/api/user/update`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(form),
+                    headers: {
+                        authorization: user.accessToken,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                localStorage.setItem("profile", JSON.stringify(await response.json()));
+            } else {
+                console.log("Logged Out");
+            }
+        });
+    }
+
     function changePassword() {
         const auth = getAuth();
         const { email } = form;
@@ -42,7 +65,7 @@ export default function EditProfile() {
         {editState && <div className="flex justify-end mr-4 mt-6 md:mt-1 lg:mr-10 mb-2">
             <div>
                 <SaveAndCancelButton setEditState={setEditState} tag={"Cancel"} BackToOldState={BackToOldState} />
-                <SaveAndCancelButton setEditState={setEditState} tag={"Save"} UpdateTheState={() => updateCall(form)} />
+                <SaveAndCancelButton setEditState={setEditState} tag={"Save"} UpdateTheState={() => UpdateTheState(form)} />
             </div>
         </div>}
     </div>);

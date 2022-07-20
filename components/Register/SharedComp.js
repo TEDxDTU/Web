@@ -58,6 +58,7 @@ const RegisterhandleAction = async (form, router) => {
   }
   return;
 }
+
 export function Password({ registerStatus, handleChange }) {
   const [passwordView, setpasswordView] = useState(false);
   return (<div className="flex items-center">

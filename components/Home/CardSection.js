@@ -15,7 +15,7 @@ export default function CardSection() {
       <div className="md:w-80 lg:w-96 mt-5 ">We are very overwhelmed by your presence.
         And we aim at providing you the best experience
         & knowledge from world leaders.</div>
-      {!form&&<div className="md:w-80 mt-2 w-96">
+      {!form&&<div className="md:w-80 mt-2">
         <Link href="/register">
           <button className="bg-red-600 w-28 h-12 text-lg mt-2">
             Register
@@ -23,14 +23,15 @@ export default function CardSection() {
         </Link>
       </div>}
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 md:mx-auto py-8 mt-5 gap-x-6 gap-y-14 justify-items-center justify-evenly">
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 md:mx-auto py-8 mt-5 gap-x-6 gap-y-20 justify-items-center justify-evenly">
       <div className="relative group">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
         <div className="relative leading-none"><Card source="LandingPage\speakers.png" title="Speakers" link="speakers" /></div>
       </div>
 
-      <div className="relative lg:h-[700px] group">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
+      <div className="relative lg:h-[700px] group md:-mt-40">
+        <div className="absolute -inset-0.5 bg-gradient-to-r md:mb-40 lg:mb-3 from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
         <div className="relative leading-none"><Card source="LandingPage\events.png" title="Events" link="events" /></div>
       </div>
 
@@ -39,21 +40,11 @@ export default function CardSection() {
         <div className="relative rounded-lg leading-none"><Card source="LandingPage\about-us.png" title="About Us" link="about" /></div>
       </div>
 
-      <div className="relative lg:h-[700px] group">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
+      <div className="relative lg:h-[700px] group md:-mt-36">
+        <div className="absolute -inset-0.5 bg-gradient-to-r md:mb-36 lg:mb-3 from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
         <div className="relative rounded-lg leading-none"><Card source="LandingPage\partners.png" title="Partners" link="partners" /></div>
       </div>
 
-      {/* <div className=""><Card source="LandingPage\events.png" title="Events" link="events" /></div>
-            <div className=""><Card source="LandingPage\about-us.png" title="About Us" link="about" /></div>
-            <div className="-mt-60"><Card source="LandingPage\partners.png" title="Partners" link="partners" /></div> */}
-
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 md:mx-auto py-10 gap-x-6 gap-y-8 justify-items-center justify-evenly">
-        <div className="mt-32"><Card source="LandingPage\speakers.png" title="Speakers" link="speakers" /></div>
-        <div><Card source="LandingPage\events.png" title="Events" link="events" /></div>
-        <div><Card source="LandingPage\about-us.png" title="About Us" link="about" /></div>
-        <div className="-mt-60"><Card source="LandingPage\partners.png" title="Partners" link="partners" /></div>
-      </div> */}
     </div>
   </div>);
 };

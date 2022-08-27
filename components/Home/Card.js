@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Card(props) {
     return (
-        <div className="w-full max-w-[20rem] lg:max-w-[24rem] m-4 ">
+        <div className="w-full max-w-[20rem] sm:max-w-[24rem] md:max-w-[22rem] lg:max-w-[24rem] m-4 ">
             <div>
                 <img src={props.source} alt={props.title} className="w-90 lg:h-100 rounded-t-lg" />
             </div>

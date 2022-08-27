@@ -32,7 +32,7 @@ export async function LoginhandleAction(form, router) {
 const RegisterhandleAction = async (form, router) => {
 
   const { email, firstname, lastname, password, university } = form;
-
+  
   const UserObj = {
     email: email,
     name: firstname + ' ' + lastname,
@@ -40,7 +40,7 @@ const RegisterhandleAction = async (form, router) => {
     university: university,
     imageURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
   }
-
+  console.log(UserObj);
   const url = `http://localhost:3000/api/user/sign-up`;
 
   const response = await fetch(url, {
@@ -50,6 +50,7 @@ const RegisterhandleAction = async (form, router) => {
       'Content-Type': 'application/json',
     }
   })
+ 
   const data = await response.json();
   const { status } = response;
   if (status == 200) {

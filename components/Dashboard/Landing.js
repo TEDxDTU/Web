@@ -4,6 +4,7 @@ import EditProfile from "./EditProfile";
 import LiveEvent from "./LiveEvent";
 import MyTicketPage from "./myTicketPage";
 import Profile from "./Profile";
+import Settings from "./Settings";
 
 export default function Landing({ allEvents }) {
 
@@ -34,8 +35,8 @@ export default function Landing({ allEvents }) {
             </div>
             <div className="col-span-2 ">
                 {option === 'Profile' && <EditProfile />}
-                {option === 'Live Event' && <LiveEvent isLargeViewPort={isLargeViewPort} liveEvent={liveEvent} pastEvents={pastEvents} />}
                 {option === 'Tickets' && <MyTicketPage />}
+                {option === 'Settings' && <Settings />}
             </div>
         </div>}
         {!isLargeViewPort && <div className="py-4 h-screen">
@@ -44,8 +45,8 @@ export default function Landing({ allEvents }) {
             </div>
             <div className="bg-black px-12 ">
                 {option === 'Profile' && <div className=""><EditProfile /></div>}
-                {option === 'Live Event' && <LiveEvent isLargeViewPort={isLargeViewPort} liveEvent={liveEvent} pastEvents={pastEvents} />}
                 {option === 'Tickets' && <MyTicketPage />}
+                {option === 'Settings' && <Settings />}
             </div>
         </div>}
     </Page>)

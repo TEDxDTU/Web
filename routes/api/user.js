@@ -22,7 +22,6 @@ router.post("/sign-up", async (req, res) => {
   try {
     const { name, email, password, university, imageURL } = req.body;
     const auth = admin.auth();
-
     let existingUser;
 
     try {
@@ -46,7 +45,7 @@ router.post("/sign-up", async (req, res) => {
     try {
       newDBUser.firebaseID = undefined;
       await newDBUser.save();
-      b;
+      // b;
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,

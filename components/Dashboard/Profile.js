@@ -20,9 +20,9 @@ export default function Profile({ setOption, option }) {
                         <div className="flex justify-start" >
                             <OptionsButton src='/Dashboard/profile.svg' name='Profile' setOption={setOption} option={option} /></div>
                         <div className="flex justify-start" >
-                            <OptionsButton src='/Dashboard/event.svg' name='Live Event' setOption={setOption} option={option} /></div>
-                        <div className="flex justify-start" >
                             <OptionsButton src='/Dashboard/ticket.svg' name='Tickets' setOption={setOption} option={option} /></div>
+                        <div className="flex justify-start" >
+                            <OptionsButton src='/Dashboard/settings.svg' name='Settings' setOption={setOption} option={option} /></div>
                     </div>
                 </div>
             </div>

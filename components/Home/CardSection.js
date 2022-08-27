@@ -23,7 +23,7 @@ export default function CardSection() {
         </Link>
       </div>}
     </div>
-    
+
     <div className="grid grid-cols-1 md:grid-cols-2 md:mx-auto py-8 mt-5 gap-x-6 gap-y-20 justify-items-center justify-evenly">
       <div className="relative group">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>

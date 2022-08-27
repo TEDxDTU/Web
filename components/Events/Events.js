@@ -8,9 +8,11 @@ const Events = ({ allEvents }) => {
   return <Page
     pageTitle={"Events"}
   >
+  <div className="">
     <EventSection eventList={upcomingEvents} eventType={"upcoming"} />
     <EventSection eventList={[liveEvent]} eventType={"live"} />
     <EventSection eventList={pastEvents} eventType={"past"} />
+    </div>
   </Page>;
 };
 export default Events;

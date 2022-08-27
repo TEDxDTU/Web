@@ -22,7 +22,6 @@ router.get("/updates", async (req, res) => {
 
     return res.status(200).json({ recentUpdates });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ msg: err.toString() });
   }
 });
@@ -45,7 +44,6 @@ router.get("/discover", async (req, res) => {
 
     return res.status(200).json({ discoverData });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ msg: err.toString() });
   }
 });

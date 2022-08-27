@@ -147,7 +147,6 @@ router.post("/data-from-token", async (req, res) => {
     const user = await User.findOne({ firebaseID });
     return res.json(user);
   } catch (err) {
-    console.log(err.toString());
     return res.status(500).json({
       msg: err.toString(),
     });
@@ -175,7 +174,6 @@ router.post("/started", withAuth, async (req, res) => {
     await user.save();
     return res.json("Marked trivia started");
   } catch (err) {
-    console.log(err.toString());
     return res.status(500).json({
       msg: err.toString(),
     });

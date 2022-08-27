@@ -11,7 +11,7 @@ const EventSection = ({ eventList, eventType }) => {
 
   eventsByYear = Object.entries(eventsByYear).reverse();
 
-  return (<div className="py-8 px-8">
+  return (<div className="py-8 px-8 bg-[url('/SIngleEvent/backgroundTheme.svg')]">
     <h1 className="capitalize w-full text-5xl font-bold text-red-600">{eventType} events</h1>
     <main>
       {eventsByYear.map(([year, eventList], idx) => {

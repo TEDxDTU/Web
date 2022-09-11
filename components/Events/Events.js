@@ -9,8 +9,8 @@ const Events = ({ allEvents }) => {
     pageTitle={"Events"}
   >
   <div className="">
-    <EventSection eventList={upcomingEvents} eventType={"upcoming"} />
     <EventSection eventList={[liveEvent]} eventType={"live"} />
+    <EventSection eventList={upcomingEvents} eventType={"upcoming"} />
     <EventSection eventList={pastEvents} eventType={"past"} />
     </div>
   </Page>;

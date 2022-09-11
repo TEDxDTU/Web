@@ -151,7 +151,7 @@ export default function NavBar() {
         text-lg
         "
             onClick={() => {
-              window.localStorage.clear();
+              window.localStorage.removeItem("profile");
               setForm(null);
             }}
           >
@@ -209,7 +209,7 @@ export default function NavBar() {
       md:w-32
       "
             onClick={() => {
-              window.localStorage.clear();
+              window.localStorage.removeItem("profile");
               setForm(null);
             }}
           >

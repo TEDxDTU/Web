@@ -57,11 +57,12 @@ router.post("/verify-order-signature", (req, res) => {
     return;
   };
 
-  // // Add the Cart Items to Orders using serverOrderID and generate an invoice
+  // Add the Cart Items to Orders using serverOrderID and generate an invoice
   res.json({
     success: true,
     msg: "Payment verified and accepted",
-    redirectURL: "",
+    redirectURL: ""
+    // body:req.body
   }).status(200);
 
 });

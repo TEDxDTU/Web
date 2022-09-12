@@ -1,4 +1,6 @@
 
+import Link from "next/link";
+
 const Thumbnail = ({ event, eventType }) => {
   const { title, imageUrl, details, dateTime } = event;
 
@@ -35,7 +37,7 @@ const Thumbnail = ({ event, eventType }) => {
     })
 
     const data = await response.json();
-    const { email,name } = JSON.parse(user);
+    const { email, name } = JSON.parse(user);
 
     const options = {
       key: 'rzp_test_P5GUEZ3SzH045X',
@@ -43,21 +45,19 @@ const Thumbnail = ({ event, eventType }) => {
       amount: data.amount.toString(),
       order_id: data.orderID,
       name: 'Ticket Booking',
-      description: title+' Event',
+      description: title + ' Event',
       image: '/LandingPage/Tab-Logo-Black.svg',
       handler: function (response) {
-        // alert(response.razorpay_payment_id)
-        // alert(response.razorpay_order_id)
-        // alert(response.razorpay_signature)
+        console.log(response);
       },
       prefill: {
-        name:name,
+        name: name,
         email: email,
         phone_number: ''
       }
     }
     const paymentObject = new window.Razorpay(options)
-    paymentObject.open()
+    paymentObject.open();
   }
 
   return (
@@ -72,8 +72,10 @@ const Thumbnail = ({ event, eventType }) => {
           <div className="rounded-2xl cursor-pointer hover:bg-red-600 hover:text-white bg-white text-black p-1 mr-2 font-semibold">Book Now</div>
         </div>}
       </div>
-      <div className="bg-[#303030] p-1 pl-2 outline outline-2 outline-[#737373]">{details}</div>
-
+      <div className="bg-[#303030] p-1 pl-2 outline outline-2 outline-[#737373]">{details.substring(0, 50)}
+        {details.length > 50 ? "...." : ""}&nbsp;&nbsp;
+        <Link href="/">View More</Link>
+      </div>
     </div>
   );
 };

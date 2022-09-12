@@ -99,13 +99,13 @@ router.post("/update", withAuth, async (req, res) => {
     // const decodedToken = await auth.verifyIdToken(authToken);
 
     const firebaseID = req.uid;
-    
+
     const updatedFBUser = await auth.updateUser(firebaseID, {
       email,
       password,
       displayName: name,
     });
-    
+
     const newUser = await User.findOneAndUpdate(
       { firebaseID },
       {
@@ -118,7 +118,7 @@ router.post("/update", withAuth, async (req, res) => {
         new: true,
       }
     );
-    
+
     return res.json(newUser);
   } catch (err) {
     return res.status(500).json({
@@ -144,7 +144,7 @@ router.post("/data-from-token", async (req, res) => {
     const decodedToken = await auth.verifyIdToken(authToken);
     const firebaseID = decodedToken.uid;
 
-    const user = await User.findOne({ firebaseID });
+    const user = await User.findOne({ firebaseID }).populate("tickets");
     return res.json(user);
   } catch (err) {
     return res.status(500).json({

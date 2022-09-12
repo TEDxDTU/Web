@@ -89,15 +89,23 @@ const userSchema = mongoose.Schema({
       ref: "Trivia",
     },
   ],
+  tickets: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ticket",
+    },
+  ],
   /** The user's UID in firebase. This is used to identify a user in Mongo as well*/
   firebaseID: {
-    type: String
+    type: String,
   },
-  tickets: [{
-    ticketID: String,
-    boughtAt: String,
-    dateTime: String
-  }]
+  tickets: [
+    {
+      ticketID: String,
+      boughtAt: String,
+      dateTime: String,
+    },
+  ],
 });
 
 /**

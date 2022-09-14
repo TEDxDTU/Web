@@ -1,4 +1,6 @@
 const { default: nextServer } = require("next/dist/server/next");
+const nextEnv = require("@next/env");
+nextEnv.loadEnvConfig(process.cwd());
 const express = require("express");
 const mongoose = require("mongoose");
 const admin = require("firebase-admin");

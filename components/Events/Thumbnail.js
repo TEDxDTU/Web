@@ -40,7 +40,7 @@ const Thumbnail = ({ event, eventType }) => {
     const { email, name } = JSON.parse(user);
 
     const options = {
-      key: 'rzp_test_P5GUEZ3SzH045X',
+      key: process.env.RAZORPAY_KEY_ID,
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.orderID,

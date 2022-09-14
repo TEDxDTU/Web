@@ -2,14 +2,14 @@
 
 const express = require("express");
 const router = express.Router();
-const shortid = require('shortid')
+const { v4: uuidv4 } = require('uuid');
 const User = require("../../schemas/user");
 const admin = require("firebase-admin");
 const crypto = require('crypto');
 const razorpayLib = require("razorpay");
 const Razorpay = new razorpayLib({
-  key_id: 'rzp_test_P5GUEZ3SzH045X',
-  key_secret: 'cXxUCWDrHASxT14E2Edupr2C'
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret:process.env.RAZORPAY_KEY_SECRET
 });
 
 router.post("/generate-order", async (req, res) => {
@@ -23,7 +23,7 @@ router.post("/generate-order", async (req, res) => {
 
     // Get the Order Amount from the cart and generate a receipt ID
     const amount = 1;
-    const receiptID = shortid.generate();
+    const receiptID = uuidv4();
 
     const order = await Razorpay.orders.create({
       amount: amount * 100,
@@ -45,7 +45,7 @@ router.post("/generate-order", async (req, res) => {
 
 router.post("/verify-order-signature", (req, res) => {
 
-  const SECRET='12345678';  
+  const SECRET=process.env.SECRET;  
   const hash = crypto.createHmac('SHA256', SECRET).update(JSON.stringify(req.body)).digest('hex');
 
   if (req.headers['x-razorpay-signature'] !== hash) {

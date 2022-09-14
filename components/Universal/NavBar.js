@@ -23,7 +23,6 @@ export default function NavBar() {
       })(),
     []
   );
-  console.log(form);
   if (isLargeViewPort)
     return (
       <nav

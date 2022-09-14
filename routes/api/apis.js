@@ -7,12 +7,12 @@ const eventsAPI = require("./events");
 const triviaAPI = require("./trivia");
 const userAPI = require("./user");
 const recentUpdatesAPI = require("./recentUpdates");
-const paymentAPI=require("./payment")
+const ticketsAPI = require("./tickets");
 
 router.use("/events", eventsAPI);
 router.use("/trivia", triviaAPI);
 router.use("/user", userAPI);
 router.use("/recent-updates", recentUpdatesAPI);
-router.use("/payment", paymentAPI);
+router.use("/tickets", ticketsAPI);
 
 module.exports = router;

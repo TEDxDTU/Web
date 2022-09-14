@@ -10,7 +10,7 @@ export async function LoginhandleAction(form, router) {
   const { email, password } = form;
 
   const authToken = await signInWithEmailAndPassword(authentication, email, password);
-  const url = process.env.HOST_DOMAIN+`/api/user/data-from-token`;
+  const url = `/api/user/data-from-token`;
 
   const response = await fetch(url, {
     method: 'POST',
@@ -41,7 +41,7 @@ const RegisterhandleAction = async (form, router) => {
     imageURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
   }
   console.log(UserObj);
-  const url = process.env.HOST_DOMAIN+`/api/user/sign-up`;
+  const url = `/api/user/sign-up`;
 
   const response = await fetch(url, {
     method: 'POST',

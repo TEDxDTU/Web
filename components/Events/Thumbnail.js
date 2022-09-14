@@ -27,7 +27,7 @@ const Thumbnail = ({ event, eventType }) => {
     }
 
     const user = localStorage.getItem("profile");
-    const url = process.env.HOST_DOMAIN+`/api/payment/generate-order`;
+    const url = `/api/payment/generate-order`;
     const response = await fetch(url, {
       method: 'POST',
       body: user,

@@ -15,7 +15,8 @@ const Razorpay = new razorpayLib({
 });
 
 router.post("/generate-order", async (req, res) => {
-  const { _id } = req.body;
+  const { _id } = JSON.parse(req.body.user);
+  const { numTickets } = req.body;
 
   const existingUser = await User.findOne({ _id });
 
@@ -26,7 +27,7 @@ router.post("/generate-order", async (req, res) => {
         .status(404);
 
     // Get the Order Amount from the cart and generate a receipt ID
-    const amount = 1;
+    const amount = 1 *numTickets;
     const receiptID = uuidv4();
 
     const order = await Razorpay.orders.create({

@@ -3,11 +3,72 @@ import Page from '../Universal/Page';
 import EventSection from './EventSection';
 
 const Events = ({ allEvents }) => {
+
   const { liveEvent, pastEvents, upcomingEvents } = allEvents;
   const [numTickets, setnumTickets] = useState(1);
   const [display, setDisplay] = useState(false);
+  const [eventInfo, setEventInfo] = useState({});
   const count = [1, 2, 3, 4, 5, 6, 7, 8];
   const amount = 100;
+
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const user = localStorage.getItem("profile");
+    const url = `/api/tickets/generate-order`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({user,numTickets}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    const { title } = eventInfo;
+    const { email, name } = JSON.parse(user);
+
+    const options = {
+      key: process.env.RAZORPAY_KEY_ID,
+      currency: data.currency,
+      amount: data.amount.toString(),
+      order_id: data.orderID,
+      name: "Ticket Booking",
+      description: title + " Event",
+      image: "/LandingPage/Tab-Logo-Black.svg",
+      handler: function (response) {
+        setDisplay(false);
+        console.log(response);
+      },
+      prefill: {
+        name: name,
+        email: email,
+        phone_number: ''
+      }
+    }
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
 
   return <Page
     pageTitle={"Events"}
@@ -51,18 +112,17 @@ const Events = ({ allEvents }) => {
               </div>
             </div>
             <div className='flex justify-around'>
-              <button className="bg-red-600 text-lg ml-4 rounded mt-4 px-6 py-1" onClick={() => { }}>Continue</button>
+              <button className="bg-red-600 text-lg ml-4 rounded mt-4 px-6 py-1" onClick={() => displayRazorpay()}>Continue</button>
             </div>
           </div>
         </div>
       </div>
     </div>}
 
-
-    <div className={`overflow-hidden ${display&&'pointer-events-none opacity-25'}`}>
-      <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} />
-      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} />
-      <EventSection eventList={pastEvents} eventType={"past"} setDisplay={setDisplay} />
+    <div className={`${display && 'pointer-events-none  opacity-25'}`}>
+      <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
+      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
+      <EventSection eventList={pastEvents} eventType={"past"} />
     </div>
   </Page>;
 };

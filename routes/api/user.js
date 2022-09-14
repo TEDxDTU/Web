@@ -137,6 +137,7 @@ router.post("/update", withAuth, async (req, res) => {
  * Get's the user's uid from the authToken and returns the user's data.
  */
 router.post("/data-from-token", async (req, res) => {
+  console.log("fetching data from token " + req.body.authToken);
   try {
     const { authToken } = req.body;
 

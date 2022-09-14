@@ -18,7 +18,7 @@ export default function EditProfile() {
         const auth = getAuth();
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const url = `http://localhost:3000/api/user/update`;
+                const url = process.env.HOST_DOMAIN+`/api/user/update`;
                 const response = await fetch(url, {
                     method: 'POST',
                     body: JSON.stringify(form),

@@ -96,7 +96,6 @@ router.post("/update", withAuth, async (req, res) => {
     const { email, password, name, imageURL, university } = req.body;
 
     const auth = admin.auth();
-    // const decodedToken = await auth.verifyIdToken(authToken);
 
     const firebaseID = req.uid;
 

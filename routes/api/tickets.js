@@ -4,11 +4,11 @@ const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const User = require("../../schemas/user");
-const admin = require("firebase-admin");
 const crypto = require("crypto");
 const razorpayLib = require("razorpay");
 const Ticket = require("../../schemas/ticket");
-// const withAuth
+const Event = require("../../schemas/event");
+
 const Razorpay = new razorpayLib({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -27,7 +27,7 @@ router.post("/generate-order", async (req, res) => {
         .status(404);
 
     // Get the Order Amount from the cart and generate a receipt ID
-    const amount = 1 *numTickets;
+    const amount = 1 * numTickets;
     const receiptID = uuidv4();
 
     const order = await Razorpay.orders.create({
@@ -48,8 +48,15 @@ router.post("/generate-order", async (req, res) => {
   }
 });
 
-router.post("/verify", (req, res) => {
+router.post("/verify", async (req, res) => {
+
   const SECRET = process.env.SECRET;
+  const PricePerTicket = 100;
+
+  const details = req.body.payload.payment.entity;
+  const { email, order_id, amount, description } = details;
+  const noOfTickets = amount / PricePerTicket;
+
   const hash = crypto
     .createHmac("SHA256", SECRET)
     .update(JSON.stringify(req.body))
@@ -62,18 +69,45 @@ router.post("/verify", (req, res) => {
       redirectURL: "",
     });
     return;
-  } else {
   }
-  console.log(req.body);
+
+  // Getting User Details
+  const user = await User.findOne({ email });
+
+  // Getting Event Details
+  const event = await Event.findOne({ description });
+
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
-  res
-    .json({
-      success: true,
-      msg: "Payment verified and accepted",
-      redirectURL: "",
-      // body:req.body
-    })
-    .status(200);
+  const newTicket = new Ticket({
+    userID: user._id,
+    eventID: event._id,
+    razorpayOrderID: order_id,
+    noOfTickets: noOfTickets
+  });
+
+  try {
+    await newTicket.save();
+
+    // Updating tickets in MongoDB
+    await User.findOneAndUpdate({ firebaseID: user.firebaseID },
+      {
+        tickets: [...user.tickets, newTicket._id]
+      },
+      {
+        new: true,
+      }
+    );
+  } catch (error) {
+    res.status(500).json({
+      msg: err.toString(),
+    });
+  }
+
+  res.json({
+    success: true,
+    msg: "Payment verified and accepted",
+    redirectURL: "",
+  }).status(200);
 });
 
 router.get("/ticket-by-id", async (req, res) => {

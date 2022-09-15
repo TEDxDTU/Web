@@ -99,13 +99,6 @@ const userSchema = mongoose.Schema({
   firebaseID: {
     type: String,
   },
-  tickets: [
-    {
-      ticketID: String,
-      boughtAt: String,
-      dateTime: String,
-    },
-  ],
 });
 
 /**

@@ -54,7 +54,8 @@ const Events = ({ allEvents }) => {
       amount: data.amount.toString(),
       order_id: data.orderID,
       name: "Ticket Booking",
-      description: title + " Event",
+      numTickets:numTickets,
+      description: title,
       image: "/LandingPage/Tab-Logo-Black.svg",
       handler: function (response) {
         setDisplay(false);

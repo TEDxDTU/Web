@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    height: 16rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background: #dc2626;
+    background: linear-gradient(rgba(220, 38, 38, 0.8), rgba(220, 38, 38, 0.8)), url("../public/LandingPage/dtu-footer");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-family: poppins;
+    justify-content: space-between;
+    position: relative;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+}
+
+.logo {
+    width: 10rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    cursor: pointer;
+}
+
+.links {
+    width: 10rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 4rem;
+    top: 2rem;
+    justify-content: right;
+    justify-items: right;
+    align-items: flex-end;
+    text-align: right;
+    letter-spacing: 0.2rem;
+    line-height: 1.7rem;
+}
+
+.links ul li {
+    cursor: pointer;
+}
+
+.copyright {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    bottom: 1rem;
+    margin: 0;
+}
+
+.introSection {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    position: absolute;
+    left: 4rem;
+    top: 2rem;
+    font-size: 0.8rem;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+
+.social_icon {
+    margin-left: 1rem;
+}
+
+.white_icon {
+    color: #ffffff;
+    width: 1rem;
+    height: 1rem;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}

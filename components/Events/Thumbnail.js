@@ -1,8 +1,15 @@
-import Link from "next/link";
-import { useEffect } from "react";
+// import Link from "next/link";
+import { useRouter } from "next/router";
+// import { useEffect } from "react";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const { title, imageUrl, details, dateTime } = event;
+  const router = useRouter();
+
+  const viewMoreHandler = () =>{
+    console.log(event);
+    router.push(`/events/${event._id}`);
+  }
 
   return (
     <div className="shadow-md h-36 w-60 mx-8 mb-16 pb-10 border-2 border-[#737373]">
@@ -18,7 +25,7 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
       </div>
       <div className="bg-[#303030] p-1 pl-2 outline outline-2 outline-[#737373]">{details.substring(0, 50)}
         {details.length > 50 ? "...." : ""}
-        <Link href="/">View More</Link>
+        <button onClick={viewMoreHandler}>View More</button>
       </div>
     </div>
   );

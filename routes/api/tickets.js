@@ -58,6 +58,8 @@ router.post("/verify", async (req, res) => {
   const { email, order_id, amount, notes } = details;
   const noOfTickets = amount / PricePerTicket;
 
+  const { firebaseID, _id } = notes;
+
   const hash = crypto
     .createHmac("SHA256", SECRET)
     .update(JSON.stringify(req.body))
@@ -73,10 +75,10 @@ router.post("/verify", async (req, res) => {
   }
 
   // Getting User Details
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ firebaseID });
 
   // Getting Event Details
-  const event = await Event.findById(notes._id);
+  const event = await Event.findById(_id);
 
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
   const newTicket = new Ticket({
@@ -88,16 +90,10 @@ router.post("/verify", async (req, res) => {
 
   try {
     await newTicket.save();
-
     // Updating tickets in MongoDB
-    await User.findOneAndUpdate({ firebaseID: user.firebaseID },
-      {
-        tickets: [...user.tickets, newTicket._id]
-      },
-      {
-        new: true,
-      }
-    );
+    user.tickets=[...user.tickets, newTicket._id];
+    await user.save();
+
   } catch (error) {
     res.status(500).json({
       msg: err.toString(),

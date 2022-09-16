@@ -38,7 +38,7 @@ const Events = ({ allEvents }) => {
     const url = `/api/tickets/generate-order`;
     const response = await fetch(url, {
       method: "POST",
-      body: JSON.stringify({user,numTickets}),
+      body: JSON.stringify({ user, numTickets }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -46,17 +46,17 @@ const Events = ({ allEvents }) => {
 
     const data = await response.json();
     console.log(eventInfo);
-    const { title ,_id } = eventInfo;
-    const { email, name } = JSON.parse(user);
+    const { title, _id } = eventInfo;
+    const { email, name, firebaseID } = JSON.parse(user);
 
     const options = {
       key: process.env.RAZORPAY_KEY_ID,
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.orderID,
-      notes:{_id},
+      notes: { _id, firebaseID },
       name: "Ticket Booking",
-      numTickets:numTickets,
+      numTickets: numTickets,
       description: title,
       image: "/LandingPage/Tab-Logo-Black.svg",
       handler: function (response) {

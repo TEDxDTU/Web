@@ -7,6 +7,10 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const router = useRouter();
 
   const viewMoreHandler = () =>{
+    if(eventType === "live"){
+      router.push(`/live-event`);
+      return;
+    }
     console.log(event);
     router.push(`/events/${event._id}`);
   }

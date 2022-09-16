@@ -5,6 +5,10 @@ import React from "react";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { useRouter } from "next/router";
+import { noEventContext } from "../../pages/events/[EventDetails]";
+import { useContext } from "react";
+
 const findEvent = (pastEvents,upcomingEvents,eventID) =>{
     const pastEventsSize = pastEvents.length;
     const upcomingEventsSize = upcomingEvents.length;
@@ -19,15 +23,20 @@ const findEvent = (pastEvents,upcomingEvents,eventID) =>{
         return upcomingEvents[i];
         }
     }
+
     return null;
-}
-const playerClickHandler= () =>{
-    
 }
 
 const EventDetails = ({eventID, pastEvents, upcomingEvents}) =>{
-
+    const router = useRouter();
     const eventDetails = findEvent(pastEvents,upcomingEvents,eventID);
+    const setNoEvent = useContext(noEventContext);
+
+    if(eventDetails === null){
+        setNoEvent(true);
+        return null;
+    }
+
     console.log(eventDetails);
     return (
     <Page pageTitle={"Events"}>
@@ -39,8 +48,9 @@ const EventDetails = ({eventID, pastEvents, upcomingEvents}) =>{
                 height='100%'
                 controls = {true}
                 light={eventDetails.imageUrl}
-                playIcon={<div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-black lg:text-4xl capitalize m-4">{eventDetails.title}</h1>
+                playIcon={<div className="">
+                    <h1 className="text-2xl md:text-3xl font-bold text-black lg:text-4xl capitalize m-4 absolute top-0 left-0">{eventDetails.title}</h1>
+                    <FontAwesomeIcon className="text-black w-4 sm:w-5 mx-auto md:w-6 lg:w-8 hover:text-red-600" icon={faPlay}></FontAwesomeIcon>
                 </div>}
             />
         </div>

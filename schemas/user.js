@@ -126,5 +126,30 @@ userSchema.methods.toJSON = function () {
   return userObject;
 };
 
+userSchema.methods.getTicketDetails = async function () {
+  console.log("here");
+  const user = this;
+  // console.log(this);
+  console.log(this.tickets);
+  await user.populate({
+    path: "tickets",
+    populate: {
+      path: "eventID",
+      select: ["dateTime", "eventType", "title", "venue", "price"],
+    },
+  });
+  // await user.populate("tickets");
+  // console.log(this.tickets);
+  userTickets = user.toObject().tickets;
+  // console.log(userObject);
+  // userObject.event = userObject.eventID;
+  userTickets.forEach((element) => {
+    element.event = element.eventID;
+    delete element.eventID;
+  });
+  delete userTickets.eventID;
+  return userTickets;
+};
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 module.exports = User;

@@ -45,7 +45,8 @@ const Events = ({ allEvents }) => {
     });
 
     const data = await response.json();
-    const { title } = eventInfo;
+    console.log(eventInfo);
+    const { title ,_id } = eventInfo;
     const { email, name } = JSON.parse(user);
 
     const options = {
@@ -53,6 +54,7 @@ const Events = ({ allEvents }) => {
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.orderID,
+      notes:{_id},
       name: "Ticket Booking",
       numTickets:numTickets,
       description: title,

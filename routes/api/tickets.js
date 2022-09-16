@@ -8,6 +8,7 @@ const crypto = require("crypto");
 const razorpayLib = require("razorpay");
 const Ticket = require("../../schemas/ticket");
 const Event = require("../../schemas/event");
+const admin = require("firebase-admin");
 
 const Razorpay = new razorpayLib({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -54,7 +55,7 @@ router.post("/verify", async (req, res) => {
   const PricePerTicket = 100;
 
   const details = req.body.payload.payment.entity;
-  const { email, order_id, amount, description } = details;
+  const { email, order_id, amount, notes } = details;
   const noOfTickets = amount / PricePerTicket;
 
   const hash = crypto
@@ -75,7 +76,7 @@ router.post("/verify", async (req, res) => {
   const user = await User.findOne({ email });
 
   // Getting Event Details
-  const event = await Event.findOne({ description });
+  const event = await Event.findById(notes._id);
 
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
   const newTicket = new Ticket({

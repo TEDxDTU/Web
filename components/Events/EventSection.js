@@ -1,6 +1,6 @@
 import Thumbnail from "./Thumbnail";
 
-const EventSection = ({ eventList, eventType, setDisplay, setEventInfo }) => {
+const EventSection = ({ eventList, eventType, setDisplay, setEventInfo, setDisplayBookNotActive }) => {
 
   let eventsByYear = new Object();
   eventList.forEach((event) => {
@@ -28,6 +28,7 @@ const EventSection = ({ eventList, eventType, setDisplay, setEventInfo }) => {
                 eventType={eventType}
                 setDisplay={setDisplay}
                 setEventInfo={setEventInfo}
+                setDisplayBookNotActive={setDisplayBookNotActive}
               />;
             })}
           </div>

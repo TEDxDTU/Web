@@ -92,6 +92,12 @@ const eventSchema = mongoose.Schema({
   },
   price: {
     type: Number,
+    default:1
+  },
+  areBookingActive: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   /**@deprecated ,this was only for LIVE EVENT, which is now on Firebase*/
   currentSpeakerIndex: Number,

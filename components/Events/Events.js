@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Page from '../Universal/Page';
 import EventSection from './EventSection';
+import { BookingNotOpen, TicketSelection } from './ExtraComponent';
 
 const Events = ({ allEvents }) => {
 
   const { liveEvent, pastEvents, upcomingEvents } = allEvents;
   const [numTickets, setnumTickets] = useState(1);
   const [display, setDisplay] = useState(false);
+  const [DisplayBookNotActive, setDisplayBookNotActive] = useState(false);
   const [eventInfo, setEventInfo] = useState({});
-  const count = [1, 2, 3, 4, 5, 6, 7, 8];
-  const amount = 100;
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -36,30 +36,33 @@ const Events = ({ allEvents }) => {
 
     const user = localStorage.getItem("profile");
     const url = `/api/tickets/generate-order`;
+    const { title, _id } = eventInfo;
+    const price = eventInfo.price;
+
     const response = await fetch(url, {
       method: "POST",
-      body: JSON.stringify({user,numTickets}),
+      body: JSON.stringify({ user, numTickets, price }),
       headers: {
         "Content-Type": "application/json",
       },
     });
 
     const data = await response.json();
-    const { title } = eventInfo;
-    const { email, name } = JSON.parse(user);
+    const { email, name, firebaseID } = JSON.parse(user);
 
     const options = {
       key: process.env.RAZORPAY_KEY_ID,
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.orderID,
+      notes: { _id, firebaseID },
       name: "Ticket Booking",
-      numTickets:numTickets,
+      numTickets: numTickets,
       description: title,
       image: "/LandingPage/Tab-Logo-Black.svg",
       handler: function (response) {
         setDisplay(false);
-        console.log(response);
+        setnumTickets(1);
       },
       prefill: {
         name: name,
@@ -74,55 +77,12 @@ const Events = ({ allEvents }) => {
   return <Page
     pageTitle={"Events"}
   >
-    {display && <div className="relative">
-      <div className="fixed z-10 left-[12%] sm:left-[25%] md:left-[30%] lg:left-[35%]">
-        <div className='absolute top-[6vh] sm:top-[8vh] md:top-[12vh]'>
-          <div className='bg-[#303030] w-80 sm:w-96 rounded p-4 '>
+    {display && eventInfo.areBookingActive && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
+    {DisplayBookNotActive && !eventInfo.areBookingActive && <BookingNotOpen setDisplayBookNotActive={setDisplayBookNotActive} />}
 
-            {/* Location of the event */}
-            <div className="flex justify-between text-sm sm:text-md mb-4">
-              <div className='flex'>
-                <img className="mr-4" src="/SingleEvent/map-pin.svg" />
-                Ampitheater
-              </div>
-              <div className='cursor-pointer' onClick={() => setDisplay(false)}>x</div>
-            </div>
-
-            <div>How many tickets ?</div>
-            <div>
-              {/* Options for number of tickets */}
-              <div className='flex'>
-                {count.map((val, idx) =>
-                  <div onClick={() => setnumTickets(val)} className={`rounded-full px-2 m-1 sm:p-0.5 sm:px-2.5 sm:m-2 cursor-pointer ${val === numTickets ? 'ticketBoxhover' : 'ticketBox'}`}>{val}</div>)}
-              </div>
-              {/* Auto Svg */}
-              <div className='flex justify-end'>
-                <img src="/Tickets/auto.svg" className='m-1' />
-              </div>
-            </div>
-            <div className='bg-[#404040]'>
-              {/* Individual Ticket Price */}
-              <div className='p-2 flex justify-between'>
-                <div>Ticket price</div>
-                <div>₹ {amount}</div>
-              </div>
-              {/*  Total Payable Amount*/}
-              <div className='p-2 flex justify-between'>
-                <div>Total Payable Amount</div>
-                <div>₹ {amount * numTickets}</div>
-              </div>
-            </div>
-            <div className='flex justify-around'>
-              <button className="bg-red-600 text-lg ml-4 rounded mt-4 px-6 py-1" onClick={() => displayRazorpay()}>Continue</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>}
-
-    <div className={`${display && 'pointer-events-none  opacity-25'}`}>
+    <div className={`${(display || DisplayBookNotActive) && 'pointer-events-none opacity-25'}`}>
       <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
-      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
+      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} setDisplayBookNotActive={setDisplayBookNotActive} />
       <EventSection eventList={pastEvents} eventType={"past"} />
     </div>
   </Page>;

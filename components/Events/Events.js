@@ -61,7 +61,7 @@ const Events = ({ allEvents }) => {
       image: "/LandingPage/Tab-Logo-Black.svg",
       handler: function (response) {
         setDisplay(false);
-        console.log(response);
+        setnumTickets(1);
       },
       prefill: {
         name: name,
@@ -87,7 +87,10 @@ const Events = ({ allEvents }) => {
                 <img className="mr-4" src="/SingleEvent/map-pin.svg" />
                 Ampitheater
               </div>
-              <div className='cursor-pointer' onClick={() => setDisplay(false)}>x</div>
+              <div className='cursor-pointer' onClick={() => { 
+                setDisplay(false) 
+                setnumTickets(1)
+              }}>x</div>
             </div>
 
             <div>How many tickets ?</div>

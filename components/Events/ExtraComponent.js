@@ -1,24 +1,4 @@
 
-export const BookingNotOpen = ({ setDisplayBookNotActive }) => {
-    return (<div className="relative">
-        <div className="fixed z-10 left-[12%] sm:left-[25%] md:left-[30%] lg:left-[35%]">
-            <div className='absolute top-[6vh] sm:top-[8vh] md:top-[12vh]'>
-                <div className='bg-[#303030] w-80 sm:w-96 rounded p-4 '>
-
-                    <div className='cursor-pointer text-right' onClick={() => {
-                        setDisplayBookNotActive(false);
-                    }}>x</div>
-
-                    <div>Booking are not currently open !!</div>
-                    <br />
-                    <div className="text-right">Please check later</div>
-
-                </div>
-            </div>
-        </div>
-    </div>)
-}
-
 export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, eventInfo, numTickets }) => {
 
     const count = [1, 2, 3, 4, 5, 6, 7, 8];

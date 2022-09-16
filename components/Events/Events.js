@@ -77,8 +77,7 @@ const Events = ({ allEvents }) => {
   return <Page
     pageTitle={"Events"}
   >
-    {display && eventInfo.areBookingActive && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
-    {DisplayBookNotActive && !eventInfo.areBookingActive && <BookingNotOpen setDisplayBookNotActive={setDisplayBookNotActive} />}
+    {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
 
     <div className={`${(display || DisplayBookNotActive) && 'pointer-events-none opacity-25'}`}>
       <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} />

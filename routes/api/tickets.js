@@ -61,7 +61,7 @@ async function sendMail(req) {
 
 router.post("/generate-order", async (req, res) => {
   const { _id } = JSON.parse(req.body.user);
-  const { numTickets } = req.body;
+  const { numTickets, price } = req.body;
 
   const existingUser = await User.findOne({ _id });
 
@@ -72,7 +72,7 @@ router.post("/generate-order", async (req, res) => {
         .status(404);
 
     // Get the Order Amount from the cart and generate a receipt ID
-    const amount = 1 * numTickets;
+    const amount = price * numTickets;
     const receiptID = uuidv4();
 
     const order = await Razorpay.orders.create({
@@ -96,12 +96,8 @@ router.post("/generate-order", async (req, res) => {
 router.post("/verify", async (req, res) => {
 
   const SECRET = process.env.SECRET;
-  const PricePerTicket = 100;
-
   const details = req.body.payload.payment.entity;
   const { order_id, amount, notes } = details;
-  const noOfTickets = amount / PricePerTicket;
-
   const { firebaseID, _id } = notes;
 
   const hash = crypto
@@ -122,6 +118,8 @@ router.post("/verify", async (req, res) => {
   const user = await User.findOne({ firebaseID });
   // Getting Event Details
   const event = await Event.findById(_id);
+
+  const noOfTickets = amount / event.price;
 
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
   const newTicket = new Ticket({

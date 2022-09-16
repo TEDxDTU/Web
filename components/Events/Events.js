@@ -9,7 +9,6 @@ const Events = ({ allEvents }) => {
   const [display, setDisplay] = useState(false);
   const [eventInfo, setEventInfo] = useState({});
   const count = [1, 2, 3, 4, 5, 6, 7, 8];
-  const amount = 100;
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -36,9 +35,12 @@ const Events = ({ allEvents }) => {
 
     const user = localStorage.getItem("profile");
     const url = `/api/tickets/generate-order`;
+    const { title, _id } = eventInfo;
+    const price = (eventInfo?.price) ? (eventInfo?.price) : 1;
+
     const response = await fetch(url, {
       method: "POST",
-      body: JSON.stringify({ user, numTickets }),
+      body: JSON.stringify({ user, numTickets, price }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -46,7 +48,6 @@ const Events = ({ allEvents }) => {
 
     const data = await response.json();
     console.log(eventInfo);
-    const { title, _id } = eventInfo;
     const { email, name, firebaseID } = JSON.parse(user);
 
     const options = {
@@ -87,8 +88,8 @@ const Events = ({ allEvents }) => {
                 <img className="mr-4" src="/SingleEvent/map-pin.svg" />
                 Ampitheater
               </div>
-              <div className='cursor-pointer' onClick={() => { 
-                setDisplay(false) 
+              <div className='cursor-pointer' onClick={() => {
+                setDisplay(false)
                 setnumTickets(1)
               }}>x</div>
             </div>
@@ -109,12 +110,12 @@ const Events = ({ allEvents }) => {
               {/* Individual Ticket Price */}
               <div className='p-2 flex justify-between'>
                 <div>Ticket price</div>
-                <div>₹ {amount}</div>
+                <div>₹ {(eventInfo?.price) ? (eventInfo?.price) : 1}</div>
               </div>
               {/*  Total Payable Amount*/}
               <div className='p-2 flex justify-between'>
                 <div>Total Payable Amount</div>
-                <div>₹ {amount * numTickets}</div>
+                <div>₹ {((eventInfo?.price) ? (eventInfo?.price) : 1) * numTickets}</div>
               </div>
             </div>
             <div className='flex justify-around'>

@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useEffect } from "react";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const { title, imageUrl, details, dateTime } = event;
-
+    console.log(event)
   return (
     <div className="shadow-md h-36 w-60 mx-8 mb-16 pb-10 border-2 border-[#737373]">
       <div className="relative">

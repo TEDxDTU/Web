@@ -14,8 +14,10 @@ const Event = require("../../schemas/event");
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 
 const Razorpay = new razorpayLib({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
+  key_id:"rzp_test_eHkLlVgJOxglft",
+  // process.env.RAZORPAY_KEY_ID
+  // process.env.RAZORPAY_KEY_SECRET
+  key_secret:"ds30W3O7dxLgvSlWfEgN9gZm",
 });
 
 const oAuth2Client = new google.auth.OAuth2(

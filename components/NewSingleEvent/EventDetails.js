@@ -108,18 +108,17 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       </div>
 
       {eventSection === "speakerInfo" ? (
-        <div className="flex flex-wrap justify-around">{speakerList}</div>
+        <div className="flex flex-wrap justify-around pb-16">{speakerList}</div>
       ) : null}
 
       {eventSection === "eventInfo" ? (
-        <EventInfo eventDetails={eventDetails}></EventInfo>
+        <div className="pt-5 pb-16">
+          <EventInfo eventDetails={eventDetails}></EventInfo>
+        </div>
       ) : null}
 
       {eventSection === "gallery" ? (
-        <Gallery
-          className="flex flex-wrap justify-around"
-          eventDetails={eventDetails}
-        ></Gallery>
+        <Gallery eventDetails={eventDetails}></Gallery>
       ) : null}
     </Page>
   );

@@ -26,7 +26,7 @@ router.post("/sign-up", async (req, res) => {
 
     try {
       existingUser = await auth.getUserByEmail(email);
-    } catch (err) {}
+    } catch (err) { }
 
     if (existingUser) {
       return res.status(409).json({
@@ -55,6 +55,7 @@ router.post("/sign-up", async (req, res) => {
         // photoURL: imageURL
       });
 
+      console.log(newFirebaseUser, auth);
       newDBUser.firebaseID = newFirebaseUser.uid;
       await newDBUser.save();
 
@@ -66,6 +67,49 @@ router.post("/sign-up", async (req, res) => {
     }
   } catch (err) {
     res.sendStatus(500).json({
+      msg: err.toString(),
+    });
+  }
+});
+
+/**
+ * Sign up post request
+ * @param {string} email - the email of the user
+ * @param {string} password - the password of the user
+ * @param {string} name - the name of the user
+ * @param {string} university - the university of the user
+ * @param {string} imageURL - the URL to the user's profile picture, with current architecture should be on Firebase Cloud Storage
+ *
+ * If firebase user is already made at frontend, here the display name is updated in firebase
+ * and creates a new user in both MongoDB and returns the details
+ * EMAIL VERIFICATION VIA FIREBASE
+ */
+
+router.post("/sign-up-web", withAuth, async (req, res) => {
+  const { name, email, university, imageURL } = req.body;
+  const auth = admin.auth();
+
+  let existingUser = await auth.getUserByEmail(email);
+  const firebaseID = existingUser.uid;
+
+  const updatedFBUser = await auth.updateUser(firebaseID, {
+    displayName: name,
+  });
+
+  const newDBUser = User({
+    name,
+    email,
+    university,
+    imageURL,
+    firebaseID
+  });
+
+  try {
+    await newDBUser.save();
+    // console.log("hi");
+    return res.json(newDBUser).status(200);
+  } catch (err) {
+    res.status(500).json({
       msg: err.toString(),
     });
   }
@@ -98,7 +142,6 @@ router.post("/update", withAuth, async (req, res) => {
     const auth = admin.auth();
 
     const firebaseID = req.uid;
-
     const updatedFBUser = await auth.updateUser(firebaseID, {
       email,
       password,
@@ -136,7 +179,6 @@ router.post("/update", withAuth, async (req, res) => {
  * Get's the user's uid from the authToken and returns the user's data.
  */
 router.post("/data-from-token", async (req, res) => {
-  console.log("fetching data from token " + req.body.authToken);
   try {
     const { authToken } = req.body;
 

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { getAuth, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import { FormContext } from "../../contextFiles/formContext";
+import { initializeApp } from "firebase/app";
+import firebaseConfigAPI from "../../firebaseAPI";
 import { InputField, InputImage, SaveAndCancelButton, updateCall } from "./SharedComp";
 
 export default function EditProfile() {
@@ -13,11 +15,13 @@ export default function EditProfile() {
     }
 
     function UpdateTheState() {
+        
         localStorage.setItem("profile", JSON.stringify(form));
-
         const auth = getAuth();
+        
         onAuthStateChanged(auth, async (user) => {
             if (user) {
+                // console.log("Hi");
                 const url =`/api/user/update`;
                 const response = await fetch(url, {
                     method: 'POST',
@@ -65,7 +69,7 @@ export default function EditProfile() {
         {editState && <div className="flex justify-end mr-4 mt-6 md:mt-1 lg:mr-10 mb-2">
             <div>
                 <SaveAndCancelButton setEditState={setEditState} tag={"Cancel"} BackToOldState={BackToOldState} />
-                <SaveAndCancelButton setEditState={setEditState} tag={"Save"} UpdateTheState={() => UpdateTheState(form)} />
+                <SaveAndCancelButton setEditState={setEditState} tag={"Save"} UpdateTheState={UpdateTheState} />
             </div>
         </div>}
     </div>);

@@ -26,7 +26,7 @@ export function InputField({ tag, name, placeholder, editState, value }) {
 
     return (<div className="grid grid-cols-3 gap-3 lg:gap-4 mt-6">
         <div className="text-xl font-semibold pl-2 md:pl-6 lg:pl-12 mt-1">{tag}</div>
-        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-48 w-full md:w-64 lg:w-96 pl-4 pr-2 ${editState && 'text-black'} ${name != "email" && 'capitalize'}`} defaultValue={value} disabled={!editState} placeholder={placeholder} /></div>
+        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-48 w-full md:w-64 lg:w-96 pl-4 pr-2 ${editState && name === "email" && "cursor-not-allowed"} ${editState && name != "email" && 'text-black'} ${name != "email" && 'capitalize'}`} defaultValue={value} disabled={(!editState) || (name === "email")} placeholder={placeholder} /></div>
     </div>)
 }
 

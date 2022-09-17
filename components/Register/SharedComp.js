@@ -2,10 +2,9 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
 import firebaseConfigAPI from "../../firebaseAPI";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
 
 export async function LoginhandleAction(form, router) {
-  console.log(process.env.HOST_DOMAIN);
 
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
   const { email, password } = form;
@@ -15,53 +14,69 @@ export async function LoginhandleAction(form, router) {
     email,
     password
   );
-  const url = `/api/user/data-from-token`;
+  console.log(authToken);
+  if (authToken.user.emailVerified) {
+    const url = `/api/user/data-from-token`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ authToken: authToken.user.accessToken }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify({ authToken: authToken.user.accessToken }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-  const { status } = response;
-  if (status == 200) {
-    localStorage.setItem("profile", JSON.stringify({ ...data }));
-    router.push("/");
+    const data = await response.json();
+    const { status } = response;
+    if (status == 200) {
+      localStorage.setItem("profile", JSON.stringify({ ...data }));
+      router.push("/dashboard");
+    }
+  }
+  else {
+    sendEmailVerification(authToken.user)
+    .then(()=>{
+      console.log("Email sent");
+    })
+    alert("Please verify your email first");
   }
   return;
 }
 
-const RegisterhandleAction = async (form, router) => {
+const RegisterhandleAction = async (form, setregisterStatus, router) => {
   const { email, firstname, lastname, password, university } = form;
+  const auth = getAuth();
 
   const UserObj = {
     email: email,
     name: firstname + " " + lastname,
     password: password,
     university: university,
-    imageURL:
-      "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+    imageURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
   };
-  console.log(UserObj);
-  const url = `/api/user/sign-up`;
 
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(UserObj),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = await response.json();
-  const { status } = response;
-  if (status == 200) {
-    localStorage.setItem("profile", JSON.stringify({ ...data }));
-    router.push("/dashboard");
-  }
+  const url = `/api/user/sign-up-web`;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      sendEmailVerification(auth.currentUser)
+        .then(async () => {
+          // alert("A verification mail has been sent to your provided email.\n Please verify to login !!");
+          const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(UserObj),
+            headers: {
+              authorization: auth.currentUser.accessToken,
+              "Content-Type": "application/json",
+            },
+          });
+          const data = response.json();
+          router.push('/register');
+          setregisterStatus(true);
+        })
+    })
+    .catch((error) => {
+      alert("User already exists");
+      auth.signOut();
+    });
   return;
 };
 
@@ -71,9 +86,8 @@ export function Password({ registerStatus, handleChange }) {
     <div className="flex items-center">
       <input
         onChange={(e) => handleChange(e)}
-        className={`px-5 w-80 rounded py-3 ${
-          registerStatus ? "my-2.5" : "my-2"
-        }`}
+        className={`px-5 w-80 rounded py-3 ${registerStatus ? "my-2.5" : "my-2"
+          }`}
         type={passwordView ? "text" : "password"}
         name="password"
         placeholder="Password"
@@ -125,7 +139,7 @@ export function Heading({ registerStatus, setregisterStatus }) {
   );
 }
 
-export function SubmitButton({ registerStatus, form }) {
+export function SubmitButton({ registerStatus, form, setregisterStatus }) {
   const router = useRouter();
 
   return (
@@ -135,7 +149,7 @@ export function SubmitButton({ registerStatus, form }) {
         onClick={() => {
           registerStatus
             ? LoginhandleAction(form, router)
-            : RegisterhandleAction(form, router);
+            : RegisterhandleAction(form, setregisterStatus, router);
         }}
       >
         {registerStatus ? "Login" : "Register"}

@@ -19,7 +19,9 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
     <div className="shadow-md h-36 w-60 mx-8 mb-16 pb-10 border-2 border-[#737373]">
       <div className="relative">
         <img src={imageUrl} className="h-36 w-60" />
-        <div className="absolute top-2 left-2">{title}</div>
+        <div className="absolute top-0 left-0 py-1 pl-2 bg-black bg-opacity-30 w-full drop-shadow-sm">
+          {title}
+        </div>
         {eventType === "upcoming" && (
           <div
             className="absolute right-0 bottom-2"

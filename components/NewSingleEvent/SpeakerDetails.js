@@ -1,7 +1,6 @@
 import React from "react";
 import { displaySpeakerContext } from "./EventDetails";
 import { useContext } from "react";
-
 const SpeakerDetails = ({ speaker }) => {
   // function textCover(bio){
   //     const width = window.innerWidth;

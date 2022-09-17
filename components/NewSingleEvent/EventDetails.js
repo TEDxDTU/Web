@@ -9,6 +9,7 @@ import SpeakerDetails from "./SpeakerDetails";
 import SpeakerPopUp from "./SpeakerPopUp";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
+import SpeakerPopUp from "./SpeakerPopUp";
 import Backdrop from "./Backdrop";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {
@@ -54,6 +55,28 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   }
 
   console.log(eventDetails);
+
+  let speakerDetails = {};
+
+  useEffect(() => {
+    if(displaySpeaker !== "null"){
+
+      const findSpeaker = () => {
+        for(let i = 0;i<eventDetails.speakersList.length;i++){
+          if(eventDetails.speakersList[i]._id === displaySpeaker){
+            speakerDetails = eventDetails.speakersList[i];
+          }
+        }
+      }
+
+      findSpeaker();
+      console.log(speakerDetails);
+    }
+    else{
+      console.log(displaySpeaker);
+    }
+
+  }, [displaySpeaker,speakerDetails])
 
   return (
     <Page pageTitle={"Events"}>
@@ -143,14 +166,13 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       </displaySpeakerContext.Provider>
 
       {eventSection === "eventInfo" ? (
-        <EventInfo eventDetails={eventDetails}></EventInfo>
+        <div className="pt-5 pb-16">
+          <EventInfo eventDetails={eventDetails}></EventInfo>
+        </div>
       ) : null}
 
       {eventSection === "gallery" ? (
-        <Gallery
-          className="flex flex-wrap justify-around"
-          eventDetails={eventDetails}
-        ></Gallery>
+        <Gallery eventDetails={eventDetails}></Gallery>
       ) : null}
 
       <displaySpeakerContext.Provider value={setDisplaySpeaker}>

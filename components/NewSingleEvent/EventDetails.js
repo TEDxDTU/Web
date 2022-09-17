@@ -9,7 +9,6 @@ import SpeakerDetails from "./SpeakerDetails";
 import SpeakerPopUp from "./SpeakerPopUp";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
-import Backdrop from "./Backdrop";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {
   const pastEventsSize = pastEvents.length;
@@ -103,7 +102,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center md:w-4/6 w-3/4 h-1/2 md:h-3/4">
             <img className="w-3/5" src={eventDetails.imageUrl} />
           </div>
         )}
@@ -177,14 +176,10 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       <displaySpeakerContext.Provider value={setDisplaySpeaker}>
         {displaySpeaker === "null" ? 
           null :
-          <Backdrop></Backdrop>
+          <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>
         }
       </displaySpeakerContext.Provider>
 
-      {displaySpeaker === "null" ? 
-        null :
-        <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>
-      }
 
     </Page>
   );

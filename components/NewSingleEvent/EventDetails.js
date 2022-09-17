@@ -32,7 +32,6 @@ const findEvent = (pastEvents, upcomingEvents, eventID) => {
 export const displaySpeakerContext = React.createContext();
 
 const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
-  const router = useRouter();
   const eventDetails = findEvent(pastEvents, upcomingEvents, eventID);
   const setNoEvent = useContext(noEventContext);
   const [eventSection, setEventSection] = useState("speakerInfo");
@@ -55,29 +54,6 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   }
 
   console.log(eventDetails);
-
-  let speakerDetails = {};
-  
-  useEffect(() => {
-    if(displaySpeaker !== "null"){
-
-      const findSpeaker = () => {
-        for(let i = 0;i<eventDetails.speakersList.length;i++){
-          if(eventDetails.speakersList[i]._id === displaySpeaker){
-            speakerDetails = eventDetails.speakersList[i];
-          }
-        }
-      }
-  
-      findSpeaker();
-      console.log(speakerDetails);
-    }
-    else{
-      console.log(displaySpeaker);
-    }
-
-  }, [displaySpeaker,speakerDetails])
-  
 
   return (
     <Page pageTitle={"Events"}>
@@ -183,6 +159,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
           <Backdrop></Backdrop>
         }
       </displaySpeakerContext.Provider>
+
       {displaySpeaker === "null" ? 
         null :
         <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>

@@ -1,4 +1,7 @@
 import React from "react";
+import { displaySpeakerContext } from "./EventDetails";
+import { useContext } from "react";
+
 const SpeakerDetails = ({ speaker }) => {
   // function textCover(bio){
   //     const width = window.innerWidth;
@@ -9,8 +12,11 @@ const SpeakerDetails = ({ speaker }) => {
   //     }
   //     return bio;
   // }
+
+  const setDisplaySpeaker = useContext(displaySpeakerContext);
+
   return (
-    <div className="flex w-2/5 bg-white m-6 text-black hover:shadow-white hover:shadow-md hover:transition-shadow rounded-md">
+    <div onClick={() => {setDisplaySpeaker(speaker._id)}} className="flex w-2/5 bg-white m-6 text-black hover:shadow-white hover:shadow-md hover:transition-shadow rounded-md">
       <div className="flex item-center h-full justify-center ">
         <img
           className="h-[10rem] w-[10rem] m-2 items-center justify-center rounded-md"

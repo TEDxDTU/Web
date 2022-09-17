@@ -53,25 +53,25 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
 
   return (
     <Page pageTitle={"Events"}>
-      <div className="">
+      <div className="flex flex-col items-center justify-center">
         {eventDetails.streamingUrl !== null ? (
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center md:w-4/6 w-3/4 h-1/2 md:h-3/4">
             <ReactPlayer
-              className="w-3/5"
+              className=""
               url={eventDetails.streamingUrl}
-              // width='100%'
-              // height='100%'
               controls={true}
               light={eventDetails.imageUrl}
               playIcon={
-                <div className="">
-                  <h1 className="text-2xl md:text-3xl font-bold text-black lg:text-4xl capitalize m-4 absolute top-0 left-0">
+                <div className="relative w-full h-full items-center justify-center flex">
+                  <h1 className="text-2xl lg:text-4xl font-light text-white drop-shadow capitalize absolute top-0 left-0 pl-2 pt-2  hover:text-red-600">
                     {eventDetails.title}
                   </h1>
-                  <FontAwesomeIcon
-                    className="text-black w-4 sm:w-5 mx-auto md:w-6 lg:w-8 hover:text-red-600"
-                    icon={faPlay}
-                  ></FontAwesomeIcon>
+                  <div className="w-full h-fit flex justify-center">
+                    <FontAwesomeIcon
+                      className="text-white w-4 sm:w-5 lg:w-8 hover:text-red-600"
+                      icon={faPlay}
+                    />
+                  </div>
                 </div>
               }
             />
@@ -88,19 +88,19 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         <div className="flex justify-center my-10 md:flex-column">
           <button
             onClick={() => setEventSection("speakerInfo")}
-            className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
+            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
           >
             Speaker info
           </button>
           <button
             onClick={() => setEventSection("eventInfo")}
-            className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
+            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
           >
             Event info
           </button>
           <button
             onClick={() => setEventSection("gallery")}
-            className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
+            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32 "
           >
             Gallery
           </button>

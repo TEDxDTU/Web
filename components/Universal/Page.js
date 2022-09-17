@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import NavBar from "./NavBar";
 import { FormContext } from "../../contextFiles/formContext";
 import Head from "next/head";
+import Footer from "./Footer";
 
 export default function Page({ pageTitle, children }) {
 
@@ -26,6 +27,7 @@ export default function Page({ pageTitle, children }) {
       <div className="bg-black text-white min-h-[max(calc(100vh-16rem),36rem)] my-auto">
         {children}
       </div>
+      <Footer/>
     </>
   );
 };

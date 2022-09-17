@@ -45,7 +45,7 @@ router.post("/sign-up", async (req, res) => {
     try {
       newDBUser.firebaseID = undefined;
       await newDBUser.save();
-      // b;
+
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,
@@ -67,49 +67,6 @@ router.post("/sign-up", async (req, res) => {
     }
   } catch (err) {
     res.sendStatus(500).json({
-      msg: err.toString(),
-    });
-  }
-});
-
-/**
- * Sign up post request
- * @param {string} email - the email of the user
- * @param {string} password - the password of the user
- * @param {string} name - the name of the user
- * @param {string} university - the university of the user
- * @param {string} imageURL - the URL to the user's profile picture, with current architecture should be on Firebase Cloud Storage
- *
- * If firebase user is already made at frontend, here the display name is updated in firebase
- * and creates a new user in both MongoDB and returns the details
- * EMAIL VERIFICATION VIA FIREBASE
- */
-
-router.post("/sign-up-web", withAuth, async (req, res) => {
-  const { name, email, university, imageURL } = req.body;
-  const auth = admin.auth();
-
-  let existingUser = await auth.getUserByEmail(email);
-  const firebaseID = existingUser.uid;
-
-  const updatedFBUser = await auth.updateUser(firebaseID, {
-    displayName: name,
-  });
-
-  const newDBUser = User({
-    name,
-    email,
-    university,
-    imageURL,
-    firebaseID
-  });
-
-  try {
-    await newDBUser.save();
-    // console.log("hi");
-    return res.json(newDBUser).status(200);
-  } catch (err) {
-    res.status(500).json({
       msg: err.toString(),
     });
   }

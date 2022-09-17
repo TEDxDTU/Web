@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
 import firebaseConfigAPI from "../../firebaseAPI";
-import { getAuth, signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 export async function LoginhandleAction(form, router) {
 
@@ -14,7 +14,7 @@ export async function LoginhandleAction(form, router) {
     email,
     password
   );
-  console.log(authToken);
+
   if (authToken.user.emailVerified) {
     const url = `/api/user/data-from-token`;
     const response = await fetch(url, {
@@ -34,49 +34,53 @@ export async function LoginhandleAction(form, router) {
   }
   else {
     sendEmailVerification(authToken.user)
-    .then(()=>{
-      console.log("Email sent");
-    })
+      .then(() => {
+        console.log("Email sent");
+      })
     alert("Please verify your email first");
   }
   return;
 }
 
 const RegisterhandleAction = async (form, setregisterStatus, router) => {
+
   const { email, firstname, lastname, password, university } = form;
-  const auth = getAuth();
+  const authentication = getAuth(initializeApp(firebaseConfigAPI));
 
   const UserObj = {
     email: email,
     name: firstname + " " + lastname,
     password: password,
     university: university,
-    imageURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+    imageURL:
+      "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
   };
 
-  const url = `/api/user/sign-up-web`;
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      sendEmailVerification(auth.currentUser)
-        .then(async () => {
-          // alert("A verification mail has been sent to your provided email.\n Please verify to login !!");
-          const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(UserObj),
-            headers: {
-              authorization: auth.currentUser.accessToken,
-              "Content-Type": "application/json",
-            },
-          });
-          const data = response.json();
-          router.push('/register');
-          setregisterStatus(true);
-        })
-    })
-    .catch((error) => {
-      alert("User already exists");
-      auth.signOut();
-    });
+  const url = `/api/user/sign-up`;
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(UserObj),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const { status } = response;
+  if (status == 200) {
+
+    await signInWithEmailAndPassword(
+      authentication,
+      email,
+      password
+    );
+
+    sendEmailVerification(authentication.currentUser)
+      .then(() => {
+        alert("A verification mail has been sent to your provided email.\n Please verify to login !!");
+      })
+    router.push('/register');
+    setregisterStatus(true);
+  }
   return;
 };
 

@@ -9,7 +9,6 @@ import SpeakerDetails from "./SpeakerDetails";
 import SpeakerPopUp from "./SpeakerPopUp";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
-import SpeakerPopUp from "./SpeakerPopUp";
 import Backdrop from "./Backdrop";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {

@@ -8,6 +8,8 @@ import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
+import SpeakerPopUp from "./SpeakerPopUp";
+import Backdrop from "./Backdrop";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {
   const pastEventsSize = pastEvents.length;
@@ -27,11 +29,15 @@ const findEvent = (pastEvents, upcomingEvents, eventID) => {
   return null;
 };
 
+export const displaySpeakerContext = React.createContext();
+
 const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   const router = useRouter();
   const eventDetails = findEvent(pastEvents, upcomingEvents, eventID);
   const setNoEvent = useContext(noEventContext);
   const [eventSection, setEventSection] = useState("speakerInfo");
+
+  const [displaySpeaker, setDisplaySpeaker] = useState("null");
 
   if (eventDetails === null) {
     setNoEvent(true);
@@ -50,6 +56,28 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   }
 
   console.log(eventDetails);
+
+  let speakerDetails = {};
+
+  useEffect(() => {
+    if(displaySpeaker !== "null"){
+
+      const findSpeaker = () => {
+        for(let i = 0;i<eventDetails.speakersList.length;i++){
+          if(eventDetails.speakersList[i]._id === displaySpeaker){
+            speakerDetails = eventDetails.speakersList[i];
+          }
+        }
+      }
+
+      findSpeaker();
+      console.log(speakerDetails);
+    }
+    else{
+      console.log(displaySpeaker);
+    }
+
+  }, [displaySpeaker,speakerDetails])
 
   return (
     <Page pageTitle={"Events"}>
@@ -107,9 +135,11 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         </div>
       </div>
 
-      {eventSection === "speakerInfo" ? (
-        <div className="flex flex-wrap justify-around pb-16">{speakerList}</div>
-      ) : null}
+      <displaySpeakerContext.Provider value={setDisplaySpeaker}>
+        {eventSection === "speakerInfo" ? (
+          <div className="flex flex-wrap justify-around">{speakerList}</div>
+        ) : null}
+      </displaySpeakerContext.Provider>
 
       {eventSection === "eventInfo" ? (
         <div className="pt-5 pb-16">
@@ -120,6 +150,18 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       {eventSection === "gallery" ? (
         <Gallery eventDetails={eventDetails}></Gallery>
       ) : null}
+
+<displaySpeakerContext.Provider value={setDisplaySpeaker>
+        {displaySpeaker === "null" ? 
+          null :
+          <Backdrop/>
+        }
+      </displaySpeakerContext.Provider>
+      {displaySpeaker === "null" ? 
+        null :
+        <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>
+      }
+
     </Page>
   );
 };

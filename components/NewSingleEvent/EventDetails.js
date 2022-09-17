@@ -88,7 +88,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
               light={eventDetails.imageUrl}
               playIcon={
                 <div className="relative w-full h-full items-center justify-center flex">
-                  <h1 className="text-2xl lg:text-4xl font-light text-white drop-shadow capitalize absolute top-0 left-0 pl-2 pt-2  hover:text-red-600">
+                  <h1 className="text-2xl lg:text-4xl font-light text-white drop-shadow capitalize absolute top-0 left-0 pl-2 pt-2">
                     {eventDetails.title}
                   </h1>
                   <div className="w-full h-fit flex justify-center">
@@ -109,7 +109,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
           {eventDetails.title}
         </h1>
-        <div className="flex justify-center my-10 md:flex-column">
+        <div className="flex space-y-5 sm:space-y-0 justify-center my-10 flex-col sm:flex-row">
           {eventSection === "speakerInfo" ?
             <button
               onClick={() => setEventSection("speakerInfo")}

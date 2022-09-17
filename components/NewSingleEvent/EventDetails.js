@@ -57,7 +57,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         {eventDetails.streamingUrl !== null ? (
           <div className="relative flex items-center justify-center">
             <ReactPlayer
-              className="absolute w-3/5"
+              className="w-3/5"
               url={eventDetails.streamingUrl}
               // width='100%'
               // height='100%'

@@ -85,22 +85,22 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
           {eventDetails.title}
         </h1>
-        <div className="flex justify-center my-10 md:flex-column">
+        <div className="flex justify-center my-10  ">
           <button
             onClick={() => setEventSection("speakerInfo")}
-            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
+            className="bg-white transition-all mx-6 md:mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
           >
             Speaker info
           </button>
           <button
             onClick={() => setEventSection("eventInfo")}
-            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
+            className="bg-white transition-all mx-6 md:mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32"
           >
             Event info
           </button>
           <button
             onClick={() => setEventSection("gallery")}
-            className="bg-white transition-all mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32 "
+            className="bg-white transition-all mx-6 md:mx-10 text-sm md:text-md text-black rounded-full px-2 md:px-4 py-1 hover:bg-red-600 hover:text-white w-24 md:w-32 "
           >
             Gallery
           </button>

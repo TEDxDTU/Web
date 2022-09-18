@@ -11,6 +11,7 @@ export default function NavBar() {
   const [form, setForm] = useContext(FormContext);
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
+  useEffect(function () {}, []);
   function logout() {
     signOut(auth).then(() => {
       console.log("Sign-out successful");
@@ -18,8 +19,6 @@ export default function NavBar() {
       // An error happened.
     });
   }
-  useEffect(function () {
-  }, []);
   useEffect(
     () =>
       (async () => {
@@ -79,7 +78,7 @@ export default function NavBar() {
           </div>
         </Link>
 
-        <Link href="/theme">
+        {/* <Link href="/theme">
           <div
             className="
         hover-underline-animation
@@ -91,7 +90,7 @@ export default function NavBar() {
           >
             Theme
           </div>
-        </Link>
+        </Link> */}
 
         <Link href="/events">
           <div
@@ -106,8 +105,6 @@ export default function NavBar() {
             Events
           </div>
         </Link>
-
-
 
         <Link href="/partners">
           <div
@@ -137,28 +134,30 @@ export default function NavBar() {
           </div>
         </Link>
 
-        {form && <Link href="/dashboard">
-          <div
-            className="
+        {form && (
+          <Link href="/dashboard">
+            <div
+              className="
         hover-underline-animation
         pb-2
         hover:text-red-600
         hover:border-red-600
         cursor-pointer
         "
-          >
-            Dashboard
-          </div>
-        </Link>}
+            >
+              Dashboard
+            </div>
+          </Link>
+        )}
 
         <Link href={form ? "/" : "/register"}>
           <button
             className="
         bg-red-600
         col-span-2
-        w-3/4
-        h-16
-        text-lg
+        w-3/5
+        h-12
+        text-lg hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 
         "
             onClick={() => {
               form && logout()
@@ -173,9 +172,10 @@ export default function NavBar() {
     );
 
   if (!isLargeViewPort)
-    return (<>
-      <header
-        className="
+    return (
+      <>
+        <header
+          className="
     flex
     flex-row
     bg-black
@@ -188,37 +188,49 @@ export default function NavBar() {
     justify-between
     items-center
     "
-      >
-        <img
-          className="
+        >
+          <img
+            className="
         h-1/4
         mx-8
         cursor-pointer
       "
-          src="/LandingPage/NavBar-White.png"
-          alt="NavBar"
-          onClick={() => setIsNavOpen(!isNavOpen)}
-        />
-        <Link href="/">
-          <img
-            className="
+            src="/LandingPage/NavBar-White.png"
+            alt="NavBar"
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          />
+          <Link href="/">
+            <img
+              className="
           w-40
           cursor-pointer
         "
-            src="/LandingPage/Logo-White-Text.svg"
-            alt="TEDxDTU Logo"
-          />
-        </Link>
+              src="/LandingPage/Logo-White-Text.svg"
+              alt="TEDxDTU Logo"
+            />
+          </Link>
 
-        <Link href={form ? "/" : "/register"}>
-          <button
-            className="
+          <Link href={form ? "/" : "/register"}>
+            <button
+              className="
       bg-red-600
       mx-8
-      h-16
+      h-10
+      md:h-16
       w-24
       md:w-32
       "
+              onClick={() => {
+                window.localStorage.removeItem("profile");
+                setForm(null);
+              }}
+            >
+              {form ? "Log Out" : "Register"}
+            </button>
+          </Link>
+        </header>
+        {isNavOpen && (
+          <nav
             onClick={() => {
               form && logout()
               window.localStorage.removeItem("profile");
@@ -248,91 +260,94 @@ export default function NavBar() {
         items-center
         overflow-auto
       "
-        >
-          <Link href="/">
-            <button
-              className="
+          >
+            <Link href="/">
+              <button
+                className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              Home
-            </button>
-          </Link>
+              >
+                Home
+              </button>
+            </Link>
 
-          <Link href="/theme">
-            <button
-              className="
+            <Link href="/theme">
+              <button
+                className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              Theme
-            </button>
-          </Link>
+              >
+                Theme
+              </button>
+            </Link>
 
-          <Link href="/events">
-            <button
-              className="
+            <Link href="/events">
+              <button
+                className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              Events
-            </button>
-          </Link>
+              >
+                Events
+              </button>
+            </Link>
 
-          {form && <Link href="/dashboard">
-            <button
-              className="
+            {form && (
+              <Link href="/dashboard">
+                <button
+                  className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              Dashboard
-            </button>
-          </Link>}
+                >
+                  Dashboard
+                </button>
+              </Link>
+            )}
 
-          <Link href="/partners">
-            <button
-              className="
+            <Link href="/partners">
+              <button
+                className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              Partners
-            </button>
-          </Link>
+              >
+                Partners
+              </button>
+            </Link>
 
-          <Link href="/about">
-            <button
-              className="
+            <Link href="/about">
+              <button
+                className="
             bg-red-600
             rounded
             w-3/4
             py-4
             my-4
           "
-            >
-              About
-            </button>
-          </Link>
-        </nav>
-      )}
-    </>);
+              >
+                About
+              </button>
+            </Link>
+          </nav>
+        )}
+      </>
+    );
 }

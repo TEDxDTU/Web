@@ -5,7 +5,6 @@ import Head from "next/head";
 import Footer from "./Footer";
 
 export default function Page({ pageTitle, children }) {
-
   const [form, setForm] = useContext(FormContext);
 
   useEffect(function () {
@@ -30,4 +29,4 @@ export default function Page({ pageTitle, children }) {
       {/* <Footer/> */}
     </>
   );
-};
+}

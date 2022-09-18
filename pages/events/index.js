@@ -1,8 +1,8 @@
 import React from 'react';
-import Events from '../components/Events/Events';
-import getLiveEvent from '../utils/getLiveEvent';
-import getPastEvents from "../utils/getPastEvents";
-import getUpcomingEvents from "../utils/getUpcomingEvents";
+import Events from '../../components/Events/Events';
+import getLiveEvent from '../../utils/getLiveEvent';
+import getPastEvents from "../../utils/getPastEvents";
+import getUpcomingEvents from "../../utils/getUpcomingEvents";
 
 export async function getServerSideProps(ctx) {
 

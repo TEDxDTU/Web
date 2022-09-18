@@ -33,7 +33,7 @@ export default function Landing({ allEvents }) {
             <div className="col-span-1 md:mr-8 lg:mr-24 mt-8">
                 <Profile setOption={setOption} option={option} />
             </div>
-            <div className="col-span-2 ">
+            <div className="col-span-2">
                 {option === 'Profile' && <EditProfile />}
                 {option === 'Tickets' && <MyTicketPage />}
                 {option === 'Settings' && <Settings />}
@@ -43,7 +43,7 @@ export default function Landing({ allEvents }) {
             <div className="mt-8 px-12">
                 <Profile setOption={setOption} option={option} />
             </div>
-            <div className="bg-black px-12 ">
+            <div className="bg-black px-4 ">
                 {option === 'Profile' && <div className=""><EditProfile /></div>}
                 {option === 'Tickets' && <MyTicketPage />}
                 {option === 'Settings' && <Settings />}

@@ -15,8 +15,8 @@ const SpeakerDetails = ({ speaker }) => {
   const setDisplaySpeaker = useContext(displaySpeakerContext);
 
   return (
-    <div onClick={() => {setDisplaySpeaker(speaker._id)}} className="cursor-pointer flex flex-col sm:flex-row w-[45%] sm:w-2/5 bg-white m-6 text-black hover:shadow-white hover:shadow-md hover:transition-shadow rounded-md">
-      <div className=" item-center h-full justify-center w-full sm:w-fit sm:h-fit sm:ml-2">
+    <div onClick={() => {setDisplaySpeaker(speaker._id)}} className="cursor-pointer flex flex-col sm:flex-row w-[45%] sm:w-2/5 bg-[rgba(100,100,100,0.3)] m-6 text-white hover:shadow-[#2C2C2C] hover:shadow-md hover:transition-shadow rounded-md">
+      <div className=" item-center h-full justify-center w-full sm:w-fit sm:h-fit sm:ml-2 ">
         <img
           className="h-[10rem] w-[10rem] m-2 rounded-md mx-auto mt-5 sm:mt-2"
           src={speaker.imageUrl}

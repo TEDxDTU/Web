@@ -66,7 +66,7 @@ export default function NavBar() {
         <Link href="/">
           <div
             className="
-        col-start-6
+        col-start-7
         hover-underline-animation
         pb-2
         hover:text-red-600
@@ -262,7 +262,7 @@ export default function NavBar() {
               </button>
             </Link>
 
-            <Link href="/theme">
+            {/* <Link href="/theme">
               <button
                 className="
             bg-red-600
@@ -274,7 +274,7 @@ export default function NavBar() {
               >
                 Theme
               </button>
-            </Link>
+            </Link> */}
 
             <Link href="/events">
               <button

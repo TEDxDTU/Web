@@ -9,6 +9,6 @@ export default function About({ teamsList }) {
         pageTitle={"About"}
     >
         <AboutBanner />
-        <CarouselWrapper teamsList={teamsList} />
+        {/* <CarouselWrapper teamsList={teamsList} /> */}
     </Page>;
 };

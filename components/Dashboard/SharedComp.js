@@ -52,11 +52,11 @@ export function InputImage({ tag, name, editState }) {
         });
     };
 
-    return (<div className={`grid grid-cols-3 gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>
+    return (<div className={`grid grid-cols-4 sm:grid-cols-3 sm:gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>
         <div className="text-xl font-semibold pl-2 md:pl-6 lg:pl-12 mt-1">{tag}</div>
         <div>
             <input name={name} type="file" disabled={!editState} onChange={(e) => uploadFile(e.target.files[0])}
-                className={`file:border-0 file:rounded file:p-1 file:px-2 mt-1 ${editState ? 'file:bg-red-600 file:text-white cursor-pointer' : ''}`}
+                className={`file:border-0 file:rounded file:p-1 file:px-2 file:pr-8 mt-1 ${editState ? 'file:bg-red-600 file:text-white cursor-pointer' : ''}`}
             />
         </div>
     </div>)

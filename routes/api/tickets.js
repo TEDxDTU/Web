@@ -119,7 +119,7 @@ router.post("/verify", async (req, res) => {
   // Getting Event Details
   const event = await Event.findById(_id);
 
-  const noOfTickets = amount / event.price;
+  const noOfTickets = amount / (event.price*100);
 
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
   const newTicket = new Ticket({

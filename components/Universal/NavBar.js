@@ -229,19 +229,6 @@ export default function NavBar() {
             </button>
           </Link>
         </header>
-        {/* {isNavOpen && (
-          <nav
-            onClick={() => {
-              form && logout()
-              window.localStorage.removeItem("profile");
-              setForm(null);
-            }}
-          >
-            {form ? "Log Out" : "Register"}
-
-          </button>
-        </Link>
-      </header> */}
       {isNavOpen && (
         <nav
           className="

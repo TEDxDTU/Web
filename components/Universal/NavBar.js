@@ -229,7 +229,7 @@ export default function NavBar() {
             </button>
           </Link>
         </header>
-        {isNavOpen && (
+        {/* {isNavOpen && (
           <nav
             onClick={() => {
               form && logout()
@@ -241,7 +241,7 @@ export default function NavBar() {
 
           </button>
         </Link>
-      </header>
+      </header> */}
       {isNavOpen && (
         <nav
           className="

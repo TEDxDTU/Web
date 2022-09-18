@@ -10,7 +10,7 @@ export const MyTicketPage = () => {
     const [loading, setLoading] = useContext(LoadingContext);
     const auth = getAuth();
     const url = `/api/user/tickets`;
-    
+
     useEffect(async () => {
         setLoading(true);
         const response = await fetch(url, {
@@ -24,10 +24,9 @@ export const MyTicketPage = () => {
         setTickets(data);
         setLoading(false);
     }, []);
-    
+
     console.log(tickets);
-    return (<div className="relative">
-        <div className="ml-60">{loading && <Spinner />}</div>
+    return (
         <div className="bg-[rgba(100,100,100,0.3)] rounded-md mt-12 p-2 overflow-x-hidden overflow-y-auto h-96 customScrollbar">
             <div className="flex justify-between px-6 md:px-4 lg:px-8 mb-10">
                 <div className="font-semibold text-4xl mt-4">My Tickets</div>
@@ -45,6 +44,5 @@ export const MyTicketPage = () => {
                     )}
                 </div>
             </div>
-        </div>
-    </div>);
+        </div>);
 }

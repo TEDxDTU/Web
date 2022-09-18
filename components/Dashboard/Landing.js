@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Page from "../Universal/Page";
 import EditProfile from "./EditProfile";
 import LiveEvent from "./LiveEvent";
+import Spinner from "../Universal/spinner";
+import { LoadingContext } from "../../contextFiles/loadingContext"
 import { MyTicketPage } from "./myTicketPage";
 import Profile from "./Profile";
 import Settings from "./Settings";
@@ -11,6 +13,7 @@ export default function Landing({ allEvents }) {
     const { liveEvent, pastEvents } = allEvents;
     const [option, setOption] = useState("Profile");
     const [isLargeViewPort, setIsLargeViewPort] = useState(null);
+    const [loading, setLoading] = useContext(LoadingContext);
 
     useEffect(function () {
     }, []);
@@ -29,25 +32,28 @@ export default function Landing({ allEvents }) {
     );
 
     return (<Page pageTitle={'Dashboard'}>
-        {isLargeViewPort && <div className="grid grid-cols-3 gap-4 px-12 py-4 h-screen">
-            <div className="col-span-1 md:mr-8 lg:mr-24 mt-8">
-                <Profile setOption={setOption} option={option} />
-            </div>
-            <div className="col-span-2">
-                {option === 'Profile' && <EditProfile />}
-                {option === 'Tickets' && <MyTicketPage />}
-                {option === 'Settings' && <Settings />}
-            </div>
-        </div>}
-        {!isLargeViewPort && <div className="py-4 h-screen">
-            <div className="mt-8 px-12">
-                <Profile setOption={setOption} option={option} />
-            </div>
-            <div className="bg-black px-4 ">
-                {option === 'Profile' && <div className=""><EditProfile /></div>}
-                {option === 'Tickets' && <MyTicketPage />}
-                {option === 'Settings' && <Settings />}
-            </div>
-        </div>}
+        <div className="relative">
+            {loading && <Spinner />}
+            {isLargeViewPort && <div className={`${loading && 'pointer-events-none opacity-25'} grid grid-cols-3 gap-4 px-12 py-4 h-screen`}>
+                <div className="col-span-1 md:mr-8 lg:mr-24 mt-8">
+                    <Profile setOption={setOption} option={option} />
+                </div>
+                <div className="col-span-2">
+                    {option === 'Profile' && <EditProfile />}
+                    {option === 'Tickets' && <MyTicketPage />}
+                    {option === 'Settings' && <Settings />}
+                </div>
+            </div>}
+            {!isLargeViewPort && <div className={`${loading && 'pointer-events-none opacity-25'} py-4 h-screen`}>
+                <div className="mt-8 px-12">
+                    <Profile setOption={setOption} option={option} />
+                </div>
+                <div className="bg-black px-4 ">
+                    {option === 'Profile' && <div className=""><EditProfile /></div>}
+                    {option === 'Tickets' && <MyTicketPage />}
+                    {option === 'Settings' && <Settings />}
+                </div>
+            </div>}
+        </div>
     </Page>)
 }

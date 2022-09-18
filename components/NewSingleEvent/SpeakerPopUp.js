@@ -27,14 +27,14 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
       linkToPush += "...";
     }
     LinksList.push(
-      <Link
+      <a
         key={i}
         href={speakerDetails.resources[i]}
         target="_blank"
-        className="hover:text-red-600"
+        className="hover:text-black"
       >
         {linkToPush}
-      </Link>
+      </a>
     );
   }
 

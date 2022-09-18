@@ -6,6 +6,7 @@ const eventSchema = mongoose.Schema({
   /**The date and time the event occurs, in ISO8601 format */
   dateTime: {
     // ISO8601 encoded date
+    trim: true,
     type: String,
     validate(value) {
       if (!value) return;
@@ -24,7 +25,13 @@ const eventSchema = mongoose.Schema({
       if (!value) {
         throw new Error("Missing eventType");
       }
-      const allowedValues = ["past", "upcoming", "live", "story"];
+      const allowedValues = [
+        "past",
+        "upcoming",
+        "live",
+        "story",
+        "past_new_format",
+      ];
       if (!allowedValues.includes(value)) {
         throw new Error(
           "Event type must be one of: " + allowedValues.join(", ")
@@ -35,11 +42,27 @@ const eventSchema = mongoose.Schema({
   /**The list of images taken during the event */
   galleryImageUrls: [
     {
+      trim: true,
       type: String,
       validate(value) {
         if (!value) return;
+        value = value.trim();
         if (!validator.isURL(value)) {
           throw new Error(`${value} in galleryImageUrls is not a valid URL`);
+        }
+      },
+    },
+  ],
+  //video urls of past events
+  videoUrls: [
+    {
+      trim: true,
+      type: String,
+      validate(value) {
+        if (!value) return;
+        value = value.trim();
+        if (!validator.isURL(value)) {
+          throw new Error(`${value} in videoUrls is not a valid URL`);
         }
       },
     },
@@ -54,12 +77,15 @@ const eventSchema = mongoose.Schema({
   },
   /** The cover image URL of the event, can be used as thumbnail */
   imageUrl: {
+    trim: true,
     type: String,
     required: true,
     validate(value) {
       if (!value) {
         throw new Error("imageUrl is required");
       }
+      value = value.trim();
+
       if (!validator.isURL(value)) {
         throw new Error(`${value} in imageUrl is not a valid URL`);
       }
@@ -83,6 +109,7 @@ const eventSchema = mongoose.Schema({
   /** The YT stream URL for the event */
   streamingUrl: {
     type: String,
+    trim: true,
     validate(value) {
       if (!value) return;
       if (!validator.isURL(value)) {
@@ -92,12 +119,12 @@ const eventSchema = mongoose.Schema({
   },
   price: {
     type: Number,
-    default:1
+    default: 1,
   },
   areBookingActive: {
     type: Boolean,
     required: true,
-    default: false
+    default: false,
   },
   /**@deprecated ,this was only for LIVE EVENT, which is now on Firebase*/
   currentSpeakerIndex: Number,
@@ -134,6 +161,14 @@ eventSchema.pre("save", async function (next) {
   } else {
     //TODO: Add validation for live and story events
   }
+  for (let i = 0; i < event.galleryImageUrls.length; i++) {
+    event.galleryImageUrls[i] = event.galleryImageUrls[i].trim();
+  }
+  for (let i = 0; i < event.videoUrls.length; i++) {
+    event.videoUrls[i] = event.videoUrls[i].trim();
+  }
+  event.imageUrl = event.imageUrl.trim();
+  event.streamingUrl = event.streamingUrl.trim();
   next();
 });
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);

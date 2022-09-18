@@ -27,7 +27,7 @@ export default function Page({ pageTitle, children }) {
       <div className="bg-black text-white min-h-[max(calc(100vh-16rem),36rem)] my-auto">
         {children}
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   );
 };

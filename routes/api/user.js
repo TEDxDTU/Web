@@ -192,7 +192,7 @@ router.get("/tickets", withAuth, async (req, res) => {
     // return res.json("Marked trivia started");
     const result = await user.getTicketDetails();
     console.log(result);
-    return res.json(result);
+    return res.json(result).status(200);
   } catch (err) {
     return res.status(500).json({
       msg: err.toString(),

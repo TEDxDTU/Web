@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -11,23 +11,23 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
-.customScrollbar{
+.customScrollbar {
   scrollbar-width: thin;
   scrollbar-color: #000 #fff;
 }
 
 .customScrollbar::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
-.customScrollbar::-webkit-scrollbar-track { 
+.customScrollbar::-webkit-scrollbar-track {
   background: #fff;
   border-radius: 10px;
 }
 
-.customScrollbar::-webkit-scrollbar-thumb { 
+.customScrollbar::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background:#888;
+  background: #888;
 }
 
 .text-stroke-thin-red {
@@ -73,16 +73,65 @@
 .border-scoop-right {
   height: 120px;
   width: 220px;
-  background: -webkit-radial-gradient(0% 0%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(100% 0%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(0% 100%, circle, transparent 6%, #D2D2D2 6%) no-repeat, -webkit-radial-gradient(100% 100%, circle, transparent 6%, #D2D2D2 6%) no-repeat;
-  background: radial-gradient(circle at 0% 0%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 100% 0%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 0% 100%, transparent 6%, #D2D2D2 6%) no-repeat, radial-gradient(circle at 100% 100%, transparent 6%, #D2D2D2 6%) no-repeat;
+  background: -webkit-radial-gradient(0% 0%, circle, transparent 6%, #d2d2d2 6%)
+      no-repeat,
+    -webkit-radial-gradient(100% 0%, circle, transparent 6%, #d2d2d2 6%) no-repeat,
+    -webkit-radial-gradient(0% 100%, circle, transparent 6%, #d2d2d2 6%) no-repeat,
+    -webkit-radial-gradient(100% 100%, circle, transparent 6%, #d2d2d2 6%) no-repeat;
+  background: radial-gradient(circle at 0% 0%, transparent 6%, #d2d2d2 6%)
+      no-repeat,
+    radial-gradient(circle at 100% 0%, transparent 6%, #d2d2d2 6%) no-repeat,
+    radial-gradient(circle at 0% 100%, transparent 6%, #d2d2d2 6%) no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 6%, #d2d2d2 6%) no-repeat;
   background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%;
   background-size: 75% 75%;
 }
 .border-scoop-left {
   height: 120px;
   width: 100px;
-  background: -webkit-radial-gradient(0% 100%, circle, transparent 9%, #555555 6%) no-repeat, -webkit-radial-gradient(100% 100%, circle, transparent 6%, #555555 6%) no-repeat, -webkit-radial-gradient(0% 0%, circle, transparent 9%, #555555 6%) no-repeat, -webkit-radial-gradient(0% 0%, circle, transparent 6%, #555555 6%) no-repeat;
-  background: radial-gradient(circle at 0% 100%, transparent 9%, #555555 6%) no-repeat, radial-gradient(circle at 100% 100%, transparent 6%, #555555 6%) no-repeat, radial-gradient(circle at 0% 0%, transparent 9%, #555555 6%) no-repeat, radial-gradient(circle at 0% 0%, transparent 6%, #555555 6%) no-repeat;
+  background: -webkit-radial-gradient(
+        0% 100%,
+        circle,
+        transparent 9%,
+        #555555 6%
+      )
+      no-repeat,
+    -webkit-radial-gradient(100% 100%, circle, transparent 6%, #555555 6%) no-repeat,
+    -webkit-radial-gradient(0% 0%, circle, transparent 9%, #555555 6%) no-repeat,
+    -webkit-radial-gradient(0% 0%, circle, transparent 6%, #555555 6%) no-repeat;
+  background: radial-gradient(circle at 0% 100%, transparent 9%, #555555 6%)
+      no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 6%, #555555 6%) no-repeat,
+    radial-gradient(circle at 0% 0%, transparent 9%, #555555 6%) no-repeat,
+    radial-gradient(circle at 0% 0%, transparent 6%, #555555 6%) no-repeat;
   background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%;
   background-size: 75% 75%;
+}
+.ticketBox {
+  background: radial-gradient(50% 50% at 50% 50%, #5a5a5a 85.94%, #2b2b2b 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.ticketBoxhover {
+  background: radial-gradient(50% 50% at 50% 50%, #e62b1e 88.02%, #7d0b03 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.loader {
+  border: 3px solid rgb(220 38 38);
+  border-radius: 60%;
+  border-top: 3px solid transparent;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite; 
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

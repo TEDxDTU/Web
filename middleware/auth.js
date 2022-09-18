@@ -10,7 +10,6 @@ const admin = require("firebase-admin");
  * });
  */
 
-
 async function withAuth(req, res, next) {
   const authorization = req.headers.authorization;
 

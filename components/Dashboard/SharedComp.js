@@ -1,3 +1,5 @@
+import { LoadingContext } from "../../contextFiles/loadingContext"
+import Spinner from "../Universal/spinner";
 import React, { useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
@@ -26,22 +28,26 @@ export function InputField({ tag, name, placeholder, editState, value }) {
 
     return (<div className="grid grid-cols-3 gap-3 lg:gap-4 mt-6">
         <div className="text-xl font-semibold pl-2 md:pl-6 lg:pl-12 mt-1">{tag}</div>
-        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-48 w-full md:w-64 lg:w-96 pl-4 pr-2 ${editState && 'text-black'} ${name != "email" && 'capitalize'}`} defaultValue={value} disabled={!editState} placeholder={placeholder} /></div>
+        <div><input name={name} onChange={(e) => handleChange(e, setForm, form)} className={`rounded h-10 w-48 w-full md:w-64 lg:w-96 pl-4 pr-2 ${editState && name === "email" && "cursor-not-allowed"} ${editState && name != "email" && 'text-black'} ${name != "email" && 'capitalize'}`} defaultValue={value} disabled={(!editState) || (name === "email")} placeholder={placeholder} /></div>
     </div>)
 }
 
 export function InputImage({ tag, name, editState }) {
 
-    const storage = getStorage(initializeApp(firebaseConfigAPI));
+    const [loading, setLoading] = useContext(LoadingContext);
     const [form, setForm] = useContext(FormContext);
+    const storage = getStorage(initializeApp(firebaseConfigAPI));
+
     const uploadFile = (imageUpload) => {
         if (imageUpload == null) {
             return;
         }
+        setLoading(true);
         const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setForm({ ...form, imageURL: url })
+                setLoading(false);
             })
         });
     };

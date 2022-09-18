@@ -1,6 +1,6 @@
 import Thumbnail from "./Thumbnail";
 
-const EventSection = ({ eventList, eventType }) => {
+const EventSection = ({ eventList, eventType, setDisplay, setEventInfo, setDisplayBookNotActive }) => {
 
   let eventsByYear = new Object();
   eventList.forEach((event) => {
@@ -19,13 +19,16 @@ const EventSection = ({ eventList, eventType }) => {
           key={idx.toString()}
           className="mx-auto my-8"
         >
-          <header className="py-6 px-6 font-semibold text-5xl flex">TED<div className="text-stroke-thin-white font-bold text-6xl text-black -mt-2.5 font-['Philosopher'] px-2">Talks,</div><div className="text-6xl -mt-3 text-[#595959]">{year}</div></header>
+          <header className="py-6 px-1 md:px-6 font-semibold text-4xl md:text-5xl flex">TED<div className="text-stroke-thin-white font-bold text-5xl md:text-6xl text-black -mt-2.5 font-['Philosopher'] px-2">Talks,</div><div className="text-6xl -mt-3 text-[#595959]">{year}</div></header>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4">
             {eventList.map((event, idx_) => {
               return <Thumbnail
                 key={idx_.toString()}
                 event={event}
                 eventType={eventType}
+                setDisplay={setDisplay}
+                setEventInfo={setEventInfo}
+                setDisplayBookNotActive={setDisplayBookNotActive}
               />;
             })}
           </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Page from "../Universal/Page";
 import EditProfile from "./EditProfile";
 import LiveEvent from "./LiveEvent";
-import MyTicketPage from "./myTicketPage";
+import { MyTicketPage } from "./myTicketPage";
 import Profile from "./Profile";
 import Settings from "./Settings";
 

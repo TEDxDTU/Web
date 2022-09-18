@@ -26,7 +26,7 @@ router.post("/sign-up", async (req, res) => {
 
     try {
       existingUser = await auth.getUserByEmail(email);
-    } catch (err) {}
+    } catch (err) { }
 
     if (existingUser) {
       return res.status(409).json({
@@ -45,7 +45,7 @@ router.post("/sign-up", async (req, res) => {
     try {
       newDBUser.firebaseID = undefined;
       await newDBUser.save();
-      // b;
+
       const newFirebaseUser = await auth.createUser({
         email: email,
         // emailVerified: false,
@@ -55,6 +55,7 @@ router.post("/sign-up", async (req, res) => {
         // photoURL: imageURL
       });
 
+      console.log(newFirebaseUser, auth);
       newDBUser.firebaseID = newFirebaseUser.uid;
       await newDBUser.save();
 
@@ -96,10 +97,8 @@ router.post("/update", withAuth, async (req, res) => {
     const { email, password, name, imageURL, university } = req.body;
 
     const auth = admin.auth();
-    // const decodedToken = await auth.verifyIdToken(authToken);
 
     const firebaseID = req.uid;
-
     const updatedFBUser = await auth.updateUser(firebaseID, {
       email,
       password,
@@ -180,4 +179,24 @@ router.post("/started", withAuth, async (req, res) => {
   }
 });
 
+router.get("/tickets", withAuth, async (req, res) => {
+  try {
+    // const { triviaId } = req.body;
+    const firebaseID = req.uid;
+    const user = await User.findOne({ firebaseID });
+    if (!user.tickets) {
+      user.tickets = [];
+    }
+    // user.triviasAttempted.push(triviaId);
+    // await user.save();
+    // return res.json("Marked trivia started");
+    const result = await user.getTicketDetails();
+    console.log(result);
+    return res.json(result).status(200);
+  } catch (err) {
+    return res.status(500).json({
+      msg: err.toString(),
+    });
+  }
+});
 module.exports = router;

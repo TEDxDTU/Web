@@ -17,7 +17,7 @@ export default function Landing({ liveEvent }) {
   }, []);
 
   return (<Page
-    pageTitle={"Live!"}
+    pageTitle={"Live"}
   >
     <div className={`${isLargeViewPort ? "flex" : ""} justify-around`}>
       <Player />

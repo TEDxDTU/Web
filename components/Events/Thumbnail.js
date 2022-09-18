@@ -11,7 +11,7 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
       router.push(`/live-event`);
       return;
     }
-    console.log(event);
+    // console.log(event);
     router.push(`/events/${event._id}`);
   };
 

@@ -52,10 +52,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
     );
   }
 
-  console.log(eventDetails);
-
-  let speakerDetails = {};
-
+  // console.log(eventDetails);
 
   return (
     <Page pageTitle={"Events"}>

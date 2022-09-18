@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const EventInfo = ({ eventDetails }) => {
-  console.log(eventDetails);
+  // console.log(eventDetails);
 
   const date = eventDetails.dateTime.slice(0, 10);
   const time = eventDetails.dateTime.slice(11, 19);

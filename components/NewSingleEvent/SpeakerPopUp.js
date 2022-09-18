@@ -12,7 +12,7 @@ const SpeakerPopUp = ({displaySpeaker,eventDetails}) =>{
         return null;
     }
     const speakerDetails = speakerDetailsFinder();
-    console.log(speakerDetails);
+    // console.log(speakerDetails);
     
     const achievementsList = [];
     for (let i = 0; i < speakerDetails.achievements.length; i++) {

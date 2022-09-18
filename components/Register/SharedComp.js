@@ -4,11 +4,11 @@ import { initializeApp } from "firebase/app";
 import firebaseConfigAPI from "../../firebaseAPI";
 import { getAuth, signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
-export async function LoginhandleAction(form, router) {
+export async function LoginhandleAction(form, router, setLoading) {
 
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
   const { email, password } = form;
-
+  setLoading(true);
   const authToken = await signInWithEmailAndPassword(
     authentication,
     email,
@@ -30,6 +30,7 @@ export async function LoginhandleAction(form, router) {
     if (status == 200) {
       localStorage.setItem("profile", JSON.stringify({ ...data }));
       router.push("/dashboard");
+      setLoading(false);
     }
   }
   else {
@@ -42,11 +43,11 @@ export async function LoginhandleAction(form, router) {
   return;
 }
 
-const RegisterhandleAction = async (form, setregisterStatus, router) => {
+const RegisterhandleAction = async (form, setregisterStatus, router,setLoading) => {
 
   const { email, firstname, lastname, password, university } = form;
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
-
+  setLoading(true);
   const UserObj = {
     email: email,
     name: firstname + " " + lastname,
@@ -80,6 +81,7 @@ const RegisterhandleAction = async (form, setregisterStatus, router) => {
       })
     router.push('/register');
     setregisterStatus(true);
+    setLoading(false);
   }
   return;
 };
@@ -143,7 +145,7 @@ export function Heading({ registerStatus, setregisterStatus }) {
   );
 }
 
-export function SubmitButton({ registerStatus, form, setregisterStatus }) {
+export function SubmitButton({ registerStatus, form, setregisterStatus, setLoading }) {
   const router = useRouter();
 
   return (
@@ -152,8 +154,8 @@ export function SubmitButton({ registerStatus, form, setregisterStatus }) {
         className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8"
         onClick={() => {
           registerStatus
-            ? LoginhandleAction(form, router)
-            : RegisterhandleAction(form, setregisterStatus, router);
+            ? LoginhandleAction(form, router, setLoading)
+            : RegisterhandleAction(form, setregisterStatus, router, setLoading);
         }}
       >
         {registerStatus ? "Login" : "Register"}

@@ -1,6 +1,7 @@
 
 export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, eventInfo, numTickets }) => {
 
+    console.log(eventInfo);
     const count = [1, 2, 3, 4, 5, 6, 7, 8];
     return (
         <div className="relative">
@@ -12,7 +13,7 @@ export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, ev
                         <div className="flex justify-between text-sm sm:text-md mb-4">
                             <div className='flex'>
                                 <img className="mr-4" src="/SingleEvent/map-pin.svg" />
-                                Ampitheater
+                                {eventInfo.venue}
                             </div>
                             <div className='cursor-pointer' onClick={() => {
                                 setDisplay(false);

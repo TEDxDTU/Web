@@ -1,3 +1,5 @@
+import { LoadingContext } from "../../contextFiles/loadingContext"
+import Spinner from "../Universal/spinner";
 import React, { useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
@@ -32,16 +34,20 @@ export function InputField({ tag, name, placeholder, editState, value }) {
 
 export function InputImage({ tag, name, editState }) {
 
-    const storage = getStorage(initializeApp(firebaseConfigAPI));
+    const [loading, setLoading] = useContext(LoadingContext);
     const [form, setForm] = useContext(FormContext);
+    const storage = getStorage(initializeApp(firebaseConfigAPI));
+
     const uploadFile = (imageUpload) => {
         if (imageUpload == null) {
             return;
         }
+        setLoading(true);
         const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setForm({ ...form, imageURL: url })
+                setLoading(false);
             })
         });
     };

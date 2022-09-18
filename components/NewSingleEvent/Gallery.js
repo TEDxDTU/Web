@@ -1,13 +1,13 @@
 const EventInfo = ({ eventDetails }) => {
   const galleryList = [];
 
-  if (eventDetails.galleryImageUrls === null) {
+  if (eventDetails.galleryImageUrls.length === 0) {
     galleryList.push(
       <div
         key={0}
         className="flex bg-gray-700 rounded-xl mt-10 mx-10 py-3 px-5 text-lg md:text-xl mb-16"
       >
-        Don't Worry, we will be adding Images Soon!
+        Don't Worry, We will be adding Images Soon!
       </div>
     );
   } else {

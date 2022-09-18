@@ -52,12 +52,15 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
     );
   }
 
-  // console.log(eventDetails);
+  console.log(eventDetails);
 
   return (
     <Page pageTitle={"Events"}>
       <div className="flex flex-col items-center justify-center">
-        {eventDetails.streamingUrl !== null ? (
+
+        {/* Whoever is reading this dont delete the code below !  */}
+
+        {/* {eventDetails.streamingUrl !== null ? (
           <div className="relative flex items-center justify-center md:w-4/6 w-5/6 h-1/2 md:h-3/4 pt-5">
             <ReactPlayer
               className=""
@@ -83,7 +86,10 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
           <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
             <img className="w-5/6" src={eventDetails.imageUrl} />
           </div>
-        )}
+        )} */}
+        <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
+            <img className="w-5/6" src={eventDetails.imageUrl} />
+        </div>
         <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
           {eventDetails.title}
         </h1>

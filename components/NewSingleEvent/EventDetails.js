@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import React, { useContext, useState, useEffect } from "react";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
 import SpeakerPopUp from "./SpeakerPopUp";
@@ -56,25 +56,6 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
 
   let speakerDetails = {};
 
-  useEffect(() => {
-    if(displaySpeaker !== "null"){
-
-      const findSpeaker = () => {
-        for(let i = 0;i<eventDetails.speakersList.length;i++){
-          if(eventDetails.speakersList[i]._id === displaySpeaker){
-            speakerDetails = eventDetails.speakersList[i];
-          }
-        }
-      }
-
-      findSpeaker();
-      console.log(speakerDetails);
-    }
-    else{
-      console.log(displaySpeaker);
-    }
-
-  }, [displaySpeaker,speakerDetails])
 
   return (
     <Page pageTitle={"Events"}>
@@ -179,7 +160,6 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
           <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>
         }
       </displaySpeakerContext.Provider>
-
 
     </Page>
   );

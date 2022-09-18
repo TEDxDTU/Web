@@ -1,13 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
 import { FormContext } from "../../contextFiles/formContext";
 import Link from "next/link";
+import { getAuth, signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import firebaseConfigAPI from "../../firebaseAPI";
 
 export default function NavBar() {
   const [isLargeViewPort, setIsLargeViewPort] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [form, setForm] = useContext(FormContext);
+  const auth = getAuth(initializeApp(firebaseConfigAPI));
 
   useEffect(function () {}, []);
+  function logout() {
+    signOut(auth).then(() => {
+      console.log("Sign-out successful");
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
   useEffect(
     () =>
       (async () => {
@@ -149,6 +160,7 @@ export default function NavBar() {
         text-lg hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 
         "
             onClick={() => {
+              form && logout()
               window.localStorage.removeItem("profile");
               setForm(null);
             }}
@@ -219,7 +231,20 @@ export default function NavBar() {
         </header>
         {isNavOpen && (
           <nav
-            className="
+            onClick={() => {
+              form && logout()
+              window.localStorage.removeItem("profile");
+              setForm(null);
+            }}
+          >
+            {form ? "Log Out" : "Register"}
+
+          </button>
+        </Link>
+      </header>
+      {isNavOpen && (
+        <nav
+          className="
         z-20
         bg-black
         fixed

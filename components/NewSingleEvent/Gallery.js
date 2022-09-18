@@ -2,7 +2,14 @@ const EventInfo = ({ eventDetails }) => {
   const galleryList = [];
 
   if (eventDetails.galleryImageUrls === null) {
-    galleryList.push(<div key={0} className="flex bg-gray-700 rounded-xl m-10 py-3 px-5 text-lg md:text-xl mb-16">Don't Worry, we will be adding Images Soon!</div>);
+    galleryList.push(
+      <div
+        key={0}
+        className="flex bg-gray-700 rounded-xl mt-10 mx-10 py-3 px-5 text-lg md:text-xl mb-16"
+      >
+        Don't Worry, we will be adding Images Soon!
+      </div>
+    );
   } else {
     for (let i = 0; i < eventDetails.galleryImageUrls.length; i++) {
       galleryList.push(
@@ -19,7 +26,7 @@ const EventInfo = ({ eventDetails }) => {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center bottom-0 pb-32">
       {galleryList}
     </div>
   );

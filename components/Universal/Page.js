@@ -4,7 +4,6 @@ import { FormContext } from "../../contextFiles/formContext";
 import Head from "next/head";
 
 export default function Page({ pageTitle, children }) {
-
   const [form, setForm] = useContext(FormContext);
 
   useEffect(function () {
@@ -28,4 +27,4 @@ export default function Page({ pageTitle, children }) {
       </div>
     </>
   );
-};
+}

@@ -203,7 +203,8 @@ export default function NavBar() {
               className="
       bg-red-600
       mx-8
-      h-16
+      h-10
+      md:h-16
       w-24
       md:w-32
       "

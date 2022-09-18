@@ -58,7 +58,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
     <Page pageTitle={"Events"}>
       <div className="flex flex-col items-center justify-center">
         {eventDetails.streamingUrl !== null ? (
-          <div className="relative flex items-center justify-center md:w-4/6 w-3/4 h-1/2 md:h-3/4">
+          <div className="relative flex items-center justify-center md:w-4/6 w-5/6 h-1/2 md:h-3/4 pt-5">
             <ReactPlayer
               className=""
               url={eventDetails.streamingUrl}
@@ -80,59 +80,59 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center md:w-4/6 w-3/4 h-1/2 md:h-3/4">
-            <img className="w-3/5" src={eventDetails.imageUrl} />
+          <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
+            <img className="w-5/6" src={eventDetails.imageUrl} />
           </div>
         )}
         <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
           {eventDetails.title}
         </h1>
         <div className="flex space-y-5 sm:space-y-0 justify-center my-10 flex-col sm:flex-row">
-          {eventSection === "speakerInfo" ?
+          {eventSection === "speakerInfo" ? (
             <button
               onClick={() => setEventSection("speakerInfo")}
               className="transition-all mx-10 lg:text-md rounded-full px-4 py-1 bg-red-600 text-white"
             >
               Speaker Info
             </button>
-            :
+          ) : (
             <button
               onClick={() => setEventSection("speakerInfo")}
               className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
             >
               Speaker Info
             </button>
-          }
-          {eventSection === "eventInfo" ?
+          )}
+          {eventSection === "eventInfo" ? (
             <button
               onClick={() => setEventSection("eventInfo")}
               className="transition-all mx-10 lg:text-md rounded-full px-4 py-1 bg-red-600 text-white"
             >
               Event Info
             </button>
-            :
+          ) : (
             <button
               onClick={() => setEventSection("eventInfo")}
               className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
             >
               Event Info
             </button>
-          }
-          {eventSection === "gallery" ?
+          )}
+          {eventSection === "gallery" ? (
             <button
               onClick={() => setEventSection("gallery")}
               className="transition-all mx-10 lg:text-md rounded-full px-4 py-1 bg-red-600 text-white"
             >
               Gallery
             </button>
-            :
+          ) : (
             <button
               onClick={() => setEventSection("gallery")}
               className="bg-white transition-all mx-10 lg:text-md text-black rounded-full px-4 py-1 hover:bg-red-600 hover:text-white"
             >
               Gallery
             </button>
-          }
+          )}
         </div>
       </div>
       <displaySpeakerContext.Provider value={setDisplaySpeaker}>
@@ -148,16 +148,19 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       ) : null}
 
       {eventSection === "gallery" ? (
-        <Gallery eventDetails={eventDetails}></Gallery>
+        <div className="bottom-0">
+          <Gallery eventDetails={eventDetails}></Gallery>
+        </div>
       ) : null}
 
       <displaySpeakerContext.Provider value={setDisplaySpeaker}>
-        {displaySpeaker === "null" ? 
-          null :
-          <SpeakerPopUp displaySpeaker = {displaySpeaker} eventDetails={eventDetails} ></SpeakerPopUp>
-        }
+        {displaySpeaker === "null" ? null : (
+          <SpeakerPopUp
+            displaySpeaker={displaySpeaker}
+            eventDetails={eventDetails}
+          ></SpeakerPopUp>
+        )}
       </displaySpeakerContext.Provider>
-
     </Page>
   );
 };

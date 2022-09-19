@@ -94,7 +94,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
           {/* Achievements Section  */}
           {speakerDetails.achievements.length === 0? null :
             <div className="flex flex-col md:w-1/2 mb-4 md:mb-none">
-              <div className="tracking-wider font-bold ">Achievements</div>
+              <div className="tracking-wider font-bold ">More Info</div>
               <div className="flex-col flex font-light">{achievementsList}</div>
             </div>
           }

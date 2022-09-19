@@ -15,7 +15,7 @@ const speakerSchema = mongoose.Schema({
   achievements: [
     {
       type: String,
-      required: true,
+      // required: true,
     },
   ],
   /** Short info about the speaker */
@@ -27,10 +27,11 @@ const speakerSchema = mongoose.Schema({
   resources: [
     {
       type: String,
+      trim: true,
       required: true,
       validate(value) {
         if (!validator.isURL(value)) {
-          throw new Error(`${value} in galleryImageUrls is not a valid URL`);
+          throw new Error(`${value} in resources is not a valid URL`);
         }
       },
     },
@@ -39,9 +40,11 @@ const speakerSchema = mongoose.Schema({
   imageUrl: {
     type: String,
     required: true,
+    trim: true,
+
     validate(value) {
       if (!validator.isURL(value)) {
-        throw new Error(`${value} in galleryImageUrls is not a valid URL`);
+        throw new Error(`${value} in imageUrl is not a valid URL`);
       }
     },
   },

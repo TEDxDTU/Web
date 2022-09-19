@@ -3,14 +3,14 @@ import { useRouter } from "next/router";
 // import { useEffect } from "react";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
-  const { title, imageUrl, details, dateTime } = event;
+  const { title, imageUrl, details, dateTime, areBookingActive } = event;
   const router = useRouter();
 
   const viewMoreHandler = () => {
-    if (eventType === "live") {
-      router.push(`/live-event`);
-      return;
-    }
+    // if (eventType === "live") {
+    //   router.push(`/live-event`);
+    //   return;
+    // }
     // console.log(event);
     router.push(`/events/${event._id}`);
   };
@@ -22,7 +22,7 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
         <div className="absolute top-0 left-0 py-1 pl-2 bg-black bg-opacity-30 w-full drop-shadow-sm">
           {title}
         </div>
-        {eventType === "upcoming" && (
+        {eventType === "upcoming" && areBookingActive && (
           <div
             className="absolute right-0 bottom-2"
             onClick={() => {
@@ -39,9 +39,9 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
       <div className="bg-[#303030] p-1 pl-2 outline outline-2 outline-[#737373]">
         {details.substring(0, 50)}
         {details.length > 50 ? "..." : ""}
-        <button className="text-red-600 ml-2" onClick={viewMoreHandler}>
+        {eventType != "live" && <button className="text-red-600 ml-2" onClick={viewMoreHandler}>
           View More
-        </button>
+        </button>}
       </div>
     </div>
   );

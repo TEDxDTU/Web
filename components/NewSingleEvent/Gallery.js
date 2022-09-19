@@ -5,7 +5,7 @@ const EventInfo = ({ eventDetails }) => {
     galleryList.push(
       <div
         key={0}
-        className="flex bg-gray-700 rounded-xl mt-10 mx-10 py-3 px-5 text-lg md:text-xl mb-16"
+        className="flex bg-[rgba(100,100,100,0.3)] rounded-xl mt-10 mx-10 py-3 px-5 text-lg md:text-xl mb-16"
       >
         Don't Worry, We will be adding Images Soon!
       </div>

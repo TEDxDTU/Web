@@ -51,17 +51,7 @@ const EventInfo = ({ eventDetails }) => {
             <div className=" ml-7 text-xl my-auto">{time}</div>
           </div>
         }
-        <div className="flex justify-center align-center w-full mb-10">
-          <FontAwesomeIcon
-            className="w-6"
-            icon={faCalendarDays}
-          ></FontAwesomeIcon>
-          <div className=" ml-7 text-xl my-auto">{date}</div>
-        </div>
-        <div className="flex justify-center align-center w-full mb-10">
-          <FontAwesomeIcon className="w-6" icon={faClock}></FontAwesomeIcon>
-          <div className=" ml-7 text-xl my-auto">{time}</div>
-        </div>
+
       </div>
       <div className="flex flex-col px-6 md:px-10 py-6 bg-[#2C2C2C] rounded-3xl justify-center align-center">
         <div className="text-2xl mx-auto tracking-wider text-white">About</div>

@@ -10,6 +10,7 @@
     "dependencies": {
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "aos": "^2.3.4",
         "cors": "^2.8.5",
         "crypto": "^1.0.1",
         "express": "^4.17.3",

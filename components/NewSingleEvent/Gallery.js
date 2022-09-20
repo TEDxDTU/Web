@@ -1,10 +1,19 @@
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 const EventInfo = ({ eventDetails }) => {
   const galleryList = [];
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   if (eventDetails.galleryImageUrls.length === 0) {
     galleryList.push(
       <div
         key={0}
+        data-aos="fade-up"
         className="flex bg-[rgba(100,100,100,0.3)] rounded-xl mt-10 mx-10 py-3 px-5 text-lg md:text-xl mb-16"
       >
         Don't Worry, We will be adding Images Soon!
@@ -19,6 +28,7 @@ const EventInfo = ({ eventDetails }) => {
             className="w-3/4 m-2 rounded-xl sm:w-1/4 sm:m-4 sm:rounded-2xl"
             src={eventDetails.galleryImageUrls[i]}
             key={i}
+            data-aos="fade-up"
           />
         </>
       );

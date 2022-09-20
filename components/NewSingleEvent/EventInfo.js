@@ -4,9 +4,15 @@ import {
   faCalendarDays,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
+import Aos from "aos";
+import { useEffect } from "react";
+import "aos/dist/aos.css";
 
 const EventInfo = ({ eventDetails }) => {
   // console.log(eventDetails);
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   let date = eventDetails.dateTime.slice(0, 10);
   function extractDate() {
@@ -24,7 +30,7 @@ const EventInfo = ({ eventDetails }) => {
 
   const time = eventDetails.dateTime.slice(11, 19);
   return (
-    <div className="flex flex-col w-4/5 mx-auto bg-[rgba(100,100,100,0.3)] rounded-3xl p-4 sm:p-6 md:p-10">
+    <div className="flex flex-col w-4/5 mx-auto bg-[rgba(100,100,100,0.3)] rounded-3xl p-4 sm:p-6 md:p-10" data-aos="fade-up">
       <div className="flex flex-col lg:flex-row mt-4 sm:mt-2 md:mt-0">
         <div className="flex justify-center align-center w-full mb-10">
           <FontAwesomeIcon

@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Card from "./Card";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import { FormContext } from "../../contextFiles/formContext";
 import Link from "next/link";
 
 export default function CardSection() {
   const [form, setForm] = useContext(FormContext);
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   return (
     <div>
@@ -36,7 +42,7 @@ export default function CardSection() {
           </div>
         </div>
 
-        <div className="relative lg:h-[700px] group md:mt-20">
+        <div className="relative lg:h-[700px] group md:mt-20" data-aos="fade-up">
           <div className="absolute -inset-0.5 bg-gradient-to-r md:pb-40 lg:pb-3 from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
           <div className="relative leading-none">
             <Card
@@ -47,7 +53,7 @@ export default function CardSection() {
           </div>
         </div>
 
-        <div className="relative group md:-mt-80 md:mb-80">
+        <div className="relative group md:-mt-80 md:mb-80" data-aos="fade-up">
           <div className="absolute -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
           <div className="relative rounded-lg leading-none">
             <Card
@@ -58,7 +64,7 @@ export default function CardSection() {
           </div>
         </div>
 
-        <div className="relative lg:h-[700px] group ">
+        <div className="relative lg:h-[700px] group"  data-aos="fade-up">
           <div className="absolute -inset-0.5 bg-gradient-to-r md:pb-36 lg:pb-3 from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
           <div className="relative rounded-lg leading-none">
             <Card

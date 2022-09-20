@@ -1,6 +1,4 @@
-// import Link from "next/link";
 import { useRouter } from "next/router";
-// import { useEffect } from "react";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const { title, imageUrl, details, dateTime, areBookingActive } = event;

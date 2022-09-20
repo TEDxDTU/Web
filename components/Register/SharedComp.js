@@ -2,48 +2,53 @@ import React, { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { initializeApp } from "firebase/app";
 import firebaseConfigAPI from "../../firebaseAPI";
-import { getAuth, signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 
 export async function LoginhandleAction(form, router, setLoading) {
 
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
   const { email, password } = form;
   setLoading(true);
-  const authToken = await signInWithEmailAndPassword(
-    authentication,
-    email,
-    password
-  );
 
-  if (authToken.user.emailVerified) {
-    const url = `/api/user/data-from-token`;
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({ authToken: authToken.user.accessToken }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  await signInWithEmailAndPassword(authentication, email, password)
+    .then(async (authToken) => {
+      if (authToken.user.emailVerified) {
+        const url = `/api/user/data-from-token`;
+        const response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({ authToken: authToken.user.accessToken }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-    const data = await response.json();
-    const { status } = response;
-    if (status == 200) {
-      localStorage.setItem("profile", JSON.stringify({ ...data }));
-      router.push("/dashboard");
-      setLoading(false);
-    }
-  }
-  else {
-    sendEmailVerification(authToken.user)
-      .then(() => {
-        console.log("Email sent");
-      })
-    alert("Please verify your email first");
-  }
+        const data = await response.json();
+        const { status } = response;
+        if (status == 200) {
+          localStorage.setItem("profile", JSON.stringify({ ...data }));
+          router.push("/dashboard");
+        }
+      }
+      else {
+        sendEmailVerification(authToken.user)
+          .then(() => {
+            console.log("Email sent");
+            alert("Please verify your email first");
+          })
+          .catch(() => {
+            alert("We are facing some server errors:(\nPlease try again later !!")
+          })
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("Email and password don't match.\nPlease try again !!");
+    })
+  setLoading(false);
   return;
 }
 
-const RegisterhandleAction = async (form, setregisterStatus, router,setLoading) => {
+const RegisterhandleAction = async (form, setregisterStatus, router, setLoading) => {
 
   const { email, firstname, lastname, password, university } = form;
   const authentication = getAuth(initializeApp(firebaseConfigAPI));
@@ -69,20 +74,31 @@ const RegisterhandleAction = async (form, setregisterStatus, router,setLoading) 
   const { status } = response;
   if (status == 200) {
 
-    await signInWithEmailAndPassword(
-      authentication,
-      email,
-      password
-    );
+    await signInWithEmailAndPassword(authentication, email, password)
+      .then(() => {
+      }).catch((error) => {
+        console.log(error);
+        return;
+      });
 
     sendEmailVerification(authentication.currentUser)
       .then(() => {
-        alert("A verification mail has been sent to your provided email.\n Please verify to login !!");
+        alert("A verification mail has been sent to your provided email.\nPlease verify to login !!");
       })
+      .catch(() => {
+        alert("We are facing some server errors:(\nPlease try again later !!")
+      })
+
     router.push('/register');
     setregisterStatus(true);
-    setLoading(false);
   }
+  else if (status == 409) {
+    alert("User with given email already exists.\nPlease login !!");
+  }
+  else {
+    alert("We are facing some server errors:(\nPlease try again later !!");
+  }
+  setLoading(false);
   return;
 };
 
@@ -100,7 +116,7 @@ export function Password({ registerStatus, handleChange }) {
         required
       />
       <img
-        className="h-7 w-7 -ml-10 cursor-pointer"
+        className="h-7 w-7 -ml-10 mr-3 cursor-pointer"
         src={
           "/Register/" + (passwordView ? "password.svg" : "ShowPassword.svg")
         }
@@ -149,9 +165,9 @@ export function SubmitButton({ registerStatus, form, setregisterStatus, setLoadi
   const router = useRouter();
 
   return (
-    <div className="flex justify-center w-72 text-white mt-2">
+    <div className="flex justify-around w-72 text-white mt-2">
       <button
-        className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-8"
+        className="bg-red-600 py-2.5 px-4 text-md font-medium rounded-sm ml-4"
         onClick={() => {
           registerStatus
             ? LoginhandleAction(form, router, setLoading)

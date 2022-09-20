@@ -44,12 +44,20 @@ export function InputImage({ tag, name, editState }) {
         }
         setLoading(true);
         const imageRef = ref(storage, `user-images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                setForm({ ...form, imageURL: url })
-                setLoading(false);
+        uploadBytes(imageRef, imageUpload)
+            .then((snapshot) => {
+                getDownloadURL(snapshot.ref)
+                    .then((url) => {
+                        setForm({ ...form, imageURL: url })
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             })
-        });
+            .catch((error) => {
+                console.log(error);
+            })
+        setLoading(false);
     };
 
     return (<div className={`grid grid-cols-4 sm:grid-cols-3 sm:gap-4 mt-6 ${!editState ? 'mb-6' : ''}`}>

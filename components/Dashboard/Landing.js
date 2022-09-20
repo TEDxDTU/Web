@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Page from "../Universal/Page";
 import EditProfile from "./EditProfile";
-import LiveEvent from "./LiveEvent";
 import Spinner from "../Universal/spinner";
 import { LoadingContext } from "../../contextFiles/loadingContext"
 import { MyTicketPage } from "./myTicketPage";

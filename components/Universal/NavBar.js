@@ -11,14 +11,18 @@ export default function NavBar() {
   const [form, setForm] = useContext(FormContext);
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
-  useEffect(function () {}, []);
+  useEffect(function () { }, []);
+
   function logout() {
     signOut(auth).then(() => {
       console.log("Sign-out successful");
+      window.localStorage.removeItem("profile");
+      setForm(null);
     }).catch((error) => {
-      // An error happened.
+      alert("We are facing some issues in logging you out :(\nPlease try again later!!")
     });
   }
+
   useEffect(
     () =>
       (async () => {
@@ -161,8 +165,7 @@ export default function NavBar() {
         "
             onClick={() => {
               form && logout()
-              window.localStorage.removeItem("profile");
-              setForm(null);
+
             }}
           >
             {form ? "Log Out" : "Register"}
@@ -221,8 +224,7 @@ export default function NavBar() {
       md:w-32
       "
               onClick={() => {
-                window.localStorage.removeItem("profile");
-                setForm(null);
+                form && logout()
               }}
             >
               {form ? "Log Out" : "Register"}
@@ -243,9 +245,9 @@ export default function NavBar() {
         </Link>
       </header> */}
 
-      {isNavOpen && (
-        <nav
-          className="
+        {isNavOpen && (
+          <nav
+            className="
         z-20
         bg-black
         fixed

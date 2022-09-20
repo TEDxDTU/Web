@@ -8,7 +8,7 @@ export default function Landing() {
 
   return (<Page pageTitle={"Register"}>
     <div className="relative h-fit w-full">
-      <img src="" className="" />
+      {/* <img src="/Register/TedxDTU.png" className="absolute top-0 w-full h-auto" /> */}
       <div className="absolute top-0 w-full h-auto">
         {registerStatus ? <Login
           registerStatus={registerStatus}

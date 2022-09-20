@@ -1,6 +1,14 @@
 import AboutContent from "./AboutContent";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const AboutBanner = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+    }, []);
+
     return (<div
         className="lg:grid lg:grid-cols-3 w-full py-16"
     >
@@ -19,6 +27,7 @@ const AboutBanner = () => {
         <img
             className="lg:col-start-3 lg:w-full w-5/6 max-w-[40rem] mx-auto py-8"
             src="/AboutUs/Speakers.png"
+            data-aos="fade-up"
         />
     </div>);
 };

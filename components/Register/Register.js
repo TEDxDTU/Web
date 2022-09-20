@@ -26,7 +26,7 @@ export default function Register({ registerStatus, setregisterStatus }) {
       <Heading registerStatus={registerStatus} setregisterStatus={setregisterStatus} />
       <div className="text-black">
         <div>
-          <input onChange={(e) => handleChange(e)} className="w-36 mr-8 pl-5 py-2.5 my-2 md:mr-8 md:w-36 rounded" name="firstname" type="text" placeholder="First Name" required />
+          <input onChange={(e) => handleChange(e)} className="w-36 mr-7 pl-5 py-2.5 my-2 md:mr-8 md:w-36 rounded" name="firstname" type="text" placeholder="First Name" required />
           <input onChange={(e) => handleChange(e)} className="w-36 pl-5 py-2.5 my-2 md:w-36 rounded" name="lastname" type="text" placeholder="Last Name" required />
         </div>
         <Email registerStatus={registerStatus} handleChange={handleChange} />

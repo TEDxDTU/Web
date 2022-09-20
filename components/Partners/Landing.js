@@ -1,99 +1,106 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function Landing() {
-    return (    
-    <div id="hexcontainer">
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl1" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-                </a>
-            </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl2" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-                </a>
-            </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl3" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-                </a>
-            </div>
-        </div>
 
-        <br />
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+    }, []);
 
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl4" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-
-                </a>
+    return (
+        <div id="hexcontainer" >
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl1" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl5" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-
-                </a>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl2" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl6" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-                </a>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl3" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl7" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
 
-                </a>
+            <br />
+
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl4" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+
+                    </a>
+                </div>
             </div>
-        </div>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl5" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
 
-        <br />
-
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl8" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl9" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
-
-                </a>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl6" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div className="hex1">
-            <div className="hex2">
-                <a className="hexlink" id="hl10" href="#">
-                    <div className="hexcover"></div>
-                    <h3>Tanjirou</h3>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl7" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
 
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
-    </div>);
+
+            <br />
+
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl8" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+
+                    </a>
+                </div>
+            </div>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl9" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+
+                    </a>
+                </div>
+            </div>
+            <div className="hex1" data-aos="fade-up">
+                <div className="hex2">
+                    <a className="hexlink" id="hl10" href="#">
+                        <div className="hexcover"></div>
+                        <h3>Tanjirou</h3>
+
+                    </a>
+                </div>
+            </div>
+        </div>);
 }

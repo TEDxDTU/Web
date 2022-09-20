@@ -53,13 +53,13 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
       className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30 "
     >
       {/* Bio Section */}
-      <div className="flex flex-col absolute w-2/3 md:w-3/5 shadow-xl shadow-black bg-red-600 text-white rounded-md p-5 border-2 border-black border-opacity-25">
+      <div className="flex flex-col overflow-auto max-h-[75%] absolute w-2/3 md:w-3/5 shadow-xl shadow-black bg-red-600 text-white rounded-md p-5 border-2 border-black border-opacity-25">
         <div className="flex flex-col flex-row ">
 
           {/* Image  */}
           <div className="flex item-center h-full justify-center w-full mx-auto">
             <img
-              className="h-[7rem] w-[7rem] m-2 items-center object-cover justify-center rounded-lg shadow-md shadow-black"
+              className="h-[10rem] m-2 items-center object-cover justify-center rounded-lg shadow-md shadow-black"
               src={speakerDetails.imageUrl}
             />
           </div>

@@ -53,7 +53,7 @@ const SpeakerDetails = ({ speaker }) => {
   const setDisplaySpeaker = useContext(displaySpeakerContext);
   
   return (
-    <div data-aos="fade-up" onClick={() => { setDisplaySpeaker(speaker._id) }} className="cursor-pointer flex flex-col sm:flex-row w-[45%] sm:w-2/5 bg-[rgba(100,100,100,0.3)] hover:bg-red-600 m-6 hover:shadow-red-500/40 hover:ease-in duration-700 hover:shadow-md hover:transition-shadow rounded-md">
+    <div data-aos="fade-up" onClick={() => { setDisplaySpeaker(speaker._id) }} className="cursor-pointer flex flex-col sm:flex-row w-[45%] sm:w-2/5 bg-[rgba(100,100,100,0.3)] hover:bg-red-600 m-6 hover:shadow-red-500/40 hover:shadow-md rounded-md">
       <div className=" item-center justify-center mx-auto sm:ml-3 sm:mt-1 sm:mr-3">
 
         <img

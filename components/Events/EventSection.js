@@ -18,7 +18,7 @@ const EventSection = ({ eventList, eventType, setDisplay, setEventInfo, setDispl
 
   eventsByYear = Object.entries(eventsByYear).reverse();
 
-  return (<div className="py-8 px-8 bg-[url('/SIngleEvent/backgroundTheme.svg')]">
+  return (<div className="py-8 px-8 bg-[url('/SingleEvent/backgroundTheme.svg')]">
     {(eventList.length != 0) && <h1 className="capitalize w-full text-5xl font-bold text-red-600" data-aos="fade-up">{eventType} events</h1>}
     <main>
       {eventsByYear.map(([year, eventList], idx) => {

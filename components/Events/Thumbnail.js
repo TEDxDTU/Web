@@ -1,8 +1,12 @@
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
+import firebaseConfigAPI from "../../firebaseAPI";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const { title, imageUrl, details, dateTime, areBookingActive } = event;
   const router = useRouter();
+  const auth = getAuth(initializeApp(firebaseConfigAPI));
 
   const viewMoreHandler = () => {
     // if (eventType === "live") {
@@ -24,6 +28,13 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
           <div
             className="absolute right-0 bottom-2"
             onClick={() => {
+
+              if (auth.currentUser === null) {
+                alert("Please login to book the tickets.");
+                router.push("/register");
+                return;
+              }
+
               setDisplay(true);
               setEventInfo(event);
             }}

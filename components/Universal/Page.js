@@ -8,7 +8,7 @@ export default function Page({ pageTitle, children }) {
   const [form, setForm] = useContext(FormContext);
 
   useEffect(function () {
-    setForm(JSON.parse(window.localStorage.getItem("profile")));
+    setForm(JSON.parse(window?.localStorage?.getItem("profile")));
   }, []);
 
   return (

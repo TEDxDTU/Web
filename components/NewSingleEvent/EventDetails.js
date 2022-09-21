@@ -15,12 +15,12 @@ const findEvent = (pastEvents, upcomingEvents, eventID) => {
   const upcomingEventsSize = upcomingEvents.length;
 
   for (var i = 0; i < pastEventsSize; i++) {
-    if (eventID === pastEvents[i]._id) {
+    if (eventID === pastEvents[i]?._id) {
       return pastEvents[i];
     }
   }
   for (var i = 0; i < upcomingEventsSize; i++) {
-    if (eventID === upcomingEvents[i]._id) {
+    if (eventID === upcomingEvents[i]?._id) {
       return upcomingEvents[i];
     }
   }
@@ -43,10 +43,10 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
 
   const speakerList = [];
 
-  for (let i = 0; i < eventDetails.speakersList.length; i++) {
+  for (let i = 0; i < eventDetails?.speakersList?.length; i++) {
     speakerList.push(
       <SpeakerDetails
-        speaker={eventDetails.speakersList[i]}
+        speaker={eventDetails?.speakersList[i]}
         key={i}
       ></SpeakerDetails>
     );
@@ -88,10 +88,10 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
           </div>
         )} */}
         <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
-            <img className="w-5/6" src={eventDetails.imageUrl} />
+            <img className="w-5/6" src={eventDetails?.imageUrl} />
         </div>
         <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
-          {eventDetails.title}
+          {eventDetails?.title}
         </h1>
         <div className="flex space-y-5 sm:space-y-0 justify-center my-10 flex-col sm:flex-row">
           {eventSection === "speakerInfo" ? (

@@ -7,7 +7,7 @@ export function FormProvider(props) {
 
   return (
     <FormContext.Provider value={[form, setForm]}>
-      {props.children}
+      {props?.children}
     </FormContext.Provider>
   );
 };

@@ -13,7 +13,7 @@ export default function Login({ setregisterStatus, registerStatus }) {
 
   const [form, setForm] = useState(formFormat);
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e?.target?.name]: e?.target?.value });
   };
 
   return (<div className="relative">

@@ -9,7 +9,7 @@ const EventInfo = ({ eventDetails }) => {
     Aos.init({ duration: 1000 });
   }, []);
 
-  if (eventDetails.galleryImageUrls.length === 0) {
+  if (eventDetails?.galleryImageUrls?.length === 0) {
     galleryList.push(
       <div
         key={0}
@@ -26,7 +26,7 @@ const EventInfo = ({ eventDetails }) => {
           {/* <div className=" -inset-0.5 bg-gradient-to-r from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div> */}
           <img
             className="w-3/4 m-2 rounded-xl sm:w-1/4 sm:m-4 sm:rounded-2xl"
-            src={eventDetails.galleryImageUrls[i]}
+            src={eventDetails?.galleryImageUrls[i]}
             key={i}
             data-aos="fade-up"
           />

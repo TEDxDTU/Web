@@ -9,9 +9,9 @@ export default function Landing({ liveEvent }) {
     return (
         <Page pageTitle={"Home"}>
             <LiveBanner
-                imageUrl={liveEvent.imageUrl}
-                title={liveEvent.title}
-                details={liveEvent.details}
+                imageUrl={liveEvent?.imageUrl}
+                title={liveEvent?.title}
+                details={liveEvent?.details}
             />
             <CardSection />
         </Page>

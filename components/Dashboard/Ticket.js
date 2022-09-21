@@ -21,7 +21,7 @@ export default function Ticket({ data }) {
     );
 
     const { event, noOfTickets, razorpayOrderID } = data;
-    const date = new Date(event.dateTime);
+    const date = new Date(event?.dateTime);
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     const time = date.toTimeString();
 
@@ -29,19 +29,19 @@ export default function Ticket({ data }) {
     return (<div className="flex pb-5">
         <div className="border-scoop-right pl-3 text-black">
             <div>
-                <div className="font-bold pt-2 pr-8 leading-tight">{event.title}</div>
+                <div className="font-bold pt-2 pr-8 leading-tight">{event?.title}</div>
             </div>
             {/* <div className="my-1">Design for Innovation</div> */}
             <div className="text-xs flex mt-1">
                 <div className="mr-1"><img className="text-black " src="/SingleEvent/map-pin.svg" /></div>
-                <div>{event.venue}</div>
+                <div>{event?.venue}</div>
             </div>
-            <div className="font-bold text-sm mt-2 text-right mr-2 leading-tight">Total Amount Paid: ₹{noOfTickets * event.price}</div>
+            <div className="font-bold text-sm mt-2 text-right mr-2 leading-tight">Total Amount Paid: ₹{noOfTickets * event?.price}</div>
         </div>
         <div className="border-scoop-left border-l-2 border-[#555555] border-dashed">
             <div className="flex">
                 <img className="text-black mt-4 ml-2 w-3 h-3" src="/SingleEvent/calendar.svg" />
-                <div className="mt-3.5 text-xs font-semibold ml-1 md:ml-2">{date.getDate()} {month[date.getMonth()]}'{date.getFullYear()}</div>
+                <div className="mt-3.5 text-xs font-semibold ml-1 md:ml-2">{date?.getDate()} {month[date?.getMonth()]}'{date?.getFullYear()}</div>
             </div>
             <div className="flex">
                 <img className="text-black mt-3 ml-2 w-3 h-3" src="/SingleEvent/clock.svg" />

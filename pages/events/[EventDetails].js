@@ -32,7 +32,7 @@ const EventDetails = ({pastEvents,upcomingEvents}) => {
     setNoEvent(false);
   }, [noEvent])
   
-  const eventID = router.query.EventDetails;
+  const eventID = router?.query?.EventDetails;
   return (
     <noEventContext.Provider value={setNoEvent}>
       <EventDetailsComp eventID = {eventID} pastEvents={pastEvents} upcomingEvents={upcomingEvents}></EventDetailsComp>

@@ -46,11 +46,12 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
         )}
       </div>
       <div className="bg-[#303030] p-1 pl-2 outline outline-2 outline-[#737373]">
-        {details.substring(0, 50)}
-        {details.length > 50 ? "..." : ""}
-        {eventType != "live" && <button className="text-red-600 ml-2" onClick={viewMoreHandler}>
+        {details.substring(0, 55)}
+        {details.length > 55 ? "..." : ""}
+        {eventType != "live" && <div className="flex justify-end pr-4"><button className="text-red-600 ml-2 text-end" onClick={viewMoreHandler}>
           View More
-        </button>}
+        </button>
+        </div>}
       </div>
     </div>
   );

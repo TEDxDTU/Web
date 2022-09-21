@@ -12,17 +12,17 @@ export async function LoginhandleAction(form, router, setLoading) {
 
   await signInWithEmailAndPassword(authentication, email, password)
     .then(async (authToken) => {
-      if (authToken.user.emailVerified) {
+      if (authToken?.user?.emailVerified) {
         const url = `/api/user/data-from-token`;
         const response = await fetch(url, {
           method: "POST",
-          body: JSON.stringify({ authToken: authToken.user.accessToken }),
+          body: JSON.stringify({ authToken: authToken?.user?.accessToken }),
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-        const data = await response.json();
+        const data = await response?.json();
         const { status } = response;
         if (status == 200) {
           localStorage.setItem("profile", JSON.stringify({ ...data }));
@@ -30,7 +30,7 @@ export async function LoginhandleAction(form, router, setLoading) {
         }
       }
       else {
-        sendEmailVerification(authToken.user)
+        sendEmailVerification(authToken?.user)
           .then(() => {
             console.log("Email sent");
             alert("Please verify your email first");
@@ -81,7 +81,7 @@ const RegisterhandleAction = async (form, setregisterStatus, router, setLoading)
         return;
       });
 
-    sendEmailVerification(authentication.currentUser)
+    sendEmailVerification(authentication?.currentUser)
       .then(() => {
         alert("A verification mail has been sent to your provided email.\nPlease verify to login !!");
       })

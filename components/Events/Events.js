@@ -37,7 +37,7 @@ const Events = ({ allEvents }) => {
     const user = localStorage.getItem("profile");
     const url = `/api/tickets/generate-order`;
     const { title, _id } = eventInfo;
-    const price = eventInfo.price;
+    const price = eventInfo?.price;
 
     const response = await fetch(url, {
       method: "POST",
@@ -52,9 +52,9 @@ const Events = ({ allEvents }) => {
 
     const options = {
       key: process.env.RAZORPAY_KEY_ID,
-      currency: data.currency,
-      amount: data.amount.toString(),
-      order_id: data.orderID,
+      currency: data?.currency,
+      amount: data?.amount.toString(),
+      order_id: data?.orderID,
       notes: { _id, firebaseID },
       name: "Ticket Booking",
       numTickets: numTickets,
@@ -71,7 +71,7 @@ const Events = ({ allEvents }) => {
       }
     }
     const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+    paymentObject?.open();
   }
 
   return <Page

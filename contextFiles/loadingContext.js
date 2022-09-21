@@ -7,7 +7,7 @@ export function LoadingProvider(props) {
 
   return (
     <LoadingContext.Provider value={[loading, setLoading]}>
-      {props.children}
+      {props?.children}
     </LoadingContext.Provider>
   );
 };

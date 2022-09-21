@@ -14,7 +14,7 @@ const EventInfo = ({ eventDetails }) => {
     Aos.init({ duration: 1000 });
   }, []);
 
-  let date = eventDetails.dateTime.slice(0, 10);
+  let date = eventDetails?.dateTime?.slice(0, 10);
   function extractDate() {
     const year = date.slice(0, 4);
     const month = date.slice(5, 7);
@@ -23,12 +23,12 @@ const EventInfo = ({ eventDetails }) => {
   }
   extractDate();
 
-  let eventAbout = eventDetails.details;
-  if (eventAbout.length === 0) {
+  let eventAbout = eventDetails?.details;
+  if (eventAbout?.length === 0) {
     eventAbout = "No Data Found!";
   }
 
-  const time = eventDetails.dateTime.slice(11, 19);
+  const time = eventDetails?.dateTime?.slice(11, 19);
   return (
     <div className="flex flex-col w-4/5 mx-auto bg-[rgba(100,100,100,0.3)] rounded-3xl p-4 sm:p-6 md:p-10" data-aos="fade-up">
       <div className="flex flex-col lg:flex-row mt-4 sm:mt-2 md:mt-0">
@@ -37,7 +37,7 @@ const EventInfo = ({ eventDetails }) => {
             className="w-6"
             icon={faLocationDot}
           ></FontAwesomeIcon>
-          <div className=" ml-7 text-xl my-auto">{eventDetails.venue}</div>
+          <div className=" ml-7 text-xl my-auto">{eventDetails?.venue}</div>
         </div>
 
 

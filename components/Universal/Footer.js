@@ -33,24 +33,24 @@ const Footer = () => {
           </Link>
         </ul>
         <div className="flex flex-row mt-3 md:mt-4">
-          <div className="ml-4">
+          {/* <div className="ml-4">
             <a href="/">
               <BsFacebook className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
             </a>
-          </div>
+          </div> */}
           <div className="ml-4">
-            <a href="/">
+            <a href="https://www.instagram.com/tedxdtu/" target="_blank">
               <BsInstagram className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
             </a>
           </div>
           <div className="ml-4">
-            <a href="/">
-              <BsTwitter className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
+            <a href="https://www.linkedin.com/company/tedxdtu/" target="_blank">
+              <BsLinkedin className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
             </a>
           </div>
           <div className="ml-4">
-            <a href="/">
-              <BsLinkedin className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
+            <a href="https://mobile.twitter.com/tedxdtu" target="_blank">
+              <BsTwitter className="text-white w-4 h-4 drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)]" />
             </a>
           </div>
         </div>

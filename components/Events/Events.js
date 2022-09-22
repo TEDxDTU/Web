@@ -85,7 +85,7 @@ const Events = ({ allEvents }) => {
     {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
 
     <div className={`${(display || DisplayBookNotActive) && 'pointer-events-none opacity-25'} pt-8 bg-[url('/SingleEvent/backgroundTheme.png')]`}>
-      <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
+      {/* <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} /> */}
       <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} setDisplayBookNotActive={setDisplayBookNotActive} />
       <EventSection eventList={pastEvents} eventType={"past"} />
     </div>

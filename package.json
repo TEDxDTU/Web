@@ -34,6 +34,9 @@
         "react-youtube": "^9.0.2",
         "serveo": "^0.0.0",
         "shortid": "^2.2.16",
+        "stats-js": "^1.0.1",
+        "stats.js": "^0.17.0",
+        "three": "^0.144.0",
         "uuid": "^8.3.2",
         "validator": "^13.7.0"
     },

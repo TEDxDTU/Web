@@ -12,6 +12,7 @@ const razorpayLib = require("razorpay");
 const Ticket = require("../../schemas/ticket");
 const Event = require("../../schemas/event");
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const withAuth = require("../../middleware/auth").withAuth;
 
 const Razorpay = new razorpayLib({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -59,7 +60,7 @@ async function sendMail(req) {
   }
 }
 
-router.post("/generate-order", async (req, res) => {
+router.post("/generate-order", withAuth, async (req, res) => {
   const { _id } = JSON.parse(req.body.user);
   const { numTickets, price } = req.body;
 
@@ -119,7 +120,7 @@ router.post("/verify", async (req, res) => {
   // Getting Event Details
   const event = await Event.findById(_id);
 
-  const noOfTickets = amount / (event.price*100);
+  const noOfTickets = amount / (event.price * 100);
 
   // Add the Cart Items to Orders using serverOrderID and generate an invoice
   const newTicket = new Ticket({
@@ -141,7 +142,7 @@ router.post("/verify", async (req, res) => {
     });
   }
 
-  let ticketQR=await QRCode.toDataURL(order_id);
+  let ticketQR = await QRCode.toDataURL(order_id);
 
   sendMail({ user, event, newTicket, ticketQR })
     .then((result) => console.log('Email sent successfully!'))

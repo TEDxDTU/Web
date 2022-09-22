@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Page from '../Universal/Page';
 import EventSection from './EventSection';
 import { BookingNotOpen, TicketSelection } from './ExtraComponent';
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import firebaseConfigAPI from '../../firebaseAPI';
 
 const Events = ({ allEvents }) => {
 
@@ -34,6 +37,7 @@ const Events = ({ allEvents }) => {
       return;
     }
 
+    const auth = getAuth(initializeApp(firebaseConfigAPI));
     const user = localStorage.getItem("profile");
     const url = `/api/tickets/generate-order`;
     const { title, _id } = eventInfo;
@@ -43,7 +47,8 @@ const Events = ({ allEvents }) => {
       method: "POST",
       body: JSON.stringify({ user, numTickets, price }),
       headers: {
-        "Content-Type": "application/json",
+        authorization: auth?.currentUser?.accessToken,
+        'Content-Type': 'application/json'
       },
     });
 

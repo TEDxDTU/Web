@@ -29,15 +29,13 @@ export default function CardSection() {
                 We are very overwhelmed by your presence. And we aim at providing you
                 the best experience & knowledge from world leaders.
               </div>
-              {!form && (
-                <div className="md:w-80 mt-2">
-                  <Link href="/register">
-                    <button className="bg-red-600 w-28 h-12 text-lg mt-2 hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 ">
-                      Register
-                    </button>
-                  </Link>
-                </div>
-              )}
+              <div className="md:w-80 mt-2">
+                <Link href={!form ? "/register" : "/events"}>
+                  <button className="bg-red-600 w-28 h-12 text-lg mt-2 hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 ">
+                    {!form ? "Register" : "Book Now"}
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -64,7 +62,7 @@ export default function CardSection() {
           </div>
         </div>
 
-        <div className="relative lg:h-[700px] group"  data-aos="fade-up">
+        <div className="relative lg:h-[700px] group" data-aos="fade-up">
           <div className="absolute -inset-0.5 bg-gradient-to-r md:pb-36 lg:pb-3 from-red-700 to-blue-700 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:200"></div>
           <div className="relative rounded-lg leading-none">
             <Card

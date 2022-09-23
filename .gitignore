@@ -24,6 +24,7 @@ firebaseAPI.js
 # misc
 .DS_Store
 *.pem
+*.ppk
 .vscode
 
 # debug

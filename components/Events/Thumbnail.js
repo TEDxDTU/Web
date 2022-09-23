@@ -9,18 +9,17 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
   const viewMoreHandler = () => {
-    if (eventType === "live") {
-      router.push(`/live-event`);
-      return;
-    }
+    // if (eventType === "live") {
+    //   router.push(`/live-event`);
+    //   return;
+    // }
     router.push(`/events/${event._id}`);
   };
 
   return (
     <div>
       <div
-        onClick={viewMoreHandler}
-        className=" cursor-pointer h-auto items-center md:items-stretch flex-col md:flex-row md:h-40 mx-auto md:mx-8 mb-8 p-2 w-[70%]  md:w-[90%]  
+        className=" cursor-pointer h-auto items-center md:items-stretch flex-col md:flex-row md:h-40 mx-auto md:mx-8 mb-8 p-2 w-[70%]  md:w-[80%]  
       hover:bg-red-600 border-t-2 border-r-2 border-white duration-200 transition-colors bg-[#2C2C2C] rounded-2xl flex"
       >
         <img
@@ -31,15 +30,16 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
         <div className="flex items-center md:items-stretch flex-col h-34">
           <div className=" px-4 md:ml-2 text-xl my-2  md:my-0">{title}</div>
 
-          <div className=" p-1 px-4 md:ml-2">
+          <div className=" p-1 px-4 md:ml-2 mb-4">
             {details.substring(0, 80)}
             {details.length > 80 ? "..." : ""}
           </div>
         </div>
 
-        {eventType === "upcoming" && areBookingActive && (
-          <div
-            className="md:w-[7rem] text-center absolute bottom-6"
+        <div
+          className="md:w-[14rem] text-center absolute bottom-6 flex"
+        >
+          {eventType === "upcoming" && areBookingActive && (<div
             onClick={() => {
               if (auth.currentUser === null) {
                 alert("Please login to book the tickets.");
@@ -50,12 +50,14 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
               setDisplay(true);
               setEventInfo(event);
             }}
-          >
-            <div className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
-              Book Now
-            </div>
+            className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
+            Book Now
+          </div>)}
+          <div onClick={viewMoreHandler} className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
+            Read More
           </div>
-        )}
+        </div>
+
       </div>
     </div>
     // <div className="shadow-md h-36 w-60 mx-8 mb-16 pb-10 border-2 border-[#737373]">

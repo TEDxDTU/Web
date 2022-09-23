@@ -24,27 +24,27 @@ export default function Landing({ liveEvent }) {
                 parameterCount, particles;
 
             function onDocumentMouseMove(e) {
-                mouseX = e.clientX - windowHalfX;
-                mouseY = e.clientY - windowHalfY;
+                mouseX = e?.clientX - windowHalfX;
+                mouseY = e?.clientY - windowHalfY;
             }
 
             function onDocumentTouchStart(e) {
 
-                if (e.touches.length === 1) {
+                if (e?.touches?.length === 1) {
 
-                    e.preventDefault();
-                    mouseX = e.touches[0].pageX - windowHalfX;
-                    mouseY = e.touches[0].pageY - windowHalfY;
+                    e?.preventDefault();
+                    mouseX = e?.touches[0]?.pageX - windowHalfX;
+                    mouseY = e?.touches[0]?.pageY - windowHalfY;
                 }
             }
 
             function onDocumentTouchMove(e) {
 
-                if (e.touches.length === 1) {
+                if (e?.touches?.length === 1) {
 
-                    e.preventDefault();
-                    mouseX = e.touches[0].pageX - windowHalfX;
-                    mouseY = e.touches[0].pageY - windowHalfY;
+                    e?.preventDefault();
+                    mouseX = e?.touches[0]?.pageX - windowHalfX;
+                    mouseY = e?.touches[0]?.pageY - windowHalfY;
                 }
             }
 
@@ -55,13 +55,13 @@ export default function Landing({ liveEvent }) {
 
                 camera.aspect = innerWidth / innerHeight;
                 camera.updateProjectionMatrix();
-                renderer.setSize(document.getElementById("particleAnimationOuter").clientWidth, innerHeight);
+                renderer?.setSize(document?.getElementById("particleAnimationOuter")?.clientWidth, innerHeight);
             }
 
             function init() {
 
                 HEIGHT = innerHeight;
-                WIDTH = document.getElementById("particleAnimationOuter").clientWidth;
+                WIDTH = document?.getElementById("particleAnimationOuter")?.clientWidth;
                 windowHalfX = WIDTH / 2;
                 windowHalfY = HEIGHT / 2;
                 fieldOfView = 75;
@@ -80,25 +80,25 @@ export default function Landing({ liveEvent }) {
                 scene = new THREE.Scene();
                 scene.fog = new THREE.FogExp2(fogHex, fogDensity);
 
-                container = document.createElement('div');
-                document.getElementById("particleAnimation").appendChild(container);
-                document.getElementById("particleAnimation").margin = 0;
-                document.getElementById("particleAnimation").overflow = 'hidden';
+                container = document?.createElement('div');
+                document?.getElementById("particleAnimation").appendChild(container);
+                document?.getElementById("particleAnimation").margin = 0;
+                document?.getElementById("particleAnimation").overflow = 'hidden';
 
                 particleCount = 20000; /* Leagues under the sea */
 
                 const points = []
                 for (i = 0; i < particleCount; i++) {
 
-                    const X = Math.random() * 2000 - 1000;
-                    const Y = Math.random() * 2000 - 1000;
-                    const Z = Math.random() * 2000 - 1000;
+                    const X = Math?.random() * 2000 - 1000;
+                    const Y = Math?.random() * 2000 - 1000;
+                    const Z = Math?.random() * 2000 - 1000;
                     var vertex = new THREE.Vector3(X, Y, Z);
 
-                    points.push(vertex);
+                    points?.push(vertex);
                 }
 
-                geometry = new THREE.BufferGeometry().setFromPoints(points); /*	NO ONE SAID ANYTHING ABOUT MATH! UGH!	*/
+                geometry = new THREE.BufferGeometry()?.setFromPoints(points); /*	NO ONE SAID ANYTHING ABOUT MATH! UGH!	*/
 
                 //     /*	We can't stop here, this is bat country!	*/
 
@@ -122,19 +122,19 @@ export default function Landing({ liveEvent }) {
 
                     particles = new THREE.Points(geometry, materials[i]);
 
-                    particles.rotation.x = Math.random() * 6;
-                    particles.rotation.y = Math.random() * 6;
-                    particles.rotation.z = Math.random() * 6;
+                    particles.rotation.x = Math?.random() * 6;
+                    particles.rotation.y = Math?.random() * 6;
+                    particles.rotation.z = Math?.random() * 6;
 
-                    scene.add(particles);
+                    scene?.add(particles);
                 }
 
 
                 renderer = new THREE.WebGLRenderer(); /*	Rendererererers particles.	*/
-                renderer.setPixelRatio(devicePixelRatio); /*	Probably 1; unless you're fancy.	*/
-                renderer.setSize(WIDTH, HEIGHT); /*	Full screen baby Wooooo!	*/
+                renderer?.setPixelRatio(devicePixelRatio); /*	Probably 1; unless you're fancy?.	*/
+                renderer?.setSize(WIDTH, HEIGHT); /*	Full screen baby Wooooo!	*/
 
-                container.appendChild(renderer.domElement); /* Let's add all this crazy junk to the page.	*/
+                container?.appendChild(renderer?.domElement); /* Let's add all this crazy junk to the page?.	*/
 
 
                 stats = new Stats();
@@ -146,9 +146,9 @@ export default function Landing({ liveEvent }) {
                 //     /* Event Listeners */
 
                 addEventListener('resize', onWindowResize, true);
-                document.addEventListener('mousemove', onDocumentMouseMove, false);
-                document.addEventListener('touchstart', onDocumentTouchStart, false);
-                document.addEventListener('touchmove', onDocumentTouchMove, false);
+                document?.addEventListener('mousemove', onDocumentMouseMove, false);
+                document?.addEventListener('touchstart', onDocumentTouchStart, false);
+                document?.addEventListener('touchmove', onDocumentTouchMove, false);
 
             }
 
@@ -158,11 +158,11 @@ export default function Landing({ liveEvent }) {
                 camera.position.x += (mouseX - camera.position.x) * 0.05;
                 camera.position.y += (-mouseY - camera.position.y) * 0.05;
 
-                camera.lookAt(scene.position);
+                camera?.lookAt(scene?.position);
 
-                for (i = 0; i < scene.children.length; i++) {
+                for (i = 0; i < scene?.children?.length; i++) {
 
-                    var object = scene.children[i];
+                    var object = scene?.children[i];
 
                     if (object instanceof THREE.PointsMaterial) {
 
@@ -170,21 +170,21 @@ export default function Landing({ liveEvent }) {
                     }
                 }
 
-                for (i = 0; i < materials.length; i++) {
+                for (i = 0; i < materials?.length; i++) {
 
                     color = parameters[i][0];
 
                     h = (360 * (color[0]) % 360) / 360;
-                    materials[i].color.setHSL(h, color[1], color[2]);
+                    materials[i]?.color?.setHSL(h, color[1], color[2]);
                 }
 
-                renderer.render(scene, camera);
+                renderer?.render(scene, camera);
             }
 
             function animate() {
                 requestAnimationFrame(animate);
                 render();
-                stats.update();
+                stats?.update();
             }
 
             init();

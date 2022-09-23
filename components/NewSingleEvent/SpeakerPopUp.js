@@ -5,9 +5,9 @@ import { displaySpeakerContext } from "./EventDetails";
 const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
   const setDisplaySpeaker = useContext(displaySpeakerContext);
   function speakerDetailsFinder() {
-    for (let i = 0; i < eventDetails.speakersList.length; i++) {
-      if (eventDetails.speakersList[i]._id === displaySpeaker) {
-        return eventDetails.speakersList[i];
+    for (let i = 0; i < eventDetails?.speakersList?.length; i++) {
+      if (eventDetails?.speakersList[i]?._id === displaySpeaker) {
+        return eventDetails?.speakersList[i];
       }
     }
     return null;
@@ -16,20 +16,20 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
   // console.log(speakerDetails);
 
   const achievementsList = [];
-  for (let i = 0; i < speakerDetails.achievements.length; i++) {
-    achievementsList.push(<div key={i}>{speakerDetails.achievements[i]}</div>);
+  for (let i = 0; i < speakerDetails?.achievements?.length; i++) {
+    achievementsList.push(<div key={i}>{speakerDetails?.achievements[i]}</div>);
   }
   const LinksList = [];
-  for (let i = 0; i < speakerDetails.resources.length; i++) {
-    let linkToPush = speakerDetails.resources[i];
-    if (speakerDetails.resources[i].length > 30) {
+  for (let i = 0; i < speakerDetails?.resources?.length; i++) {
+    let linkToPush = speakerDetails?.resources[i];
+    if (speakerDetails?.resources[i]?.length > 30) {
       linkToPush = linkToPush.slice(0, 30);
       linkToPush += "...";
     }
     LinksList.push(
       <a
         key={i}
-        href={speakerDetails.resources[i]}
+        href={speakerDetails?.resources[i]}
         target="_blank"
         className="hover:text-black"
       >
@@ -39,7 +39,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
   }
 
   const onClickHandler = (e) => {
-    if (e.target.id === "backdrop") {
+    if (e?.target?.id === "backdrop") {
       setDisplaySpeaker("null");
     }
   };
@@ -60,7 +60,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
           <div className="flex item-center h-full justify-center w-full mx-auto">
             <img
               className="h-[10rem] m-2 items-center object-cover justify-center rounded-lg shadow-md shadow-black"
-              src={speakerDetails.imageUrl}
+              src={speakerDetails?.imageUrl}
             />
           </div>
 
@@ -68,22 +68,22 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
              
             {/* Name */}
             <div className="font-bold text-lg text-center sm:text-left ">
-              {speakerDetails.name}
+              {speakerDetails?.name}
             </div>
             {/* Bio */}
-            {speakerDetails.bio.length === 0 ? null :
+            {speakerDetails?.bio?.length === 0 ? null :
               <div className="text-sm font-light text-center sm:text-left mb-1">
-                {speakerDetails.bio}
+                {speakerDetails?.bio}
               </div>
             }
             {/* Topic */}
-            {speakerDetails.topic.length === 0 ? null :
+            {speakerDetails?.topic?.length === 0 ? null :
               <div>
                 <div className="font-bold text-lg text-center sm:text-left ">
                   Topic
                 </div>
                 <div className="text-sm font-light text-center sm:text-left">
-                  {speakerDetails.topic}
+                  {speakerDetails?.topic}
                 </div>
               </div>
             }
@@ -92,7 +92,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
 
         <div className="flex md:space-x-5 md:flex-row flex-col mx-2">
           {/* Achievements Section  */}
-          {speakerDetails.achievements.length === 0? null :
+          {speakerDetails?.achievements?.length === 0? null :
             <div className="flex flex-col md:w-1/2 mb-4 md:mb-none">
               <div className="tracking-wider font-bold ">More Info</div>
               <div className="flex-col flex font-light">{achievementsList}</div>
@@ -100,7 +100,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
           }
 
           {/* Links Section  */}
-          {speakerDetails.resources.length === 0? null :
+          {speakerDetails?.resources?.length === 0? null :
             <div className="flex flex-col md:w-1/2">
               <div className="tracking-wider font-bold">Links</div>
               <div className="flex-col flex font-light">{LinksList}</div>

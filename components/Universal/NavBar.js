@@ -16,7 +16,7 @@ export default function NavBar() {
   function logout() {
     signOut(auth).then(() => {
       console.log("Sign-out successful");
-      window.localStorage.removeItem("profile");
+      window?.localStorage?.removeItem("profile");
       setForm(null);
     }).catch((error) => {
       alert("We are facing some issues in logging you out :(\nPlease try again later!!")

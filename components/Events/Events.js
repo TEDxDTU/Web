@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Page from '../Universal/Page';
 import EventSection from './EventSection';
 import { BookingNotOpen, TicketSelection } from './ExtraComponent';
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import firebaseConfigAPI from '../../firebaseAPI';
 
 const Events = ({ allEvents }) => {
 
@@ -34,16 +37,18 @@ const Events = ({ allEvents }) => {
       return;
     }
 
+    const auth = getAuth(initializeApp(firebaseConfigAPI));
     const user = localStorage.getItem("profile");
     const url = `/api/tickets/generate-order`;
     const { title, _id } = eventInfo;
-    const price = eventInfo.price;
+    const price = eventInfo?.price;
 
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({ user, numTickets, price }),
       headers: {
-        "Content-Type": "application/json",
+        authorization: auth?.currentUser?.accessToken,
+        'Content-Type': 'application/json'
       },
     });
 
@@ -52,9 +57,9 @@ const Events = ({ allEvents }) => {
 
     const options = {
       key: process.env.RAZORPAY_KEY_ID,
-      currency: data.currency,
-      amount: data.amount.toString(),
-      order_id: data.orderID,
+      currency: data?.currency,
+      amount: data?.amount.toString(),
+      order_id: data?.orderID,
       notes: { _id, firebaseID },
       name: "Ticket Booking",
       numTickets: numTickets,
@@ -71,7 +76,7 @@ const Events = ({ allEvents }) => {
       }
     }
     const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+    paymentObject?.open();
   }
 
   return <Page
@@ -80,7 +85,7 @@ const Events = ({ allEvents }) => {
     {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
 
     <div className={`${(display || DisplayBookNotActive) && 'pointer-events-none opacity-25'} pt-8 bg-[url('/SingleEvent/backgroundTheme.png')]`}>
-      <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
+      {/* <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} /> */}
       <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} setDisplayBookNotActive={setDisplayBookNotActive} />
       <EventSection eventList={pastEvents} eventType={"past"} />
     </div>

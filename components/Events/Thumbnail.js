@@ -55,6 +55,7 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
             </div>
           )
         }
+
       </div>
 
 

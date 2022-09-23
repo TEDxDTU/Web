@@ -6,7 +6,7 @@ import Ticket from "./Ticket";
 
 export const MyTicketPage = () => {
 
-    const [tickets, setTickets] = useState([]);
+    const [tickets, setTickets] = useState(null);
     const [loading, setLoading] = useContext(LoadingContext);
     const auth = getAuth();
     const url = `/api/user/tickets`;
@@ -20,7 +20,7 @@ export const MyTicketPage = () => {
                 'Content-Type': 'application/json',
             }
         });
-        const data = await response.json();
+        const data = await response?.json();
         setTickets(data);
         setLoading(false);
     }, []);
@@ -34,14 +34,17 @@ export const MyTicketPage = () => {
             <div className="md:flex-none md:px-8 ">
                 <div>
                     {tickets?.map((val, idx) =>
-                        val.event.eventType === "upcoming" && <Ticket key={idx} data={val} />
+                        val?.event?.eventType === "upcoming" && <Ticket key={idx} data={val} />
                     )}
                     {tickets?.map((val, idx) =>
-                        val.event.eventType === "live" && < Ticket key={idx} data={val} />
+                        val?.event?.eventType === "live" && < Ticket key={idx} data={val} />
                     )}
                     {tickets?.map((val, idx) =>
-                        val.event.eventType === "past" && <Ticket key={idx} data={val} />
+                        val?.event?.eventType === "past" && <Ticket key={idx} data={val} />
                     )}
+                    {(tickets?.length === 0) && <div className="flex justify-center mt-24 font-semibold text-4xl md:text-6xl ">
+                        No tickets found
+                    </div>}
                 </div>
             </div>
         </div>);

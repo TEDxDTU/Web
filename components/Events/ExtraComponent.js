@@ -13,7 +13,7 @@ export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, ev
                         <div className="flex justify-between text-sm sm:text-md mb-4">
                             <div className='flex'>
                                 <img className="mr-4" src="/SingleEvent/map-pin.svg" />
-                                {eventInfo.venue}
+                                {eventInfo?.venue}
                             </div>
                             <div className='cursor-pointer' onClick={() => {
                                 setDisplay(false);
@@ -37,7 +37,7 @@ export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, ev
                             {/* Individual Ticket Price */}
                             <div className='p-2 flex justify-between'>
                                 <div>Ticket price</div>
-                                <div>₹ {eventInfo.price}</div>
+                                <div>₹ {eventInfo?.price}</div>
                             </div>
                             {/*  Total Payable Amount*/}
                             <div className='p-2 flex justify-between'>

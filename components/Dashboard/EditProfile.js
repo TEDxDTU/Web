@@ -28,7 +28,7 @@ export default function EditProfile() {
                     method: 'POST',
                     body: JSON.stringify(form),
                     headers: {
-                        authorization: user.accessToken,
+                        authorization: user?.accessToken,
                         'Content-Type': 'application/json',
                     }
                 });

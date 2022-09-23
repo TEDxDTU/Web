@@ -22,13 +22,13 @@ const Footer = () => {
           <Link href={"/"}>
             <li className="cursor-pointer ">Home</li>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/events"}>
             <li className="cursor-pointer">Events</li>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/partners"}>
             <li className="cursor-pointer">Partners</li>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/about"}>
             <li className="cursor-pointer">About</li>
           </Link>
         </ul>

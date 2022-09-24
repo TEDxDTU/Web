@@ -61,11 +61,11 @@ async function sendMail(req) {
 }
 
 router.post("/generate-order", withAuth, async (req, res) => {
+
   const { _id } = JSON.parse(req.body.user);
   const { numTickets, price } = req.body;
-
   const existingUser = await User.findOne({ _id });
-
+    
   try {
     if (!existingUser)
       return res

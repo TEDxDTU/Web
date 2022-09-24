@@ -81,7 +81,7 @@ export default function Landing({ liveEvent }) {
                 scene.fog = new THREE.FogExp2(fogHex, fogDensity);
 
                 container = document?.createElement('div');
-                document?.getElementById("particleAnimation").appendChild(container);
+                document?.getElementById("particleAnimation")?.appendChild(container);
                 document?.getElementById("particleAnimation").margin = 0;
                 document?.getElementById("particleAnimation").overflow = 'hidden';
 

@@ -6,14 +6,14 @@ export default function Player() {
   const [videoPlayerWidth, setVideoPlayerWidth] = useState();
 
   function handleWindowResize() {
-    const player = document.getElementById("youtube-player");
+    const player = document?.getElementById("youtube-player");
     // player.width = window.innerWidth * 0.65;
     // player.height = player.width * 9 / 16;
   };
 
   useEffect(() => {
     setVideoPlayerWidth(() => innerWidth * 0.65);
-    window.addEventListener("resize", handleWindowResize);
+    window?.addEventListener("resize", handleWindowResize);
   }, []);
 
   return (

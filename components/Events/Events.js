@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Page from '../Universal/Page';
 import EventSection from './EventSection';
-import { BookingNotOpen, TicketSelection } from './ExtraComponent';
+import { TicketSelection } from './ExtraComponent';
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import firebaseConfigAPI from '../../firebaseAPI';

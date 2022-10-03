@@ -2,9 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import firebaseConfigAPI from "../../firebaseAPI";
+import {React,useRef,useState,useEffect} from "react";
 
 const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
   const { title, imageUrl, details, dateTime, areBookingActive } = event;
+
+  const [hover, setHover] = useState(false);
+  const backgroundElementRef = useRef(null)
+
   const router = useRouter();
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
@@ -16,13 +21,26 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
     router.push(`/events/${event._id}`);
   };
 
- 
-
+  useEffect(() => {
+    if(hover === true){
+      backgroundElementRef.current.classList.replace("bg-[rgba(255,255,255,0.4)]","bg-[rgba(255,255,255,0.6)]");
+      backgroundElementRef.current.firstElementChild.classList.replace("bg-[#2C2C2C]","bg-red-600");
+    }
+    if(hover === false){
+      backgroundElementRef.current.classList.replace("bg-[rgba(255,255,255,0.6)]","bg-[rgba(255,255,255,0.4)]");
+      backgroundElementRef.current.firstElementChild.classList.replace("bg-red-600","bg-[#2C2C2C]");
+    }
+  }, [hover])
+  
   return (
     <div>
-      <div  onClick={viewMoreHandler}  className=" cursor-pointer h-auto items-center md:items-stretch flex-col md:flex-row md:h-40 mx-auto md:mx-8 mb-16 p-2 w-[70%]  md:w-[90%]  
-      hover:bg-red-600 border-t-2 border-r-2 border-white duration-200 transition-colors bg-[#2C2C2C] rounded-2xl flex">
+      <div ref={backgroundElementRef} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} 
+      className="w-[70%] md:w-[90%] md:h-40 mx-auto  bg-[rgba(255,255,255,0.4)]
+      duration-200 transition-colors rounded-2xl md:mx-8 mb-16 relative ">
 
+      <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      className="items-center md:items-stretch flex-col md:flex-row p-2 w-full md:h-full
+      duration-200 transition-colors bg-[#2C2C2C] rounded-2xl flex z-10 md:absolute relative top-2 -left-2">
         <img src={imageUrl} className="h-34 md:max-w-[40%] object-cover rounded-2xl border-[rgba(255,255,255,0.1)] border-[1px]" />
 
         <div className="flex items-center md:items-stretch flex-col h-34">
@@ -34,32 +52,34 @@ const Thumbnail = ({ event, eventType, setDisplay, setEventInfo }) => {
           </div>
         </div>
 
-        {eventType === "upcoming" && areBookingActive && (
-            <div
-              className="md:w-[7rem] text-center absolute bottom-6"
-              onClick={() => {
+        <div
+          className="md:w-[14rem] text-center absolute -bottom-4 flex"
+        >
+          {eventType === "upcoming" && areBookingActive && (<div
+            onClick={() => {
+              if (auth.currentUser === null) {
+                alert("Please login to book the tickets.");
+                router.push("/register");
+                return;
+              }
 
-                if (auth.currentUser === null) {
-                  alert("Please login to book the tickets.");
-                  router.push("/register");
-                  return;
-                }
-
-                setDisplay(true);
-                setEventInfo(event);
-              }}
-            >
-              <div className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
-                Book Now
-              </div>
-            </div>
-          )
-        }
-
+              setDisplay(true);
+              setEventInfo(event);
+            }}
+            className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
+            Book Now
+          </div>)}
+          <div onClick={viewMoreHandler} className="rounded-2xl cursor-pointer duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold">
+            Read More
+          </div>
+        </div>
+      
       </div>
-
-
+      </div>
     </div>
+
+    // Old Event Design
+
     // <div className="shadow-md h-36 w-60 mx-8 mb-16 pb-10 border-2 border-[#737373]">
     //   <div className="relative">
     //     <img src={imageUrl} className="h-36 w-60" />

@@ -31,7 +31,9 @@ export default function CardSection() {
               </div>
               <div className="md:w-80 mt-2">
                 <Link href={!form ? "/register" : "/events"}>
-                  <button className="bg-red-600 w-28 h-12 text-lg mt-2 hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 ">
+                  <button className="bg-red-600 w-28 h-12 text-lg mt-2 hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600" onClick={() => {
+                    !form && alert("Please login to book the tickets !")
+                  }}>
                     Book Now
                   </button>
                 </Link>

@@ -3,9 +3,12 @@ import ReactPlayer from "react-player";
 import React, { useContext, useState, useEffect } from "react";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { useRouter } from "next/router";
 import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import firebaseConfigAPI from '../../firebaseAPI';
+import { TicketSelection } from "../Events/ExtraComponent";
 import SpeakerPopUp from "./SpeakerPopUp";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
@@ -32,10 +35,76 @@ export const displaySpeakerContext = React.createContext();
 
 const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   const eventDetails = findEvent(pastEvents, upcomingEvents, eventID);
+  const auth = getAuth(initializeApp(firebaseConfigAPI));
   const setNoEvent = useContext(noEventContext);
   const [eventSection, setEventSection] = useState("speakerInfo");
   const [displaySpeaker, setDisplaySpeaker] = useState("null");
+  const [numTickets, setnumTickets] = useState(1);
+  const [display, setDisplay] = useState(false);
 
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const user = localStorage.getItem("profile");
+    const url = `/api/tickets/generate-order`;
+    const { title, _id } = eventDetails;
+    const price = eventDetails?.price;
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ user, numTickets, price }),
+      headers: {
+        authorization: auth?.currentUser?.accessToken,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    const data = await response.json();
+    const { email, name, firebaseID } = JSON.parse(user);
+  
+    const options = {
+      key: process.env.RAZORPAY_KEY_ID,
+      currency: data?.currency,
+      amount: data?.amount.toString(),
+      order_id: data?.orderID,
+      notes: { _id, firebaseID },
+      name: "Ticket Booking",
+      numTickets: numTickets,
+      description: title,
+      image: "/LandingPage/Tab-Logo-Black.svg",
+      handler: function (response) {
+        setDisplay(false);
+        setnumTickets(1);
+      },
+      prefill: {
+        name: name,
+        email: email,
+        phone_number: ''
+      }
+    }
+    const paymentObject = new window.Razorpay(options);
+    paymentObject?.open();
+  }
   if (eventDetails === null) {
     setNoEvent(true);
     return null;
@@ -52,13 +121,13 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
     );
   }
 
-  // console.log(eventDetails);
-
   return (
     <Page pageTitle={"Events"}>
-      <div className="flex flex-col items-center justify-center">
+      {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventDetails} displayRazorpay={displayRazorpay} />}
 
-        {/* Whoever is reading this dont delete the code below !  */}
+      <div className={`${display && 'pointer-events-none opacity-25'} flex flex-col items-center justify-center`}>
+
+        {/* Whoever is reading this don't delete the code below !  */}
 
         {/* {eventDetails.streamingUrl !== null ? (
           <div className="relative flex items-center justify-center md:w-4/6 w-5/6 h-1/2 md:h-3/4 pt-5">
@@ -87,11 +156,23 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
             <img className="w-5/6" src={eventDetails.imageUrl} />
           </div>
         )} */}
-        <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
-            <img className="w-5/6" src={eventDetails?.imageUrl} />
+        <div className="md:w-4/6 h-5/6 md:h-4/6 md:h-3/4">
+          <div className="flex justify-center relative">
+            <img className="w-[90%]" src={eventDetails?.imageUrl} />
+          </div>
         </div>
-        <h1 className="flex text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 items-center justify-center">
-          {eventDetails?.title}
+        <h1 className="flex items-center justify-center">
+          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">{eventDetails?.title}</div>
+          {eventDetails?.areBookingActive&&<div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold" onClick={()=>{
+                if (auth?.currentUser === null) {
+                  alert("Please login to book the tickets.");
+                  router.push("/register");
+                  return;
+                }
+                setDisplay(true);
+          }}>
+            Book Now
+          </div>}
         </h1>
         <div className="flex space-y-5 sm:space-y-0 justify-center my-10 flex-col sm:flex-row">
           {eventSection === "speakerInfo" ? (

@@ -7,8 +7,7 @@ const EventSection = ({
   eventList,
   eventType,
   setDisplay,
-  setEventInfo,
-  setDisplayBookNotActive,
+  setEventInfo
 }) => {
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -58,7 +57,6 @@ const EventSection = ({
                       eventType={eventType}
                       setDisplay={setDisplay}
                       setEventInfo={setEventInfo}
-                      setDisplayBookNotActive={setDisplayBookNotActive}
                     />
                   );
                 })}

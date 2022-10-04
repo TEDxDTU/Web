@@ -11,7 +11,6 @@ const Events = ({ allEvents }) => {
   const { liveEvent, pastEvents, upcomingEvents } = allEvents;
   const [numTickets, setnumTickets] = useState(1);
   const [display, setDisplay] = useState(false);
-  const [DisplayBookNotActive, setDisplayBookNotActive] = useState(false);
   const [eventInfo, setEventInfo] = useState({});
 
   function loadScript(src) {
@@ -84,9 +83,9 @@ const Events = ({ allEvents }) => {
   >
     {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventInfo} displayRazorpay={displayRazorpay} />}
 
-    <div className={`${(display || DisplayBookNotActive) && 'pointer-events-none opacity-25'} pt-8 bg-[url('/SingleEvent/backgroundTheme.png')]`}>
+    <div className={`${display && 'pointer-events-none opacity-25'} pt-8 bg-[url('/SingleEvent/backgroundTheme.png')]`}>
       {/* <EventSection eventList={[liveEvent]} eventType={"live"} setDisplay={setDisplay} setEventInfo={setEventInfo} /> */}
-      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} setDisplayBookNotActive={setDisplayBookNotActive} />
+      <EventSection eventList={upcomingEvents} eventType={"upcoming"} setDisplay={setDisplay} setEventInfo={setEventInfo} />
       <EventSection eventList={pastEvents} eventType={"past"} />
     </div>
   </Page>;

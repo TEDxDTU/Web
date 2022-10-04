@@ -55,12 +55,12 @@ export default function Landing({ liveEvent }) {
 
                 camera.aspect = innerWidth / innerHeight;
                 camera.updateProjectionMatrix();
-                renderer?.setSize(document?.getElementById("particleAnimationOuter")?.clientWidth, innerHeight);
+                renderer?.setSize(document?.getElementById("particleAnimationOuter")?.clientWidth, innerHeight-80);
             }
 
             function init() {
 
-                HEIGHT = innerHeight;
+                HEIGHT = innerHeight-80;
                 WIDTH = document?.getElementById("particleAnimationOuter")?.clientWidth;
                 windowHalfX = WIDTH / 2;
                 windowHalfY = HEIGHT / 2;
@@ -202,7 +202,7 @@ export default function Landing({ liveEvent }) {
                 details={liveEvent?.details}
             /> */}
             <div id="particleAnimationOuter" className="relative h-full w-full">
-                <img src="/LandingPage/TEDxDTU_Black.png" className="absolute w-[70%] left-[15%] top-[35%] sm:w-[50%] sm:top-[35%] md:h-[35%] sm:left-[25%] md:top-[20%]" />
+                <img src="/LandingPage/TEDxDTU_Black.png" className="absolute w-[70%] left-[15%] top-[35%] sm:w-[50%] sm:top-[35%] md:h-[25%] lg:h-[35%] sm:left-[28%] md:top-[32%] lg:top-[28%]" />
                 <div id="particleAnimation"></div>
             </div>
             <CardSection />

@@ -32,7 +32,7 @@ export default function CardSection() {
               <div className="md:w-80 mt-2">
                 <Link href={!form ? "/register" : "/events"}>
                   <button className="bg-red-600 w-28 h-12 text-lg mt-2 hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 ">
-                    {!form ? "Register" : "Book Now"}
+                    Book Now
                   </button>
                 </Link>
               </div>

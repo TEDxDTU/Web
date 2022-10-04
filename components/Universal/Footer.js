@@ -12,25 +12,41 @@ const Footer = () => {
           </div>
         </Link>
         <div className="">
-          TEDxDTU is a self-organized branch of the humongous non-profit organization TEDx.
-          Our motto is to enlighten people,to impact fellow humans with powerful words, to ask them to believe that life is worth all the hustle and to appeal to a world that is ready to grow, ready to flourish and to welcome to new and better possibilities.
+          TEDxDTU is a self-organized branch of the humongous non-profit
+          organization TEDx. Our motto is to enlighten people,to impact fellow
+          humans with powerful words, to ask them to believe that life is worth
+          all the hustle and to appeal to a world that is ready to grow, ready
+          to flourish and to welcome to new and better possibilities.
         </div>
       </div>
       <div className="md:w-40 md:absolute mt-3 md:mt-0 flex flex-col md:right-16 md:mt-8 justify-center items-center md:justify-end md:content-end md:items-end md:justify-items-end md:text-right tracking-widest text-lg">
-        <ul className="flex flex-row md:flex-col justify-between px-10 md:px-0 w-full ">
-          <Link href={"/"}>
-            <li className="cursor-pointer ">Home</li>
-          </Link>
-          <Link href={"/events"}>
-            <li className="cursor-pointer">Events</li>
-          </Link>
-          <Link href={"/partners"}>
-            <li className="cursor-pointer">Partners</li>
-          </Link>
-          <Link href={"/about"}>
-            <li className="cursor-pointer">About</li>
-          </Link>
-        </ul>
+        <div className="flex flex-col md:flex-row">
+          <ul className="flex flex-col items-center justify-center md:justify-between px-10 md:px-0 w-full md:ml-10 md:whitespace-nowrap my-5 md:my-0 md:items-start">
+            <Link href={"/contact"}>
+              <li className="cursor-pointer ">Contact Us</li>
+            </Link>
+            <Link href={"/tnc"}>
+              <li className="cursor-pointer">Terms & Conditions</li>
+            </Link>
+            <Link href={"/returnpolicy"}>
+              <li className="cursor-pointer">Return Policy</li>
+            </Link>
+          </ul>
+          <ul className="flex flex-row md:flex-col justify-between px-10 md:px-0 w-full md:ml-20">
+            <Link href={"/"}>
+              <li className="cursor-pointer mx-4">Home</li>
+            </Link>
+            <Link href={"/events"}>
+              <li className="cursor-pointer mx-4">Events</li>
+            </Link>
+            <Link href={"/partners"}>
+              <li className="cursor-pointer mx-4">Partners</li>
+            </Link>
+            <Link href={"/about"}>
+              <li className="cursor-pointer mx-4">About</li>
+            </Link>
+          </ul>
+        </div>
         <div className="flex flex-row mt-3 md:mt-4">
           {/* <div className="ml-4">
             <a href="/">

@@ -11,16 +11,20 @@ export default function NavBar() {
   const [form, setForm] = useContext(FormContext);
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
-  useEffect(function () { }, []);
+  useEffect(function () {}, []);
 
   function logout() {
-    signOut(auth).then(() => {
-      console.log("Sign-out successful");
-      window?.localStorage?.removeItem("profile");
-      setForm(null);
-    }).catch((error) => {
-      alert("We are facing some issues in logging you out :(\nPlease try again later!!")
-    });
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful");
+        window?.localStorage?.removeItem("profile");
+        setForm(null);
+      })
+      .catch((error) => {
+        alert(
+          "We are facing some issues in logging you out :(\nPlease try again later!!"
+        );
+      });
   }
 
   useEffect(
@@ -138,6 +142,20 @@ export default function NavBar() {
           </div>
         </Link>
 
+        <Link href="/contact">
+          <div
+            className="
+        hover-underline-animation
+        pb-2
+        hover:text-red-600
+        hover:border-red-600
+        cursor-pointer
+        "
+          >
+            Contact Us
+          </div>
+        </Link>
+
         {form && (
           <Link href="/dashboard">
             <div
@@ -164,8 +182,7 @@ export default function NavBar() {
         text-lg hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 
         "
             onClick={() => {
-              form && logout()
-
+              form && logout();
             }}
           >
             {form ? "Log Out" : "Register"}
@@ -224,7 +241,7 @@ export default function NavBar() {
       md:w-32
       "
               onClick={() => {
-                form && logout()
+                form && logout();
               }}
             >
               {form ? "Log Out" : "Register"}

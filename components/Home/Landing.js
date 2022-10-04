@@ -81,7 +81,7 @@ export default function Landing({ liveEvent }) {
                 scene.fog = new THREE.FogExp2(fogHex, fogDensity);
 
                 container = document?.createElement('div');
-                document?.getElementById("particleAnimation")?.appendChild(container);
+                document?.getElementById("particleAnimation").appendChild(container);
                 document?.getElementById("particleAnimation").margin = 0;
                 document?.getElementById("particleAnimation").overflow = 'hidden';
 
@@ -90,9 +90,9 @@ export default function Landing({ liveEvent }) {
                 const points = []
                 for (i = 0; i < particleCount; i++) {
 
-                    const X = Math?.random() * 2000 - 1000;
                     const Y = Math?.random() * 2000 - 1000;
                     const Z = Math?.random() * 2000 - 1000;
+                    const X = Math?.random() * 2000 - 1000;
                     var vertex = new THREE.Vector3(X, Y, Z);
 
                     points?.push(vertex);

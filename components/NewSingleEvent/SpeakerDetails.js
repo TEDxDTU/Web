@@ -10,9 +10,18 @@ const SpeakerDetails = ({ speaker }) => {
   const [isSmallViewPort, setIsSmallViewPort] = useState(null);
   const [isMediumViewPort, setIsMediumViewPort] = useState(null);
 
-  useEffect(
-    () =>
-      (async () => {
+  useEffect(() => {
+    const viewPort = async () => {
+      if (innerWidth >= 1024) setIsLargeViewPort(true);
+      else setIsLargeViewPort(false);
+
+      if (innerWidth < 640) setIsSmallViewPort(true);
+      else setIsSmallViewPort(false);
+
+      if (innerWidth > 640 && innerWidth < 768) setIsMediumViewPort(true);
+      else setIsMediumViewPort(false);
+
+      window.addEventListener("resize", (evt) => {
         if (innerWidth >= 1024) setIsLargeViewPort(true);
         else setIsLargeViewPort(false);
 
@@ -21,22 +30,9 @@ const SpeakerDetails = ({ speaker }) => {
 
         if (innerWidth > 640 && innerWidth < 768) setIsMediumViewPort(true);
         else setIsMediumViewPort(false);
-
-        window.addEventListener("resize", (evt) => {
-          if (innerWidth >= 1024) setIsLargeViewPort(true);
-          else setIsLargeViewPort(false);
-
-          if (innerWidth < 640) setIsSmallViewPort(true);
-          else setIsSmallViewPort(false);
-
-          if (innerWidth > 640 && innerWidth < 768) setIsMediumViewPort(true);
-          else setIsMediumViewPort(false);
-        });
-      })(),
-    []
-  );
-
-  useEffect(() => {
+      });
+    };
+    viewPort();
     Aos.init({ duration: 1000 });
   }, []);
 

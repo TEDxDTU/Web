@@ -5,20 +5,19 @@ import { BsInstagram, BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
 const Footer = () => {
   return (
     <div className="w-full h-68 lg:h-64 bottom-0 left-0 right-0 text-white bg-red-600 bg-no-repeat bg-center bg-cover flex flex-col text-base font-sans md:justify-between relative tracking-widest">
-      <div className="flex flex-col md:w-1/2 px-10 md:px-16 mt-6 md:mt-8 text-sm">
+      <div className="flex flex-col md:w-[53%] px-10 md:px-16 mt-6 md:mt-8 text-sm">
         <Link href={"/"}>
           <div className="w-40 mb-4 cursor-pointer drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)] mx-auto md:mx-0">
             <img src="/LandingPage/Logo-White-Text.svg" alt="TEDxDTU Logo" />
           </div>
         </Link>
         <div className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-          inventore porro eius temporibus, voluptates deserunt nisi dignissimos
-          veniam vitae consequatur ad tenetur rerum.
+          TEDxDTU is a self-organized branch of the humongous non-profit organization TEDx.
+          Our motto is to enlighten people,to impact fellow humans with powerful words, to ask them to believe that life is worth all the hustle and to appeal to a world that is ready to grow, ready to flourish and to welcome to new and better possibilities.
         </div>
       </div>
       <div className="md:w-40 md:absolute mt-3 md:mt-0 flex flex-col md:right-16 md:mt-8 justify-center items-center md:justify-end md:content-end md:items-end md:justify-items-end md:text-right tracking-widest text-lg">
-        <ul className="flex flex-row md:flex-col  justify-around w-full ">
+        <ul className="flex flex-row md:flex-col justify-between px-10 md:px-0 w-full ">
           <Link href={"/"}>
             <li className="cursor-pointer ">Home</li>
           </Link>

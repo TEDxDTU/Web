@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TnC(props) {
+export default function PrivacyPolicy(props) {
   return (
     <div className="text-center mx-10 py-4 md:mx-24">
       <h1 className="my-4 font-extrabold text-red-600 tracking-widest text-xl">

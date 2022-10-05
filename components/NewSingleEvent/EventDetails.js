@@ -162,7 +162,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
           </div>
         </div>
         <h1 className="flex items-center justify-center">
-          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">{eventDetails?.title}</div>
+          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">TEDxDTU 2022 | {eventDetails?.title}</div>
           {eventDetails?.areBookingActive&&<div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold" onClick={()=>{
                 if (auth?.currentUser === null) {
                   alert("Please login to book the tickets.");

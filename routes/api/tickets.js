@@ -12,6 +12,7 @@ const razorpayLib = require("razorpay");
 const Ticket = require("../../schemas/ticket");
 const Event = require("../../schemas/event");
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const nodeHtmlToImage = require('node-html-to-image');
 const withAuth = require("../../middleware/auth").withAuth;
 
 const Razorpay = new razorpayLib({
@@ -27,7 +28,7 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: process.env.EMAIL_REFRESH_TOKEN });
 
 async function sendMail(req) {
-  const { user, event, newTicket, ticketQR } = req;
+  const { user, ticketQR, newTicket } = req;
 
   try {
     const accessToken = await oAuth2Client.getAccessToken();
@@ -44,13 +45,18 @@ async function sendMail(req) {
       },
     });
 
+    const url = await nodeHtmlToImage({
+      output: './ticket.png',
+      html: '<div><img src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket1.png?alt=media&token=5a5f5a3f-7f0d-4b71-9109-e7a5ac2a91b3"><div style="display:flex; justify-content: space-around; font-size:50px; background-color:#e62b1e; width:420px; position:relative;"><div style="color:white; margin-top:35px; margin-right:60px; margin-left:30px;">' + newTicket.noOfTickets + ' Ticket</div><div><img style="margin-top:10px; margin-bottom:10px;" src="' + ticketQR + '" alt="QR Code"></div></div><img src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket2.png?alt=media&token=9f88400e-b299-4574-bb5d-960966141b26"></div>'
+    });
+    const val = 'data:image/png;charset=utf-8;base64,' + url.toString('base64');
+
     const mailOptions = {
       from: 'TEDx DTU <tedx@dtu.ac.in>',
-      to: user.email,
-      subject: 'Hello from gmail using API',
-      text: 'Hello from gmail email using API',
+      to: user?.email,
+      subject: 'TEDxDTU 2022 Booking Confirmation',
       attachDataUrls: true,
-      html: '<div><img src="' + ticketQR + '" alt="QR Code">Hello from gmail email using API</div>',
+      html: '<div><img src="' + val + '"></div>',
     };
 
     const result = await transport.sendMail(mailOptions);
@@ -65,7 +71,7 @@ router.post("/generate-order", withAuth, async (req, res) => {
   const { _id } = JSON.parse(req.body.user);
   const { numTickets, price } = req.body;
   const existingUser = await User.findOne({ _id });
-    
+
   try {
     if (!existingUser)
       return res
@@ -93,6 +99,30 @@ router.post("/generate-order", withAuth, async (req, res) => {
     res.json({ msg: "Unknown Server Error" }).status(500);
   }
 });
+
+// router.get("/mail", async (req, res) => {
+
+//   let ticketQR = await QRCode.toDataURL("sdsjdsjd");
+
+//   const newTicket = new Ticket({
+//     userID: "jhfj",
+//     eventID: "jfhj",
+//     razorpayOrderID: "jdsh",
+//     noOfTickets: 4
+//   });
+
+//   sendMail({ newTicket, ticketQR })
+//     .then((result) => console.log('Email sent successfully!'))
+//     .catch((error) => console.log(error.message));
+
+
+//   res.json({
+//     success: true,
+//     msg: "Payment verified and accepted",
+//     redirectURL: "",
+//   }).status(200);
+
+// });
 
 router.post("/verify", async (req, res) => {
 
@@ -142,6 +172,7 @@ router.post("/verify", async (req, res) => {
     });
   }
 
+  console.log("hi");
   let ticketQR = await QRCode.toDataURL(order_id);
 
   sendMail({ user, event, newTicket, ticketQR })

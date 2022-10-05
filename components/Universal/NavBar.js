@@ -142,20 +142,6 @@ export default function NavBar() {
           </div>
         </Link>
 
-        <Link href="/contact">
-          <div
-            className="
-        hover-underline-animation
-        pb-2
-        hover:text-red-600
-        hover:border-red-600
-        cursor-pointer
-        "
-          >
-            Contact Us
-          </div>
-        </Link>
-
         {form && (
           <Link href="/dashboard">
             <div

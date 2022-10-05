@@ -18,7 +18,7 @@ export default function CardSection() {
         <div className="relative group md:mt-44 mt-8">
           <div className="relative leading-none">
             <div className="ml-[2rem] w-[20rem] md:ml-[5rem] mt-4 lg:w-[36rem] lg:ml-[7.5rem] lg:mt-5">
-              <div>TEDxDTU welcomes you</div>
+              <div>TEDxDTU 2022 on 16th October in Delhi |</div>
               <div className=" text-2xl mt-2 md:text-3xl lg:text-4xl">
                 A world full of
               </div>

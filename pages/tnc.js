@@ -9,7 +9,7 @@ export default function tnc(content) {
   }
 
   return (
-    <Page>
+    <Page pageTitle={'Terms and Conditions'}>
       <header className="text-center text-6xl py-8 text-black text-stroke-thin-red font-bold ">
         Terms & Conditions
       </header>

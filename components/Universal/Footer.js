@@ -4,7 +4,7 @@ import { BsInstagram, BsTwitter, BsLinkedin } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <div className="w-full h-68 lg:h-64 bottom-0 left-0 right-0 text-white bg-red-600  flex flex-col text-base font-sans md:justify-between relative tracking-widest overflow-x-hidden">
+    <div className="w-full h-68 lg:h-64 bottom-0 left-0 right-0 text-white bg-red-600  flex flex-col text-base font-sans md:justify-between relative tracking-widest overflow-hidden">
       <div className="flex flex-col text-justify md:text-left md:w-[53%] px-10 md:px-16 mt-6 md:mt-8 text-sm">
         <Link href={"/"}>
           <div className="w-40 mb-4 cursor-pointer drop-shadow-[3px_5px_2px_rgba(0,0,0,0.4)] mx-auto md:mx-0">

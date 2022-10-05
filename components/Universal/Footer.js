@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { BsInstagram, BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
+import { BsInstagram, BsTwitter, BsLinkedin } from "react-icons/bs";
 
 const Footer = () => {
   return (

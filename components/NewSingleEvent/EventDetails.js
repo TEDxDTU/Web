@@ -142,9 +142,15 @@ console.log(eventDetails);
           </div>
         )}
 
-        <h1 className="flex items-center justify-center">
-          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">{eventDetails.eventType === "upcoming" && "TEDxDTU 2022 |"} {eventDetails?.title}</div>
-          {eventDetails?.areBookingActive && <div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-[rgb(255,255,255)] py-1 px-3 mr-2 font-semibold" onClick={() => {
+        <h1 className="flex items-center justify-center flex-row">
+          <div className="flex flex-col md:flex-row">
+            <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize my-1 md:my-4 md:ml-4 mr-0 text-center md:text-left ">{eventDetails.eventType === "upcoming" && "TEDxDTU 2022 | "}</div>
+            <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize my-1 md:my-4 md:mr-4 ml-1 text-center md:text-left">{eventDetails?.title}</div>
+          </div>
+          {eventDetails?.areBookingActive && 
+          <div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition ml-5 md:ml-0
+          bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-[rgb(255,255,255)] py-1 px-3 mr-2 font-semibold"
+           onClick={() => {
             if (auth?.currentUser === null) {
               alert("Please login to book the tickets.");
               router.push("/register");

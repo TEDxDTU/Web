@@ -20,11 +20,13 @@ const  VideoCarousel = (props) => {
 
     const handleOnPrevClick = () =>{
         setCurrentIndex(prevIndex =>(prevIndex + videoLength - 1) % videoLength );
-        sliderRef.current.classList.add("fade-anim");
+        if(sliderRef.current !== null)
+            sliderRef.current.classList.add("fade-anim");
     }
     const handleOnNextClick = () =>{
         setCurrentIndex(prevIndex => (prevIndex+1)%videoLength);
-        sliderRef.current.classList.add("fade-anim");
+        if(sliderRef.current !== null)
+            sliderRef.current.classList.add("fade-anim");
     }
 
     const startSlider = () =>{
@@ -37,7 +39,8 @@ const  VideoCarousel = (props) => {
         clearInterval(slideInterval);
     }
     const removeAnimation = () =>{
-        sliderRef.current.classList.remove("fade-anim")
+        if(sliderRef.current !== null)
+            sliderRef.current.classList.remove("fade-anim")
     }
     useEffect(() => {
         sliderRef.current.addEventListener("animationend",removeAnimation);

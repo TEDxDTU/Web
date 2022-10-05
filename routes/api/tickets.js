@@ -45,15 +45,16 @@ async function sendMail(req) {
       },
     });
 
+    const str = (newTicket.noOfTickets > 1) ? "Tickets" : "Ticket";
     const url = await nodeHtmlToImage({
       output: './ticket.png',
-      html: '<img style="width:100%;" src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket1.png?alt=media&token=5a5f5a3f-7f0d-4b71-9109-e7a5ac2a91b3"><div style="display:flex; justify-content: space-around; font-size:50px; background-color:#e62b1e; width:100%; position:relative;"><div style="color:white; margin-top:35px; margin-right:60px; margin-left:30px;">' + newTicket.noOfTickets + ' Ticket</div><div><img style="margin-top:10px; margin-bottom:10px;" src="' + ticketQR + '" alt="QR Code"></div></div><img  style="width:100%;" src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket2.png?alt=media&token=9f88400e-b299-4574-bb5d-960966141b26">'
+      html: '<img style="width:100%;" src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket1.png?alt=media&token=5a5f5a3f-7f0d-4b71-9109-e7a5ac2a91b3"><div style="display:flex; justify-content: space-around; font-size:50px; background-color:#e62b1e; width:100%; position:relative;"><div style="color:white; margin-top:60px; margin-right:60px; margin-left:30px;">' + newTicket.noOfTickets + ' ' + str + '</div><div><img style="margin-top:10px; margin-bottom:10px; width:200px; height:200px" src="' + ticketQR + '" alt="QR Code"></div></div><img  style="width:100%;" src="https://firebasestorage.googleapis.com/v0/b/tedx-dtu.appspot.com/o/mail-images%2FEmail%20ticket2.png?alt=media&token=9f88400e-b299-4574-bb5d-960966141b26">'
     });
     const val = 'data:image/png;charset=utf-8;base64,' + url.toString('base64');
 
     const mailOptions = {
       from: 'TEDx DTU <tedx@dtu.ac.in>',
-      to: (user?.email)?user?.email:"dons311201@gmail.com",
+      to: (user?.email) ? user?.email : "dons311201@gmail.com",
       subject: 'TEDxDTU 2022 Booking Confirmation',
       attachDataUrls: true,
       html: '<div><img src="' + val + '"></div>',

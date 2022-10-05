@@ -1,8 +1,5 @@
 import Page from "../../components/Universal/Page";
-import ReactPlayer from "react-player";
-import React, { useContext, useState, useEffect } from "react";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useState} from "react";
 import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
 import { getAuth } from 'firebase/auth';
@@ -12,6 +9,7 @@ import { TicketSelection } from "../Events/ExtraComponent";
 import SpeakerPopUp from "./SpeakerPopUp";
 import EventInfo from "./EventInfo";
 import Gallery from "./Gallery";
+import VideoCarousel from "./VideoCarousel";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {
   const pastEventsSize = pastEvents.length;
@@ -127,43 +125,26 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
 
       <div className={`${display && 'pointer-events-none opacity-25'} flex flex-col items-center justify-center`}>
 
-        {/* Whoever is reading this don't delete the code below !  */}
-
-        {/* {eventDetails.streamingUrl !== null ? (
-          <div className="relative flex items-center justify-center md:w-4/6 w-5/6 h-1/2 md:h-3/4 pt-5">
-            <ReactPlayer
-              className=""
-              url={eventDetails.streamingUrl}
-              controls={true}
-              light={eventDetails.imageUrl}
-              playIcon={
-                <div className="relative w-full h-full items-center justify-center flex">
-                  <h1 className="text-2xl lg:text-4xl font-light text-white drop-shadow capitalize absolute top-0 left-0 pl-2 pt-2">
-                    {eventDetails.title}
-                  </h1>
-                  <div className="w-full h-fit flex justify-center">
-                    <FontAwesomeIcon
-                      className="text-white w-4 sm:w-5 lg:w-8 hover:text-red-600"
-                      icon={faPlay}
-                    />
-                  </div>
-                </div>
-              }
-            />
-          </div>
+        {eventDetails.videoUrls.length !== 0 ? (
+          <VideoCarousel 
+          videoUrls={[...eventDetails.videoUrls]} 
+          imageUrl={eventDetails.imageUrl}
+          title = {eventDetails.title}>
+          </VideoCarousel>
         ) : (
-          <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
-            <img className="w-5/6" src={eventDetails.imageUrl} />
+          // <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
+          //   <img className="w-5/6" src={eventDetails.imageUrl} />
+          // </div>
+          <div className="md:w-4/6 h-5/6 md:h-4/6 md:h-3/4">
+            <div className="flex justify-center relative">
+              <img className="w-[90%]" src={eventDetails?.imageUrl} />
+            </div>
           </div>
-        )} */}
-        <div className="md:w-4/6 h-5/6 md:h-4/6 md:h-3/4">
-          <div className="flex justify-center relative">
-            <img className="w-[90%]" src={eventDetails?.imageUrl} />
-          </div>
-        </div>
+        )}
+
         <h1 className="flex items-center justify-center">
           <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">TEDxDTU 2022 | {eventDetails?.title}</div>
-          {eventDetails?.areBookingActive&&<div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-white py-1 px-3 mr-2 font-semibold" onClick={()=>{
+          {eventDetails?.areBookingActive&&<div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-[rgb(255,255,255)] py-1 px-3 mr-2 font-semibold" onClick={()=>{
                 if (auth?.currentUser === null) {
                   alert("Please login to book the tickets.");
                   router.push("/register");

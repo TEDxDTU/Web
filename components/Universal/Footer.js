@@ -31,6 +31,9 @@ const Footer = () => {
             <Link href={"/returnpolicy"}>
               <li className="cursor-pointer">Return Policy</li>
             </Link>
+            <Link href={"/privacypolicy"}>
+              <li className="cursor-pointer">Privacy Policy</li>
+            </Link>
           </ul>
           <ul className="flex flex-row md:flex-col justify-between px-10 md:px-0 w-full md:ml-20">
             <Link href={"/"}>

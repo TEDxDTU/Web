@@ -26,7 +26,7 @@ export const TicketSelection = ({ displayRazorpay, setDisplay, setnumTickets, ev
                             {/* Options for number of tickets */}
                             <div className='flex'>
                                 {count.map((val, idx) =>
-                                    <div onClick={() => setnumTickets(val)} className={`rounded-full px-2 m-1 sm:p-0.5 sm:px-2.5 sm:m-2 cursor-pointer ${val === numTickets ? 'ticketBoxhover' : 'ticketBox'}`}>{val}</div>)}
+                                    <div key={idx} onClick={() => setnumTickets(val)} className={`rounded-full px-2 m-1 sm:p-0.5 sm:px-2.5 sm:m-2 cursor-pointer ${val === numTickets ? 'ticketBoxhover' : 'ticketBox'}`}>{val}</div>)}
                             </div>
                             {/* Auto Svg */}
                             <div className='flex justify-end'>

@@ -3,7 +3,7 @@ import Page from "../components/Universal/Page";
 import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
 import contents from "../components/TermsAndConditions/Contents";
 
-export default function TermsAndConditions(content) {
+export default function Tnc(content) {
   function createContent(content) {
     return <TermsAndConditions title={content.title} text={content.text} />;
   }

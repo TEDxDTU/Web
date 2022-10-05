@@ -3,9 +3,9 @@ import Page from "../components/Universal/Page";
 import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
 import contents from "../components/PrivacyPolicy/Contents";
 
-export default function tnc(content) {
-    function createContent(content) {
-        return <PrivacyPolicy title={content.title} text={content.text} />;
+export default function tnc() {
+    function createContent(content,val) {
+        return <PrivacyPolicy key={val} title={content.title} text={content.text} />;
     }
 
     return (

@@ -25,13 +25,13 @@ const Footer = () => {
             <Link href={"/contact"}>
               <li className="cursor-pointer ">Contact Us</li>
             </Link>
-            <Link href={"/termsandconditions"}>
+            <Link href={"/terms-and-conditions"}>
               <li className="cursor-pointer">Terms & Conditions</li>
             </Link>
-            <Link href={"/returnpolicy"}>
+            <Link href={"/return-policy"}>
               <li className="cursor-pointer">Return Policy</li>
             </Link>
-            <Link href={"/privacypolicy"}>
+            <Link href={"/privacy-policy"}>
               <li className="cursor-pointer">Privacy Policy</li>
             </Link>
           </ul>

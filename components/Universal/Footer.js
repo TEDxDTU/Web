@@ -25,7 +25,7 @@ const Footer = () => {
             <Link href={"/contact"}>
               <li className="cursor-pointer ">Contact Us</li>
             </Link>
-            <Link href={"/tnc"}>
+            <Link href={"/TermsAndConditions"}>
               <li className="cursor-pointer">Terms & Conditions</li>
             </Link>
             <Link href={"/returnpolicy"}>

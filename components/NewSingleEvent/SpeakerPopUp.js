@@ -31,7 +31,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
         key={i}
         href={speakerDetails?.resources[i]}
         target="_blank"
-        className="hover:text-black"
+        className=" text-slate-50 hover:text-black transition-colors duration-200"
       >
         {linkToPush}
       </a>
@@ -54,7 +54,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
     >
       {/* Bio Section */}
       <div className="flex flex-col overflow-auto max-h-[75%] absolute w-2/3 md:w-3/5 shadow-xl shadow-black bg-red-600 text-white rounded-md p-5 border-2 border-black border-opacity-25">
-        <div className="flex flex-col flex-row ">
+        <div className="flex flex-col ">
 
           {/* Image  */}
           <div className="flex item-center h-full justify-center w-full mx-auto">
@@ -103,7 +103,7 @@ const SpeakerPopUp = ({ displaySpeaker, eventDetails }) => {
           {speakerDetails?.resources?.length === 0? null :
             <div className="flex flex-col md:w-1/2">
               <div className="tracking-wider font-bold">Links</div>
-              <div className="flex-col flex font-light">{LinksList}</div>
+              <div className="flex-col flex font-light text-white">{LinksList}</div>
             </div>
           }
         </div>

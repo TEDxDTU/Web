@@ -155,6 +155,20 @@ hover-underline-animation {
   animation: spin 1s linear infinite;
 }
 
+
+.fade-anim div{
+  animation: fadeAnim 0.5s;
+}
+
+@keyframes fadeAnim{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity : 1;
+  }
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }

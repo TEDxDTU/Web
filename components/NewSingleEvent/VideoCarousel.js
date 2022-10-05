@@ -4,9 +4,9 @@ import { faPlay,faChevronLeft,faChevronRight } from "@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const  VideoCarousel = (props) => {
-    const videoUrls = props.videoUrls
-    const imageUrl = props.imageUrl;
-    const title = props.title;
+    const videoUrls = props?.videoUrls
+    const imageUrl = props?.imageUrl;
+    const title = props?.title;
 
     const sliderRef = useRef(null);
     const nextButton = useRef(null);

@@ -18,8 +18,8 @@ const AboutBanner = () => {
 
         <ContactContent
           contents={[
-            [<FontAwesomeIcon icon={faPhone} />, "+91 99xxxxxxxx"],
-            [<FontAwesomeIcon icon={faEnvelope} />, "tedxdtu@dtu.ac.in"],
+            [<FontAwesomeIcon icon={faPhone} />, "+91 9717022815"],
+            [<FontAwesomeIcon icon={faEnvelope} />, "tedx@dtu.ac.in"],
           ]}
         />
         {/* <div className="mx-auto mb-16 lg:mb-32 w-3/4 " data-aos="fade-up">

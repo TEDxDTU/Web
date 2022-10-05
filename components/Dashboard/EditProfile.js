@@ -1,16 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { LoadingContext } from "../../contextFiles/loadingContext";
-import { getAuth, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, onAuthStateChanged, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { FormContext } from "../../contextFiles/formContext";
 import { initializeApp } from "firebase/app";
 import firebaseConfigAPI from "../../firebaseAPI";
+import { useRouter } from "next/router";
 import { InputField, InputImage, SaveAndCancelButton, updateCall } from "./SharedComp";
 
 export default function EditProfile() {
 
     const [editState, setEditState] = useState(false);
     const [form, setForm] = useContext(FormContext);
+    const [isLargeViewPort, setIsLargeViewPort] = useState(null);
     const [loading, setLoading] = useContext(LoadingContext);
+    const router = useRouter();
+
+    useEffect(
+        () =>
+            (async () => {
+                if (innerWidth >= 1024) setIsLargeViewPort(true);
+                window.addEventListener("resize", (evt) => {
+                    if (innerWidth >= 1024) setIsLargeViewPort(true);
+                    else {
+                        setIsLargeViewPort(false);
+                    }
+                });
+            })(),
+        []
+    );
 
     function BackToOldState() {
         setForm(JSON.parse(window.localStorage.getItem("profile")));
@@ -55,12 +72,29 @@ export default function EditProfile() {
             })
     }
 
+    function logout() {
+        const auth = getAuth(initializeApp(firebaseConfigAPI));
+        signOut(auth)
+            .then(() => {
+                console.log("Sign-out successful");
+                window?.localStorage?.removeItem("profile");
+                setForm(null);
+                router.push("/");
+            })
+            .catch((error) => {
+                alert(
+                    "We are facing some issues in logging you out :(\nPlease try again later!!"
+                );
+            });
+    }
+
     return (<div className="bg-[rgba(100,100,100,0.3)] rounded-md mt-12 p-2">
         <div className="flex justify-between px-6 md:px-4 lg:px-8 mb-10">
             <div className="font-semibold text-4xl mt-4">Profile</div>
             <div className="md:flex">
                 <div className="text-sm text-red-600 underline cursor-pointer mt-2 md:mt-4 mr-4" onClick={() => setEditState(true)}>Edit Profile</div>
-                <div className="text-sm text-red-600 underline cursor-pointer mt-1 md:mt-4" onClick={() => changePassword()}>Change Password</div>
+                <div className="text-sm text-red-600 underline cursor-pointer mt-1 md:mt-4 mr-4" onClick={() => changePassword()}>Change Password</div>
+                {isLargeViewPort && <div className="text-sm text-red-600 underline cursor-pointer mt-1 md:mt-4" onClick={() => logout()}>Log Out</div>}
             </div>
         </div>
         <div className="">

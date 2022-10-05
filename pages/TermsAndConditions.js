@@ -1,11 +1,11 @@
 import React from "react";
 import Page from "../components/Universal/Page";
-import TnC from "../components/TnC/TnC";
-import contents from "../components/TnC/Contents";
+import TermsAndConditions from "../components/TermsAndConditions/TermsAndConditions";
+import contents from "../components/TermsAndConditions/Contents";
 
-export default function tnc(content) {
+export default function TermsAndConditions(content) {
   function createContent(content) {
-    return <TnC title={content.title} text={content.text} />;
+    return <TermsAndConditions title={content.title} text={content.text} />;
   }
 
   return (

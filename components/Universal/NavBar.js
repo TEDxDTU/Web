@@ -11,7 +11,7 @@ export default function NavBar() {
   const [form, setForm] = useContext(FormContext);
   const auth = getAuth(initializeApp(firebaseConfigAPI));
 
-  useEffect(function () {}, []);
+  useEffect(function () { }, []);
 
   function logout() {
     signOut(auth)
@@ -74,7 +74,7 @@ export default function NavBar() {
         <Link href="/">
           <div
             className="
-        col-start-7
+        col-start-8
         hover-underline-animation
         pb-2
         hover:text-red-600
@@ -158,7 +158,7 @@ export default function NavBar() {
           </Link>
         )}
 
-        <Link href={form ? "/" : "/register"}>
+        {!form && <Link href="/register">
           <button
             className="
         bg-red-600
@@ -167,13 +167,10 @@ export default function NavBar() {
         h-12
         text-lg hover:border-red-600 hover:border-2 hover:bg-white hover:text-red-600 
         "
-            onClick={() => {
-              form && logout();
-            }}
           >
-            {form ? "Log Out" : "Register"}
+            Register
           </button>
-        </Link>
+        </Link>}
       </nav>
     );
 
@@ -181,7 +178,7 @@ export default function NavBar() {
     return (
       <>
         <header
-          className="
+          className='
     flex
     flex-row
     bg-black
@@ -193,7 +190,7 @@ export default function NavBar() {
     text-white
     justify-between
     items-center
-    "
+    '
         >
           <img
             className="
@@ -207,16 +204,17 @@ export default function NavBar() {
           />
           <Link href="/">
             <img
-              className="
+              className={`
           w-40
+          ${form && 'mr-16'}
           cursor-pointer
-        "
+        `}
               src="/LandingPage/Logo-White-Text.svg"
               alt="TEDxDTU Logo"
             />
           </Link>
 
-          <Link href={form ? "/" : "/register"}>
+          {!form && <Link href="/register">
             <button
               className="
       bg-red-600
@@ -226,13 +224,10 @@ export default function NavBar() {
       w-24
       md:w-32
       "
-              onClick={() => {
-                form && logout();
-              }}
             >
-              {form ? "Log Out" : "Register"}
+              Register
             </button>
-          </Link>
+          </Link>}
         </header>
         {/* {isNavOpen && (
           <nav
@@ -352,8 +347,23 @@ export default function NavBar() {
                 About
               </button>
             </Link>
+            {form && <Link href="/">
+              <button
+                className="
+                bg-red-600
+                rounded
+                w-3/4
+                py-4
+                my-4
+                  "
+                onClick={() => logout()}
+              >
+                Log Out
+              </button>
+            </Link>}
           </nav>
-        )}
+        )
+        }
       </>
     );
 }

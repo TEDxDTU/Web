@@ -17,8 +17,8 @@ export default function AboutContent({ title, contents}) {
       <header
         className='text-center text-6xl my-8 text-black text-stroke-thin-red font-bold '
       >{title}</header>
-      {contents?.map((content)=>{
-        return <p className='bg-[rgba(100,100,100,0.3)] rounded p-4 my-4 text-xl text-justify'>
+      {contents?.map((content,val)=>{
+        return <p key={val} className='bg-[rgba(100,100,100,0.3)] rounded p-4 my-4 text-xl text-justify'>
           {content}
         </p>
       })}

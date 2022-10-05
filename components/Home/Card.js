@@ -24,7 +24,7 @@ export default function Card(props) {
                     <div>
                         <p className="py-2 tracking-wide mx-4">Did you know that the TED in TED Talks stands for Technology, Entertainment and Design? Collaboration and partnerships are one of the many hallmarks of a TED Talk.
                         </p>
-                        <p className="py-2 tracking-wide mx-4">In our case, we are proud to have partnered up with xxxx(Raid Shadow Legends?) and many other sponsors for the successful execution of our talk shows. We believe that by creating such tie-ups with a variety of companies spanning different domains of the Industry, we can create a richer experience for idea sharing and conversations. 
+                        <p className="py-2 tracking-wide mx-4">In our case, we are proud to have partnered up with <b>The Tatva</b> and many other sponsors for the successful execution of our talk shows. We believe that by creating such tie-ups with a variety of companies spanning different domains of the Industry, we can create a richer experience for idea sharing and conversations. 
                         </p>
                     </div> :
                  null}

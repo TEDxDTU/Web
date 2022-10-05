@@ -1,5 +1,5 @@
 import Page from "../../components/Universal/Page";
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
 import { getAuth } from 'firebase/auth';
@@ -12,8 +12,8 @@ import Gallery from "./Gallery";
 import VideoCarousel from "./VideoCarousel";
 
 const findEvent = (pastEvents, upcomingEvents, eventID) => {
-  const pastEventsSize = pastEvents.length;
-  const upcomingEventsSize = upcomingEvents.length;
+  const pastEventsSize = pastEvents?.length;
+  const upcomingEventsSize = upcomingEvents?.length;
 
   for (var i = 0; i < pastEventsSize; i++) {
     if (eventID === pastEvents[i]?._id) {
@@ -79,7 +79,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
 
     const data = await response.json();
     const { email, name, firebaseID } = JSON.parse(user);
-  
+
     const options = {
       key: process.env.RAZORPAY_KEY_ID,
       currency: data?.currency,
@@ -118,18 +118,18 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
       ></SpeakerDetails>
     );
   }
-
+console.log(eventDetails);
   return (
     <Page pageTitle={"Events"}>
       {display && <TicketSelection setDisplay={setDisplay} numTickets={numTickets} setnumTickets={setnumTickets} eventInfo={eventDetails} displayRazorpay={displayRazorpay} />}
 
       <div className={`${display && 'pointer-events-none opacity-25'} flex flex-col items-center justify-center`}>
 
-        {eventDetails.videoUrls.length !== 0 ? (
-          <VideoCarousel 
-          videoUrls={[...eventDetails.videoUrls]} 
-          imageUrl={eventDetails.imageUrl}
-          title = {eventDetails.title}>
+        {eventDetails?.videoUrls?.length !== 0 ? (
+          <VideoCarousel
+            videoUrls={[...eventDetails.videoUrls]}
+            imageUrl={eventDetails.imageUrl}
+            title={eventDetails.title}>
           </VideoCarousel>
         ) : (
           // <div className="flex items-center justify-center md:w-4/6 w-5/6 h-4/6 md:h-3/4">
@@ -143,14 +143,14 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
         )}
 
         <h1 className="flex items-center justify-center">
-          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">TEDxDTU 2022 | {eventDetails?.title}</div>
-          {eventDetails?.areBookingActive&&<div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-[rgb(255,255,255)] py-1 px-3 mr-2 font-semibold" onClick={()=>{
-                if (auth?.currentUser === null) {
-                  alert("Please login to book the tickets.");
-                  router.push("/register");
-                  return;
-                }
-                setDisplay(true);
+          <div className="text-2xl md:text-3xl font-bold text-white lg:text-4xl capitalize m-4 ">{eventDetails.eventType === "upcoming" && "TEDxDTU 2022 |"} {eventDetails?.title}</div>
+          {eventDetails?.areBookingActive && <div className="rounded-2xl cursor-pointer mt-2 duration-200 delay-75 transition bg-red-500 hover:text-[#2C2C2C] hover:bg-white text-[rgb(255,255,255)] py-1 px-3 mr-2 font-semibold" onClick={() => {
+            if (auth?.currentUser === null) {
+              alert("Please login to book the tickets.");
+              router.push("/register");
+              return;
+            }
+            setDisplay(true);
           }}>
             Book Now
           </div>}

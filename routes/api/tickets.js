@@ -54,7 +54,7 @@ async function sendMail(req) {
 
     const mailOptions = {
       from: 'TEDx DTU <tedx@dtu.ac.in>',
-      to: (user?.email) ? user?.email : "dons311201@gmail.com",
+      to: (user?.email) ? user?.email : "tedx@dtu.ac.in",
       subject: 'TEDxDTU 2022 Booking Confirmation',
       attachDataUrls: true,
       html: '<div><img src="' + val + '"></div>',
@@ -101,29 +101,29 @@ router.post("/generate-order", withAuth, async (req, res) => {
   }
 });
 
-router.get("/mail", async (req, res) => {
+// router.get("/mail", async (req, res) => {
 
-  let ticketQR = await QRCode.toDataURL("sdsjdsjd");
+//   let ticketQR = await QRCode.toDataURL("sdsjdsjd");
 
-  const newTicket = new Ticket({
-    userID: "jhfj",
-    eventID: "jfhj",
-    razorpayOrderID: "jdsh",
-    noOfTickets: 4
-  });
+//   const newTicket = new Ticket({
+//     userID: "jhfj",
+//     eventID: "jfhj",
+//     razorpayOrderID: "jdsh",
+//     noOfTickets: 4
+//   });
 
-  sendMail({ newTicket, ticketQR })
-    .then((result) => console.log('Email sent successfully!'))
-    .catch((error) => console.log(error.message));
+//   sendMail({ newTicket, ticketQR })
+//     .then((result) => console.log('Email sent successfully!'))
+//     .catch((error) => console.log(error.message));
 
 
-  res.json({
-    success: true,
-    msg: "Payment verified and accepted",
-    redirectURL: "",
-  }).status(200);
+//   res.json({
+//     success: true,
+//     msg: "Payment verified and accepted",
+//     redirectURL: "",
+//   }).status(200);
 
-});
+// });
 
 router.post("/verify", async (req, res) => {
 
@@ -173,7 +173,7 @@ router.post("/verify", async (req, res) => {
     });
   }
 
-  console.log("hi");
+  // console.log("hi");
   let ticketQR = await QRCode.toDataURL(order_id);
 
   sendMail({ user, event, newTicket, ticketQR })

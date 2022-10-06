@@ -14,7 +14,7 @@ const AboutBanner = () => {
     <div className="flex flex-col justify-center items-center w-full py-16">
       <ContactContent
         contents={[
-          [<FontAwesomeIcon icon={faLocationDot} />, "DTU, Delhi"],
+          [<FontAwesomeIcon icon={faLocationDot} />, "Delhi Technological University, Shahbad Daulatpur Village, Rohini, New Delhi, Delhi-110042"],
           [<FontAwesomeIcon icon={faPhone} />, "+91 9717022815"],
           [<FontAwesomeIcon icon={faEnvelope} />, "tedx@dtu.ac.in"],
         ]}

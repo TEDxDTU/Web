@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { noEventContext } from "../../pages/events/[EventDetails]";
 import SpeakerDetails from "./SpeakerDetails";
 import { getAuth } from 'firebase/auth';
+import { useRouter } from "next/router";
 import { initializeApp } from 'firebase/app';
 import firebaseConfigAPI from '../../firebaseAPI';
 import { TicketSelection } from "../Events/ExtraComponent";
@@ -39,6 +40,7 @@ const EventDetails = ({ eventID, pastEvents, upcomingEvents }) => {
   const [displaySpeaker, setDisplaySpeaker] = useState("null");
   const [numTickets, setnumTickets] = useState(1);
   const [display, setDisplay] = useState(false);
+  const router=useRouter();
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -153,7 +155,7 @@ console.log(eventDetails);
            onClick={() => {
             if (auth?.currentUser === null) {
               alert("Please login to book the tickets.");
-              router.push("/register");
+              router?.push("/register");
               return;
             }
             setDisplay(true);

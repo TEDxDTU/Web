@@ -3,7 +3,7 @@ import Page from "../components/Universal/Page";
 
 export default function returnpolicy() {
   return (
-    <Page>
+    <Page pageTitle={"Return Policy"}>
       <header className="text-center text-6xl py-8 text-black text-stroke-thin-red font-bold ">
         Return Policy
       </header>

@@ -144,7 +144,7 @@ router.post("/verify", async (req, res) => {
     return;
   }
 
-  const Existingticket = await Ticket.findOne({ order_id });
+  const Existingticket = await Ticket.findOne({ razorpayOrderID: order_id });
   if (Existingticket)
     return res
       .json({

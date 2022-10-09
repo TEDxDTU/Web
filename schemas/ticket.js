@@ -15,6 +15,7 @@ const ticketSchema = mongoose.Schema(
     razorpayOrderID: {
       type: String,
       required: true,
+      unique: true
     },
     noOfTickets: {
       type: Number,

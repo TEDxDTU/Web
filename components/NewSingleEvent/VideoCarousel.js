@@ -44,8 +44,8 @@ const  VideoCarousel = (props) => {
     }
     useEffect(() => {
         sliderRef.current.addEventListener("animationend",removeAnimation);
-        sliderRef.current.addEventListener("mouseenter",pauseSlider);
-        sliderRef.current.addEventListener("mouseleave",startSlider);
+        sliderRef.current.firstElementChild.addEventListener("mouseenter",pauseSlider);
+        sliderRef.current.firstElementChild.addEventListener("mouseleave",startSlider);
         startSlider();
         return() =>{
             pauseSlider();

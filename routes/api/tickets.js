@@ -29,10 +29,8 @@ oAuth2Client.setCredentials({ refresh_token: process.env.EMAIL_REFRESH_TOKEN });
 
 async function sendMail(req) {
   const { user, ticketQR, newTicket } = req;
-
   try {
     const accessToken = await oAuth2Client.getAccessToken();
-
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -44,7 +42,7 @@ async function sendMail(req) {
         accessToken: accessToken,
       },
     });
-
+    console.log(transport);
     const str = (newTicket.noOfTickets > 1) ? "Tickets" : "Ticket";
     const url = await nodeHtmlToImage({
       output: './ticket.png',
@@ -145,6 +143,14 @@ router.post("/verify", async (req, res) => {
     });
     return;
   }
+
+  const Existingticket = await Ticket.findOne({ order_id });
+  if (Existingticket)
+    return res
+      .json({
+        success: false,
+        msg: "Ticket with order Id already exist"
+      });
 
   // Getting User Details
   const user = await User.findOne({ firebaseID });

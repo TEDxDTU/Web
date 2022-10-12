@@ -12,6 +12,8 @@ const ticketSchema = mongoose.Schema(
       required: true,
       ref: "Event",
     },
+
+    //may also contain UPI transaction ID
     razorpayOrderID: {
       type: String,
       required: true,
@@ -20,6 +22,10 @@ const ticketSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 1,
+    },
+    claimedTickets: {
+      type: Number,
+      default: 0,
     },
   },
   {

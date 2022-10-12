@@ -99,6 +99,14 @@ const userSchema = mongoose.Schema({
   firebaseID: {
     type: String,
   },
+  userType: {
+    type: String,
+    default: "user",
+    validate(value) {
+      if (!["user", "superadmin", "admin"].includes(value))
+        throw new Error(`${value} is not a valid user type`);
+    },
+  },
 });
 
 /**

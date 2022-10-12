@@ -22,6 +22,11 @@ const ticketSchema = mongoose.Schema(
       required: true,
       default: 1,
     },
+    // sent:{
+    //   type:Boolean,
+    //   required:true,
+    //   default:false
+    // }
   },
   {
     timestamps: true,

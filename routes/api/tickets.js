@@ -101,26 +101,42 @@ router.post("/generate-order", withAuth, async (req, res) => {
 
 // router.get("/mail", async (req, res) => {
 
-//   let ticketQR = await QRCode.toDataURL("sdsjdsjd");
+//   const tickets = await Ticket.find();
+
+//   tickets.forEach(async (ticket) => {
+
+//   if(!ticket.isSent){
+//     let ticketQR = await QRCode.toDataURL(ticket.razorpayOrderID);
+//     sendMail({ ticket, ticketQR })
+//       .then((result) => {
+//          console.log('Email sent successfully!')
+//          ticket.isSent=true;
+//          await ticket.save();
+//        })
+//       .catch((error) => console.log(error.message));
+//      }
+//   });
+//   return;
+// });
+
+// router.post("/updateTickets", async (req, res) => {
+//   const { email, payID, event, numTickets } = req.body;
+//   const existingUser = await User.findOne({ email });
+//   if (!existingUser)
+//     res.json({ msg: "User not found" }).status(404);
 
 //   const newTicket = new Ticket({
-//     userID: "jhfj",
-//     eventID: "jfhj",
-//     razorpayOrderID: "jdsh",
-//     noOfTickets: 4
+//     userID: existingUser._id,
+//     eventID: event,
+//     razorpayOrderID: payID,
+//     noOfTickets: numTickets
 //   });
+//   await newTicket.save();
 
-//   sendMail({ newTicket, ticketQR })
-//     .then((result) => console.log('Email sent successfully!'))
-//     .catch((error) => console.log(error.message));
+//   existingUser.tickets = [...existingUser.tickets, newTicket._id];
+//   await existingUser.save();
 
-
-//   res.json({
-//     success: true,
-//     msg: "Payment verified and accepted",
-//     redirectURL: "",
-//   }).status(200);
-
+//   res.json({ msg: "Details updated successfully" }).status(200);
 // });
 
 router.post("/verify", async (req, res) => {

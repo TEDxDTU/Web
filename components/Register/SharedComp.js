@@ -32,18 +32,18 @@ export async function LoginhandleAction(form, router, setLoading) {
       else {
         sendEmailVerification(authToken?.user)
           .then(() => {
-            console.log("Email sent");
             alert("Please verify your email first");
           })
-          .catch(() => {
-            alert("We are facing some server errors:(\nPlease try again later !!")
-          })
+          .catch((err) => {
+            console.log(err.stack);
+            alert("Please verify your email while we resolve this error");
+          });
       }
     })
     .catch((error) => {
       console.log(error);
       alert("Email and password don't match.\nPlease try again !!");
-    })
+    });
   setLoading(false);
   return;
 }
@@ -85,9 +85,9 @@ const RegisterhandleAction = async (form, setregisterStatus, router, setLoading)
       .then(() => {
         alert("A verification mail has been sent to your provided email.\nPlease verify to login !!");
       })
-      .catch(() => {
-        alert("We are facing some server errors:(\nPlease try again later !!")
-      })
+      .catch((err) => {
+        alert("Please verify your email while we resolve this error");
+      });
 
     router.push('/register');
     setregisterStatus(true);

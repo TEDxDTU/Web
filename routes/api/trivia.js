@@ -81,6 +81,10 @@ router.get("/leaderboard", async (req, res) => {
 
   for (let i = 0; i < contestants.length; i++) {
     const user = await User.findOne({ firebaseID: contestants[i].userId });
+    if (user == null) {
+      console.log(contestants[i].userId);
+      continue;
+    }
     leaderboard.push({
       name: user.name,
       points: contestants[i].points,

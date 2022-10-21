@@ -30,6 +30,8 @@ const eventSchema = mongoose.Schema({
         "upcoming",
         "live",
         "story",
+        "storyTalk",
+        "storyEvent",
         "past_new_format",
       ];
       if (!allowedValues.includes(value)) {
@@ -79,7 +81,7 @@ const eventSchema = mongoose.Schema({
   imageUrl: {
     trim: true,
     type: String,
-    required: true,
+    required: false,
     validate(value) {
       if (!value) {
         throw new Error("imageUrl is required");
@@ -99,7 +101,7 @@ const eventSchema = mongoose.Schema({
   speakersList: [
     {
       type: speakerSchema,
-      required: true,
+      // required: true,
     },
   ],
   venue: {
@@ -123,11 +125,15 @@ const eventSchema = mongoose.Schema({
   },
   areBookingActive: {
     type: Boolean,
-    required: true,
+    // required: true,
     default: false,
   },
-  /**@deprecated ,this was only for LIVE EVENT, which is now on Firebase*/
-  currentSpeakerIndex: Number,
+  stories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
+    },
+  ],
 });
 
 /**
@@ -140,6 +146,9 @@ const eventSchema = mongoose.Schema({
  */
 eventSchema.pre("save", async function (next) {
   const event = this;
+  if (event.eventType != "storyEvent" && event.imageUrl == null) {
+    throw new Error("Event must have an image");
+  }
   if (event.eventType == "past") {
     if (!event.galleryImageUrls) {
       throw new Error("galleryImageUrls is required for past events");
@@ -158,7 +167,13 @@ eventSchema.pre("save", async function (next) {
     ) {
       throw new Error("price is required for upcoming events with ticket");
     }
-  } else {
+  } else if (event.eventType == "storyEvent") {
+    for (let storyId of event.stories) {
+      let event = await Event.findById(storyId);
+      if (event.eventType != "storyTalk") {
+        throw new Error("Story must be of type storyTalk");
+      }
+    }
     //TODO: Add validation for live and story events
   }
   for (let i = 0; i < event.galleryImageUrls.length; i++) {
@@ -167,8 +182,9 @@ eventSchema.pre("save", async function (next) {
   for (let i = 0; i < event.videoUrls.length; i++) {
     event.videoUrls[i] = event.videoUrls[i].trim();
   }
-  event.imageUrl = event.imageUrl.trim();
-  event.streamingUrl = event.streamingUrl.trim();
+
+  event.imageUrl = event.imageUrl?.trim();
+  event.streamingUrl = event.streamingUrl?.trim();
   next();
 });
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);

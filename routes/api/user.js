@@ -181,15 +181,11 @@ router.post("/started", withAuth, async (req, res) => {
 
 router.get("/tickets", withAuth, async (req, res) => {
   try {
-    // const { triviaId } = req.body;
     const firebaseID = req.uid;
     const user = await User.findOne({ firebaseID });
     if (!user.tickets) {
       user.tickets = [];
     }
-    // user.triviasAttempted.push(triviaId);
-    // await user.save();
-    // return res.json("Marked trivia started");
     const result = await user.getTicketDetails();
     console.log(result);
     return res.json(result).status(200);

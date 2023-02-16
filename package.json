@@ -5,7 +5,8 @@
         "server-dev": "nodemon server.js",
         "client-dev": "node server.js",
         "build": "next build",
-        "start": "node server.js"
+        "start": "node server.js",
+        "dev": "next dev"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -22,7 +23,7 @@
         "helmet": "^5.0.2",
         "html-to-image": "^1.10.8",
         "mongoose": "^6.2.0",
-        "next": "^12.0.7",
+        "next": "^12.3.4",
         "node-html-to-image": "^3.2.4",
         "nodemailer": "^6.7.8",
         "qrcode": "^1.5.1",

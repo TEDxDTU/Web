@@ -42,7 +42,7 @@ triviaContestantSchema.pre("save", async function (next) {
     throw Exception(error.toString());
   }
 });
-const TriviaContestant = mongoose.model(
+const TriviaContestant = mongoose.models.TriviaContestant || mongoose.model(
   "TriviaContestant",
   triviaContestantSchema,
   "leaderboard"

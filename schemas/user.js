@@ -148,7 +148,7 @@ userSchema.methods.getTicketDetails = async function () {
   });
   // await user.populate("tickets");
   // console.log(this.tickets);
-  userTickets = user.toObject().tickets;
+  let userTickets = user.toObject().tickets;
   // console.log(userObject);
   // userObject.event = userObject.eventID;
   userTickets.forEach((element) => {

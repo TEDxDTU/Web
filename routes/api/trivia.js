@@ -94,25 +94,6 @@ router.get("/leaderboard", async (req, res) => {
       firebaseID: user.firebaseID,
     });
   }
-  // await Promise.all(
-  //   contestants.map(async (contestant) => {
-  //     const user = await User.findOne({ firebaseID: contestant.userId }, [
-  //       "name",
-  //       "university",
-  //       "imageURL",
-  //       "firebaseID",
-  //     ]);
-  //     // const trivia = Trivia.findById(contestant.triviaId);
-  //     // console.log(user);
-  //     leaderboard.push({
-  //       user: user.name,
-  //       points: contestant.points,
-  //       timeTaken: contestant.timeTaken,
-
-  //     });
-  //   })
-  // );
-  // console.log(leaderboard);
   console.log("sending leaderboard");
   res.status(200).json(leaderboard);
 });

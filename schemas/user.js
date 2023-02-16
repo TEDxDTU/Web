@@ -26,7 +26,7 @@ const userTriviaSchema = mongoose.Schema(
 );
 userTriviaSchema.methods.toJSON = function () {
   const userTrivia = this;
-  userTriviaObj = userTrivia.toObject();
+  var userTriviaObj = userTrivia.toObject();
   delete userTriviaObj.triviaId;
   delete userTriviaObj.createdAt;
   delete userTriviaObj.updatedAt;

@@ -1,4 +1,4 @@
-const dbconnect = require('../../../backend/dbConnect.js');
+const init = require('../../../backend/init.js');
 const User = require('../../../schemas/user.js');
 const Trivia = require('../../../schemas/trivia.js');
 const admin = require("firebase-admin");
